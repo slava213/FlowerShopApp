@@ -15,6 +15,40 @@ USERS = [5347872932, 6673440979]
 UPLOAD_FOLDER = "static/uploads"
 ORDER_COOLDOWN = {}
 
+MAX_ORDERS = 5
+COOLDOWN_MINUTES = 30
+
+
+def check_cooldown(ip):
+    now = datetime.now()
+    state = ORDER_COOLDOWN.get(ip)
+
+    if state is None:
+        return True, None
+
+    # If currently blocked
+    if state['blocked_at']:
+        diff = now - state['blocked_at']
+        if diff < timedelta(minutes=COOLDOWN_MINUTES):
+            left = COOLDOWN_MINUTES - int(diff.total_seconds() / 60)
+            return False, f"Ви вже зробили {MAX_ORDERS} замовлень. Спробуйте через {left} хв."
+        else:
+            ORDER_COOLDOWN[ip] = {'count': 0, 'blocked_at': None}
+
+    return True, None
+
+
+def register_order(ip):
+    now = datetime.now()
+    state = ORDER_COOLDOWN.get(ip, {'count': 0, 'blocked_at': None})
+    state['count'] += 1
+
+    if state['count'] >= MAX_ORDERS:
+        state['blocked_at'] = now
+
+    ORDER_COOLDOWN[ip] = state
+
+
 @bot.message_handler(commands=['start'])
 def start(message):
     if message.chat.id in USERS:
@@ -34,14 +68,9 @@ def about():
 def order():
     if request.method == 'POST':
         ip = request.remote_addr
-        now = datetime.now()
-
-        if ip in ORDER_COOLDOWN:
-            diff = now - ORDER_COOLDOWN[ip]
-            if diff < timedelta(minutes=30):
-                left = 30 - int(diff.total_seconds() / 60)
-                return render_template('order.html',
-                    error=f"Ви вже робили замовлення. Спробуйте через {left} хв.")
+        allowed, error = check_cooldown(ip)
+        if not allowed:
+            return render_template('order.html', error=error)
 
         name = request.form.get('name', '').strip()
         phone = request.form.get('phone', '').strip()
@@ -55,10 +84,10 @@ def order():
         photo_path = None
 
         if photo and photo.filename:
-            allowed = {'jpg', 'jpeg', 'png', 'webp', 'gif'}
+            allowed_ext = {'jpg', 'jpeg', 'png', 'webp', 'gif'}
             ext = photo.filename.rsplit('.', 1)[-1].lower()
 
-            if ext not in allowed:
+            if ext not in allowed_ext:
                 return render_template('order.html', error="Дозволені формати фото: jpg, png, webp, gif")
 
             os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -85,8 +114,7 @@ def order():
             except Exception as e:
                 print(f"Помилка відправки Telegram [{user_id}]: {e}")
 
-        ORDER_COOLDOWN[ip] = now
-
+        register_order(ip)
         return render_template('complete_order.html')
 
     return render_template('order.html')
@@ -95,13 +123,9 @@ def order():
 def delivery():
     if request.method == 'POST':
         ip = request.remote_addr
-        now = datetime.now()
-
-        if ip in ORDER_COOLDOWN:
-            diff = now - ORDER_COOLDOWN[ip]
-            if diff < timedelta(minutes=30):
-                left = 30 - int(diff.total_seconds() / 60)
-                return render_template('delivery.html', error=f"Ви вже робили замовлення. Спробуйте через {left} хв.")
+        allowed, error = check_cooldown(ip)
+        if not allowed:
+            return render_template('delivery.html', error=error)
 
         sender_name    = request.form.get('sender_name', '').strip()
         sender_phone   = request.form.get('sender_phone', '').strip()
@@ -114,7 +138,6 @@ def delivery():
         greeting_text  = request.form.get('greeting_text', '').strip()
         music          = request.form.get('music', 'no')
         music_text     = request.form.get('music_text', '').strip()
-        photo    = request.form.get('photo', '').strip()
         description    = request.form.get('description', '').strip()
         wishes         = request.form.get('wishes', '').strip()
 
@@ -125,9 +148,9 @@ def delivery():
         photo_path = None
 
         if photo and photo.filename:
-            allowed = {'jpg', 'jpeg', 'png', 'webp', 'gif'}
+            allowed_ext = {'jpg', 'jpeg', 'png', 'webp', 'gif'}
             ext = photo.filename.rsplit('.', 1)[-1].lower()
-            if ext not in allowed:
+            if ext not in allowed_ext:
                 return render_template('delivery.html', error="Дозволені формати фото: jpg, png, webp, gif")
             os.makedirs(UPLOAD_FOLDER, exist_ok=True)
             filename = secure_filename(photo.filename)
@@ -159,7 +182,7 @@ def delivery():
             except Exception as e:
                 print(f"Помилка відправки Telegram [{user_id}]: {e}")
 
-        ORDER_COOLDOWN[ip] = now
+        register_order(ip)
         return render_template('complete_order.html')
 
     return render_template('delivery.html')

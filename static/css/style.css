@@ -17,9 +17,10 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; overflow-x: hidden; }
-body { overflow-x: hidden; }
 
+/* БАГ #1: body об'єднано в одне правило */
 body {
+  overflow-x: hidden;
   font-family: 'Jost', sans-serif;
   background: var(--white);
   color: var(--black);
@@ -28,6 +29,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Анімація секцій при скролі — JS додає клас .visible через IntersectionObserver */
 section {
   opacity: 0;
   transform: translateY(50px);
@@ -37,6 +39,14 @@ section {
 section.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Фолбек якщо JS вимкнено */
+@media (scripting: none) {
+  section {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 .header {
@@ -88,7 +98,6 @@ section.visible {
 .nav a:hover { color: var(--gray); }
 .nav a:hover::after { width: 100%; }
 
-/* Телефон у nav — прихований на десктопі */
 .nav-phone { display: none; }
 
 .phone {
@@ -205,10 +214,12 @@ section.visible {
 }
 
 .order-btn:hover {
-  color: var(--white);
   transform: scale(1.04);
   letter-spacing: 0.14em;
 }
+
+/* БАГ #3: колір тексту при ховері прописано прямо на span */
+.order-btn:hover span { color: var(--white); }
 
 .order-btn:hover::before { transform: translateY(0); }
 
@@ -227,8 +238,10 @@ section.visible {
   box-shadow: var(--shadow);
 }
 
+/* БАГ #5: парні картинки при ховері зберігають своє зміщення */
 .hero-images img:nth-child(even) { transform: translateY(28px); }
-.hero-images img:hover { transform: translateY(-6px) scale(1.05) !important; box-shadow: var(--shadow-hover); }
+.hero-images img:hover { transform: translateY(-6px) scale(1.05); box-shadow: var(--shadow-hover); }
+.hero-images img:nth-child(even):hover { transform: translateY(22px) scale(1.05); }
 
 .tabs-section {
   padding: 80px 40px;
@@ -587,6 +600,7 @@ section.visible {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* БАГ #7: font-family явно задано для textarea (браузери не успадковують) */
 .order-form input,
 .order-description,
 .order-small {
@@ -692,6 +706,7 @@ section.visible {
   .hero-images { grid-template-columns: 1fr 1fr; }
   .hero-images img { width: 150px; height: 150px; }
   .hero-images img:nth-child(even) { transform: translateY(16px); }
+  .hero-images img:nth-child(even):hover { transform: translateY(10px) scale(1.05); }
 
   .about-hero h1 { font-size: 48px; }
 
@@ -854,9 +869,7 @@ section.visible {
   margin-bottom: 20px;
 }
 
-.success-contacts {
-  margin-bottom: 48px;
-}
+.success-contacts { margin-bottom: 48px; }
 
 .success-btn {
   display: inline-block;
@@ -887,7 +900,8 @@ section.visible {
   z-index: 1;
 }
 
-.success-btn:hover { color: var(--white); transform: scale(1.04); }
+.success-btn:hover { transform: scale(1.04); }
+.success-btn:hover span { color: var(--white); }
 .success-btn:hover::before { transform: translateY(0); }
 
 .success-btn span {
@@ -977,6 +991,21 @@ section.visible {
   .nav-overlay.open { display: block; }
 }
 
+/* ===== БАГ #4: scroll jump при фіксуванні body =====
+   В JS перед додаванням .nav-open збережи позицію:
+   const scrollY = window.scrollY;
+   document.body.style.top = `-${scrollY}px`;
+   document.body.classList.add('nav-open');
+   При закритті:
+   document.body.classList.remove('nav-open');
+   window.scrollTo(0, scrollY);
+   document.body.style.top = '';
+*/
+body.nav-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
 
 /* ===== SEO ABOUT PAGE ===== */
 
@@ -988,14 +1017,13 @@ section.visible {
   margin-bottom: 16px;
 }
 
+/* БАГ #6: margin скорочено до одного рядка */
 .seo-list {
   list-style: none;
   padding: 0;
-  margin: 16px 0 24px;
+  margin: 16px auto 24px;
   text-align: left;
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .seo-list li {
@@ -1177,9 +1205,7 @@ section.visible {
   margin: 40px auto 0;
 }
 
-.faq-acc-item {
-  border-bottom: 1px solid var(--warm);
-}
+.faq-acc-item { border-bottom: 1px solid var(--warm); }
 
 .faq-acc-btn {
   width: 100%;
@@ -1239,12 +1265,4 @@ section.visible {
   color: var(--gray);
   line-height: 1.8;
   padding-bottom: 22px;
-}
-
-/* ===== BURGER SCROLL LOCK ===== */
-
-body.nav-open {
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
 }

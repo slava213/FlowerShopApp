@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="success-section">
+  <div class="success-container">
+
+    <div class="success-icon">
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="40" r="39" stroke="#c8b89a" stroke-width="1.5"/>
+        <path d="M24 40.5L34.5 51L56 30" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1>Дякуємо за замовлення!</h1>
+
+    <p class="success-text">
+      Ми отримали вашу заявку і зв'яжемося з вами найближчим часом.
+    </p>
+
+    <div class="success-contacts">
+      <p class="success-hint">Якщо хочете уточнити деталі — напишіть нам:</p>
+      <div class="contact-grid">
+        <a class="contact-card" href="https://t.me/0976982154">
+          <i class="fab fa-telegram"></i> Telegram
+        </a>
+        <a class="contact-card" href="viber://chat?number=+380976982154">
+          <i class="fab fa-viber"></i> Viber
+        </a>
+        <a class="contact-card" href="https://www.instagram.com/kvitu_kelmentsi_fotozona/" target="_blank">
+          <i class="fab fa-instagram"></i> Instagram
+        </a>
+        <a class="contact-card" href="tel:+380976982154">
+          <i class="fas fa-phone"></i> Подзвонити
+        </a>
+      </div>
+    </div>
+
+    <a href="/" class="order-btn success-btn"><span>На головну</span></a>
+
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Замовити букет у Кельменцях | Квіти від Тамари{% endblock %}
+
+{% block head %}
+<meta name="description" content="Замовити авторський букет у Кельменцях 🌸 Заповніть форму онлайн — і ми створимо ідеальний букет спеціально для вас. Магазин «Квіти від Тамари»." />
+<meta name="keywords" content="замовити букет Кельменці, купити букет онлайн Кельменці, авторський букет Кельменці" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://kvityvid-tamary.ua/order" />
+<meta property="og:title" content="Замовити букет у Кельменцях | Квіти від Тамари" />
+<meta property="og:description" content="Заповніть форму онлайн — і ми створимо ідеальний букет спеціально для вас." />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="uk_UA" />
+<meta property="og:url" content="https://kvityvid-tamary.ua/order" />
+{% endblock %}
+
+{% block content %}
+
+<section class="about-hero">
+    <div class="about-container">
+        <h1>Замовити букет</h1>
+        <p class="about-intro">
+            Заповніть форму і ми зв'яжемося з вами
+        </p>
+    </div>
+</section>
+
+<section class="order-section">
+    <div class="about-container">
+        <form class="order-form" method="POST" action="/order" enctype="multipart/form-data">
+
+            <h2 class="section-title">Форма замовлення</h2>
+
+            {% if error %}
+              <p style="color:red; font-size:15px;">{{ error }}</p>
+            {% endif %}
+
+            <input type="text" name="name"
+                placeholder="Як до вас звертатися" required>
+
+            <input type="tel" name="phone" id="phone"
+                placeholder="+380 (__) __-__-__"
+                maxlength="19" required>
+
+            <textarea class="order-description" name="description"
+                placeholder="Опишіть замовлення (тип букета, подія, квіти...)"
+                required></textarea>
+
+            <div class="upload-block">
+                <p>Додати фото-приклад (необов'язково)</p>
+                <label class="upload-label">
+                    <input type="file" name="photo" id="photoInput" accept="image/*">
+                    <span>Натисніть щоб завантажити фото</span>
+                </label>
+                <div class="preview-box">
+                    <img id="photoPreview">
+                </div>
+            </div>
+
+            <textarea class="order-small" name="wishes"
+                placeholder="Ваші побажання (необов'язково)"></textarea>
+
+            <button type="submit" class="order-btn"><span>Замовити</span></button>
+
+        </form>
+    </div>
+</section>
+
+<script>
+  function phoneMask(input) {
+    input.addEventListener('input', function () {
+      let val = this.value.replace(/\D/g, '');
+      if (val.startsWith('380')) val = val.slice(3);
+      else if (val.startsWith('0')) val = val.slice(1);
+      val = val.slice(0, 9);
+      let result = '+380 ';
+      if (val.length > 0) result += '(' + val.slice(0, 2);
+      if (val.length >= 2) result += ') ' + val.slice(2, 5);
+      if (val.length >= 5) result += '-' + val.slice(5, 7);
+      if (val.length >= 7) result += '-' + val.slice(7, 9);
+      this.value = result;
+    });
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Backspace' && this.value === '+380 ') this.value = '';
+    });
+    input.addEventListener('focus', function () {
+      if (!this.value) this.value = '+380 ';
+    });
+  }
+
+  phoneMask(document.getElementById('phone'));
+
+  document.getElementById('photoInput')?.addEventListener('change', function() {
+    const preview = document.getElementById('photoPreview');
+    if (this.files && this.files[0]) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+      };
+      reader.readAsDataURL(this.files[0]);
+    }
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% block head %}{% endblock %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <header class="header">
+    <img src="{{ url_for('static', filename='images/logo-removebg-preview.png') }}"
+         class="logo"
+         alt="Квіти від Тамари — квітковий магазин у Кельменцях">
+
+    <nav class="nav" id="navMenu" aria-label="Головне меню">
+        <a href="/">Головна</a>
+        <a href="/about">Про нас</a>
+        <a href="/order">Замовити</a>
+        <a href="/delivery">Доставка</a>
+        <a href="tel:+380976982154" class="nav-phone">+38 (097) 698 21 54</a>
+    </nav>
+
+    <a class="phone" href="tel:+380976982154">+38 (097) 698 21 54</a>
+
+    <button class="burger" id="burgerBtn" aria-label="Відкрити меню">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <main>
+      {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+
+      <div class="footer-block">
+          <img src="{{ url_for('static', filename='images/logo-removebg-preview.png') }}"
+               class="footer-logo"
+               alt="Квіти від Тамари логотип">
+          <p class="footer-description">
+              Авторські букети та флористичні композиції.
+              Створюємо красу з любов'ю.
+          </p>
+          <p class="copyright">© 2025 Усі права захищені</p>
+      </div>
+
+      <div class="footer-block">
+          <h4>Навігація</h4>
+          <a href="/" class="footer-link">Головна</a>
+          <a href="/about" class="footer-link">Про нас</a>
+          <a href="/order" class="footer-link">Замовити</a>
+          <a href="/delivery" class="footer-link">Доставка</a>
+      </div>
+
+      <div class="footer-block">
+          <h4>📍 Адреса</h4>
+          <address style="font-style: normal;">
+            <p>вулиця Довженка, 27</p>
+            <p>Кельменці, Чернівецька область</p>
+            <p>60100</p>
+          </address>
+          <h4 style="margin-top:20px;">🌍 Геолокація</h4>
+          <a class="footer-link" target="_blank" rel="noopener"
+             href="https://maps.app.goo.gl/dWTGqCRkapmPnB1E8">
+              📍 Відкрити на Google Maps
+          </a>
+      </div>
+
+      <div class="footer-block">
+          <h4>Соцмережі</h4>
+          <a class="social-link"
+             href="https://www.instagram.com/kvitu_kelmentsi_fotozona/"
+             target="_blank" rel="noopener" aria-label="Instagram Квіти від Тамари">
+              <i class="fab fa-instagram"></i> Instagram
+          </a>
+          <a class="social-link" href="https://t.me/0976982154"
+             rel="noopener" aria-label="Telegram Квіти від Тамари">
+              <i class="fab fa-telegram"></i> Telegram
+          </a>
+          <a class="social-link" href="viber://chat?number=+380976982154"
+             aria-label="Viber Квіти від Тамари">
+              <i class="fab fa-viber"></i> Viber
+          </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+  <script>
+    const burger = document.getElementById('burgerBtn');
+    const nav    = document.getElementById('navMenu');
+
+    let scrollY = 0;
+
+    function toggleMenu(open) {
+      burger.classList.toggle('open', open);
+      nav.classList.toggle('open', open);
+      burger.setAttribute('aria-label', open ? 'Закрити меню' : 'Відкрити меню');
+
+      if (open) {
+        scrollY = window.scrollY;
+        document.body.style.overflow = 'hidden'; document.body.style.overflowX = 'hidden'; document.documentElement.style.overflowX = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${scrollY}px`;
+        document.body.style.width = '100%';
+      } else {
+        document.body.style.overflow = ''; document.body.style.overflowX = ''; document.documentElement.style.overflowX = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY);
+      }
+    }
+
+    burger.addEventListener('click', () => toggleMenu(!nav.classList.contains('open')));
+
+    nav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => toggleMenu(false));
+    });
+  </script>
+
+</body>
+</html>

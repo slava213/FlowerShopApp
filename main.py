@@ -114,17 +114,12 @@ def delivery():
         greeting_text  = request.form.get('greeting_text', '').strip()
         music          = request.form.get('music', 'no')
         music_text     = request.form.get('music_text', '').strip()
+        photo    = request.form.get('photo', '').strip()
         description    = request.form.get('description', '').strip()
         wishes         = request.form.get('wishes', '').strip()
 
         if not sender_name or not sender_phone or not recipient_name or not recipient_phone or not city or not address or not description:
             return render_template('delivery.html', error="Будь ласка, заповніть всі обов'язкові поля")
-
-        if not is_valid_phone(sender_phone):
-            return render_template('delivery.html', error="Введіть коректний номер телефону відправника")
-
-        if not is_valid_phone(recipient_phone):
-            return render_template('delivery.html', error="Введіть коректний номер телефону отримувача")
 
         photo = request.files.get('photo')
         photo_path = None

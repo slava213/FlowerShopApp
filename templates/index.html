@@ -8,7 +8,7 @@
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://kvityvid-tamary.ua/" />
 <meta property="og:title" content="Квіти Кельменці — авторські букети та доставка | Квіти від Тамари" />
-<meta property="og:description" content="Авторські букети, квіткові композиції та доставка квітів по Кельменцях. Магазин «Квіти від Тамари»." />
+<meta property="og:description" content="Авторські букети, квіткові композиції та доставка квітів по Кельменцях." />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="uk_UA" />
 <meta property="og:url" content="https://kvityvid-tamary.ua/" />
@@ -17,69 +17,120 @@
 {% block content %}
 
 <section class="hero">
-    <div class="hero-text">
-        <p class="small-text">✦ Свіжі квіти щодня</p>
-        <h1>
-        Квіти, що <span class="highlight">говорять</span><br>
-        краще за слова
-        </h1>
-        <p class="description">
-        Авторські букети та флористичні композиції<br>
-        з найсвіжіших квітів.
-        </p>
-        <button class="order-btn" onclick="window.location.href='/order'"><span>Замовити</span></button>
-    </div>
+  <div class="hero-text">
+    <span class="small-text">✦ Квітковий магазин у Кельменцях</span>
+    <h1>
+      Квіти, що<br>
+      <em>говорять</em><br>
+      краще за слова
+    </h1>
+    <p class="description">
+      Авторські букети та флористичні<br>
+      композиції з найсвіжіших квітів —<br>
+      для кожного приводу і найщиріших емоцій.
+    </p>
+    <button class="order-btn" onclick="window.location.href='/order'">
+      <span>Замовити букет</span>
+    </button>
+    <p class="hero-caption">Свіжі квіти щодня · Доставка по Кельменцях</p>
+  </div>
 
-    <div class="hero-images">
-        <img src="/static/images/img.png" alt="авторський букет — квіти Кельменці">
-        <img src="/static/images/img_1.png" alt="квітковий букет троянд Кельменці">
-        <img src="/static/images/img_2.png" alt="флористична композиція Кельменці">
-        <img src="/static/images/img_3.png" alt="букет квітів на подарунок Кельменці">
+  <div class="hero-images">
+    <div class="hero-img-wrap">
+      <img src="/static/images/img.png" alt="авторський букет — квіти Кельменці">
+      <div class="hero-img-label"><span>Авторський букет</span></div>
     </div>
+    <div class="hero-img-wrap">
+      <img src="/static/images/img_1.png" alt="букет троянд Кельменці">
+      <div class="hero-img-label"><span>Букет троянд</span></div>
+    </div>
+    <div class="hero-img-wrap">
+      <img src="/static/images/img_2.png" alt="флористична композиція Кельменці">
+      <div class="hero-img-label"><span>Композиція</span></div>
+    </div>
+    <div class="hero-img-wrap">
+      <img src="/static/images/img_3.png" alt="букет на подарунок Кельменці">
+      <div class="hero-img-label"><span>Букет на подарунок</span></div>
+    </div>
+  </div>
 </section>
 
 <section class="products">
-    <h2>Приклади букетів</h2>
-    <div class="product-grid">
-        <div class="product-card">
-            <img src="/static/images/img_4.png" alt="весняний букет квітів Кельменці">
-            <p>Весняний букет</p>
-        </div>
-        <div class="product-card">
-            <img src="/static/images/img_6.png" alt="романтичний букет троянд Кельменці">
-            <p>Романтичний букет</p>
-        </div>
-        <div class="product-card">
-            <img src="/static/images/img_5.png" alt="авторський букет від флориста Кельменці">
-            <p>Авторський букет</p>
-        </div>
-        <div class="product-card">
-            <img src="/static/images/img_7.png" alt="святковий букет квітів Кельменці">
-            <p>Святковий букет</p>
-        </div>
+  <h2>Приклади букетів</h2>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-card-img">
+        <img src="/static/images/img_4.png" alt="весняний букет квітів Кельменці">
+        <div class="product-card-label"><p>Весняний букет</p></div>
+      </div>
+      <div class="product-card-caption">Весняний букет</div>
     </div>
+
+    <div class="product-card">
+      <div class="product-card-img">
+        <img src="/static/images/img_6.png" alt="романтичний букет троянд Кельменці">
+        <div class="product-card-label"><p>Романтичний букет</p></div>
+      </div>
+      <div class="product-card-caption">Романтичний букет</div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-card-img">
+        <img src="/static/images/img_5.png" alt="авторський букет від флориста Кельменці">
+        <div class="product-card-label"><p>Авторський букет</p></div>
+      </div>
+      <div class="product-card-caption">Авторський букет</div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-card-img">
+        <img src="/static/images/img_7.png" alt="святковий букет квітів Кельменці">
+        <div class="product-card-label"><p>Святковий букет</p></div>
+      </div>
+      <div class="product-card-caption">Святковий букет</div>
+    </div>
+
+  </div>
 </section>
 
 <section class="products">
-    <h2>Приклади композицій</h2>
-    <div class="product-grid">
-        <div class="product-card">
-            <img src="/static/images/img_11.png" alt="флористична композиція у коробці Кельменці">
-            <p>Флористична композиція</p>
-        </div>
-        <div class="product-card">
-            <img src="/static/images/img_8.png" alt="святкова квіткова композиція Кельменці">
-            <p>Святкова композиція</p>
-        </div>
-        <div class="product-card">
-            <img src="/static/images/img_9.png" alt="авторська квіткова композиція Кельменці">
-            <p>Авторська композиція</p>
-        </div>
-        <div class="product-card">
-            <img src="/static/images/img_10.png" alt="преміум флористична композиція Кельменці">
-            <p>Преміум композиція</p>
-        </div>
+  <h2>Приклади композицій</h2>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-card-img">
+        <img src="/static/images/img_11.png" alt="флористична композиція у коробці Кельменці">
+        <div class="product-card-label"><p>Флористична композиція</p></div>
+      </div>
+      <div class="product-card-caption">Флористична композиція</div>
     </div>
+
+    <div class="product-card">
+      <div class="product-card-img">
+        <img src="/static/images/img_8.png" alt="святкова квіткова композиція Кельменці">
+        <div class="product-card-label"><p>Святкова композиція</p></div>
+      </div>
+      <div class="product-card-caption">Святкова композиція</div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-card-img">
+        <img src="/static/images/img_9.png" alt="авторська квіткова композиція Кельменці">
+        <div class="product-card-label"><p>Авторська композиція</p></div>
+      </div>
+      <div class="product-card-caption">Авторська композиція</div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-card-img">
+        <img src="/static/images/img_10.png" alt="преміум флористична композиція Кельменці">
+        <div class="product-card-label"><p>Преміум композиція</p></div>
+      </div>
+      <div class="product-card-caption">Преміум композиція</div>
+    </div>
+
+  </div>
 </section>
 
 {% endblock %}

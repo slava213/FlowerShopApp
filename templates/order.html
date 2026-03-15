@@ -1,6 +1,22 @@
 {% extends "base.html" %}
 
-{% block title %}Замовити букет у Кельменцях | Квіти від Тамари{% endblock %}
+{% block title %}Замовити букет у Кельменцях | Квіти від Тамари
+<script>
+  // Захист від подвійного сабміту — блокуємо кнопку одразу після кліку
+  document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', function() {
+      const btn = this.querySelector('button[type="submit"]');
+      if (!btn) return;
+      btn.disabled = true;
+      btn.style.opacity = '0.6';
+      btn.style.cursor = 'not-allowed';
+      const span = btn.querySelector('span');
+      if (span) span.textContent = 'Надсилається...';
+    });
+  });
+</script>
+
+{% endblock %}
 
 {% block head %}
 <meta name="description" content="Замовити авторський букет у Кельменцях 🌸 Заповніть форму онлайн — і ми створимо ідеальний букет спеціально для вас. Магазин «Квіти від Тамари»." />

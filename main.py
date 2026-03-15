@@ -3,6 +3,7 @@ import os
 from werkzeug.utils import secure_filename
 import telebot
 import threading
+import hashlib
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
 
@@ -17,6 +18,64 @@ ORDER_COOLDOWN = {}
 
 MAX_ORDERS = 5
 COOLDOWN_MINUTES = 30
+
+RECENT_ORDERS = {}
+DUPLICATE_WINDOW_SECONDS = 15
+
+NOTIFIED_IPS = {}
+
+
+def make_order_hash(*args):
+    raw = '|'.join(str(a) for a in args)
+    return hashlib.md5(raw.encode()).hexdigest()
+
+
+def is_duplicate(order_hash):
+    now = datetime.now()
+    expired = [k for k, v in RECENT_ORDERS.items()
+               if now - v > timedelta(seconds=DUPLICATE_WINDOW_SECONDS)]
+    for k in expired:
+        del RECENT_ORDERS[k]
+
+    if order_hash in RECENT_ORDERS:
+        return True
+
+    RECENT_ORDERS[order_hash] = now
+    return False
+
+
+def notify_blocked_ip(ip, route):
+    last_notified = NOTIFIED_IPS.get(ip)
+    if last_notified:
+        state = ORDER_COOLDOWN.get(ip, {})
+        blocked_at = state.get('blocked_at')
+        if blocked_at and last_notified >= blocked_at:
+            return
+
+    now = datetime.now()
+    NOTIFIED_IPS[ip] = now
+
+    page_labels = {
+        'order': 'Замовлення',
+        'delivery': 'Доставка',
+    }
+    page = page_labels.get(route, route)
+    time_str = now.strftime("%d.%m.%Y %H:%M")
+
+    text = (
+        f"🚫 *Заблокований IP*\n\n"
+        f"⏰ {time_str}\n"
+        f"🌐 IP: `{ip}`\n"
+        f"📄 Сторінка: {page}\n\n"
+        f"Перевищено ліміт {MAX_ORDERS} замовлень.\n"
+        f"Блокування на {COOLDOWN_MINUTES} хв."
+    )
+
+    for user_id in USERS:
+        try:
+            bot.send_message(user_id, text, parse_mode='Markdown')
+        except Exception as e:
+            print(f"Помилка сповіщення про блокування [{user_id}]: {e}")
 
 
 def check_cooldown(ip):
@@ -41,10 +100,8 @@ def register_order(ip):
     now = datetime.now()
     state = ORDER_COOLDOWN.get(ip, {'count': 0, 'blocked_at': None})
     state['count'] += 1
-
     if state['count'] >= MAX_ORDERS:
         state['blocked_at'] = now
-
     ORDER_COOLDOWN[ip] = state
 
 
@@ -55,13 +112,16 @@ def start(message):
     else:
         bot.send_message(message.chat.id, "Бот не підключений, ви не є працівником компанії ❌")
 
+
 @app.route('/')
 def main():
     return render_template('index.html')
 
+
 @app.route('/about')
 def about():
     return render_template('about.html')
+
 
 @app.route('/order', methods=['GET', 'POST'])
 def order():
@@ -69,15 +129,20 @@ def order():
         ip = request.remote_addr
         allowed, error = check_cooldown(ip)
         if not allowed:
+            notify_blocked_ip(ip, 'order')
             return render_template('order.html', error=error)
 
-        name = request.form.get('name', '').strip()
-        phone = request.form.get('phone', '').strip()
+        name        = request.form.get('name', '').strip()
+        phone       = request.form.get('phone', '').strip()
         description = request.form.get('description', '').strip()
-        wishes = request.form.get('wishes', '').strip()
+        wishes      = request.form.get('wishes', '').strip()
 
         if not name or len(phone) < 12 or not description:
             return render_template('order.html', error="Будь ласка, заповніть всі обов'язкові поля")
+
+        order_hash = make_order_hash(ip, name, phone, description)
+        if is_duplicate(order_hash):
+            return render_template('complete_order.html')
 
         photo = request.files.get('photo')
         photo_path = None
@@ -85,10 +150,8 @@ def order():
         if photo and photo.filename:
             allowed_ext = {'jpg', 'jpeg', 'png', 'webp', 'gif'}
             ext = photo.filename.rsplit('.', 1)[-1].lower()
-
             if ext not in allowed_ext:
                 return render_template('order.html', error="Дозволені формати фото: jpg, png, webp, gif")
-
             os.makedirs(UPLOAD_FOLDER, exist_ok=True)
             filename = secure_filename(photo.filename)
             photo_path = os.path.join(UPLOAD_FOLDER, filename)
@@ -118,12 +181,14 @@ def order():
 
     return render_template('order.html')
 
+
 @app.route('/delivery', methods=['GET', 'POST'])
 def delivery():
     if request.method == 'POST':
         ip = request.remote_addr
         allowed, error = check_cooldown(ip)
         if not allowed:
+            notify_blocked_ip(ip, 'delivery')
             return render_template('delivery.html', error=error)
 
         sender_name    = request.form.get('sender_name', '').strip()
@@ -140,8 +205,13 @@ def delivery():
         description    = request.form.get('description', '').strip()
         wishes         = request.form.get('wishes', '').strip()
 
-        if not sender_name or not sender_phone or not recipient_name or not recipient_phone or not city or not address or not description:
+        if not sender_name or not sender_phone or not recipient_name \
+                or not recipient_phone or not city or not address or not description:
             return render_template('delivery.html', error="Будь ласка, заповніть всі обов'язкові поля")
+
+        order_hash = make_order_hash(ip, sender_name, sender_phone, recipient_name, recipient_phone, description)
+        if is_duplicate(order_hash):
+            return render_template('complete_order.html')
 
         photo = request.files.get('photo')
         photo_path = None
@@ -186,8 +256,8 @@ def delivery():
 
     return render_template('delivery.html')
 
+
 if __name__ == '__main__':
     bot_thread = threading.Thread(target=bot.infinity_polling, daemon=True)
     bot_thread.start()
-
     app.run(host="0.0.0.0", port=5000, debug=True)

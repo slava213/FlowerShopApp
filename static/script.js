@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
         entry.target.classList.add("visible");
       }
     });
-  }, { threshold: 0.1, rootMargin: "0px 0px -60px 0px" });
+  }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
 
   sections.forEach(section => {
     sectionObserver.observe(section);
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
         imageObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+  }, { threshold: 0.15, rootMargin: "0px 0px -10px 0px" });
 
   images.forEach(img => imageObserver.observe(img));
 

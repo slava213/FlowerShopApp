@@ -11,7 +11,7 @@ load_dotenv()
 app = Flask(__name__)
 bot = telebot.TeleBot(os.getenv('api_key'))
 
-USERS = [5347872932, 6673440979]
+USERS = [5347872932, 6673440979, 5258794783]
 UPLOAD_FOLDER = "static/uploads"
 ORDER_COOLDOWN = {}
 
@@ -26,7 +26,6 @@ def check_cooldown(ip):
     if state is None:
         return True, None
 
-    # If currently blocked
     if state['blocked_at']:
         diff = now - state['blocked_at']
         if diff < timedelta(minutes=COOLDOWN_MINUTES):

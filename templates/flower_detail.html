@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+
+{% block title %}{{ flower.name }} — Квіти від Тамари | Кельменці{% endblock %}
+
+{% block head %}
+<meta name="description" content="{{ flower.description[:150] }}... Замовляйте онлайн або телефоном у квітковому магазині «Квіти від Тамари».">
+<meta name="keywords" content="{{ flower.name }}, квіти Кельменці, букети Кельменці, купити квіти">
+<meta property="og:title" content="{{ flower.name }} — Квіти від Тамари">
+<meta property="og:description" content="{{ flower.description[:150] }}...">
+<meta property="og:type" content="product">
+<meta property="og:image" content="{{ flower.image }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="flower-detail">
+  <div class="flower-detail-container">
+
+    <!-- Зображення товару -->
+    <div class="flower-image-section">
+      <div class="flower-image-wrapper premium-card">
+        <img src="{{ flower.image }}" alt="{{ flower.name }} — квіти Кельменці" class="flower-main-image">
+        <div class="card-shine"></div>
+        {% if flower.badge %}
+        <div class="product-badge {{ flower.badge_class }}">{{ flower.badge }}</div>
+        {% endif %}
+      </div>
+      <div class="flower-thumbnails">
+        {% for thumb in flower.gallery %}
+        <div class="flower-thumb" onclick="changeMainImage('{{ thumb }}')">
+          <img src="{{ thumb }}" alt="{{ flower.name }} фото {{ loop.index }}">
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Інформація про товар -->
+    <div class="flower-info-section">
+      <nav class="breadcrumbs">
+        <a href="/">Головна</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="/#products">Букети</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current">{{ flower.name }}</span>
+      </nav>
+
+      <h1 class="flower-title">{{ flower.name }}</h1>
+
+      <div class="flower-price-block">
+        <span class="flower-price">{{ flower.price }} грн</span>
+        {% if flower.old_price %}
+        <span class="flower-old-price">{{ flower.old_price }} грн</span>
+        {% endif %}
+      </div>
+
+      <div class="flower-description">
+        <p>{{ flower.description }}</p>
+      </div>
+
+      <div class="flower-details">
+        <div class="flower-detail-item">
+          <span class="detail-icon">🌸</span>
+          <div class="detail-content">
+            <span class="detail-label">Склад букету</span>
+            <span class="detail-value">{{ flower.composition }}</span>
+          </div>
+        </div>
+        <div class="flower-detail-item">
+          <span class="detail-icon">📏</span>
+          <div class="detail-content">
+            <span class="detail-label">Розмір</span>
+            <span class="detail-value">{{ flower.size }}</span>
+          </div>
+        </div>
+        <div class="flower-detail-item">
+          <span class="detail-icon">🎨</span>
+          <div class="detail-content">
+            <span class="detail-label">Кольорова гама</span>
+            <span class="detail-value">{{ flower.colors }}</span>
+          </div>
+        </div>
+        <div class="flower-detail-item">
+          <span class="detail-icon">⏳</span>
+          <div class="detail-content">
+            <span class="detail-label">Свіжість</span>
+            <span class="detail-value">{{ flower.freshness }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flower-actions">
+        <button class="order-btn flower-order-btn" onclick="window.location.href='/order?flower={{ flower_id }}'">
+          <span>Замовити букет</span>
+        </button>
+        <a href="javascript:history.back()" class="back-btn">
+          <span>Повернутись назад</span>
+        </a>
+      </div>
+
+      <div class="flower-guarantee">
+        <div class="guarantee-item">
+          <span class="guarantee-icon">✓</span>
+          <span>Гарантія свіжості 7 днів</span>
+        </div>
+        <div class="guarantee-item">
+          <span class="guarantee-icon">✓</span>
+          <span>Безкоштовна доставка від 1000 грн</span>
+        </div>
+        <div class="guarantee-item">
+          <span class="guarantee-icon">✓</span>
+          <span>Фото перед відправкою</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Схожі товари -->
+<section class="related-products" id="related">
+  <h2>Вам також сподобається</h2>
+  <div class="product-grid">
+    {% for related in related_flowers %}
+    <div class="product-card premium-card" onclick="showModal('{{ related.name }}', '/flowers/{{ related.id }}')">
+      <div class="product-card-img">
+        <img src="{{ related.image }}" alt="{{ related.name }}">
+        <div class="product-card-label">
+          <p>{{ related.name }}</p>
+          <span class="product-price">від {{ related.price }} грн</span>
+        </div>
+      </div>
+      <div class="product-card-caption">{{ related.name }}</div>
+      <div class="card-shine"></div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Фото для переходу в секцію "вам також може сподобатися" -->
+  <div class="related-scroll-hint" onclick="scrollToRelated()">
+    <div class="scroll-images">
+      {% for related in related_flowers[:3] %}
+      <div class="scroll-thumb">
+        <img src="{{ related.image }}" alt="{{ related.name }}">
+      </div>
+      {% endfor %}
+    </div>
+    <span class="scroll-text">Переглянути схожі</span>
+  </div>
+</section>
+
+<!-- Модальне вікно підтвердження -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-container">
+    <div class="modal-content">
+      <div class="modal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          <path d="M12 8v4"></path>
+          <circle cx="12" cy="16" r="1"></circle>
+        </svg>
+      </div>
+      <h3 class="modal-title">Перейти на сторінку</h3>
+      <p class="modal-text" id="modalText">Перейти на сторінку букета?</p>
+      <div class="modal-actions">
+        <button class="modal-btn modal-btn-cancel" onclick="closeModal()">
+          <span>Скасувати</span>
+        </button>
+        <button class="modal-btn modal-btn-confirm" id="modalConfirmBtn">
+          <span>Перейти</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function changeMainImage(src) {
+  document.querySelector('.flower-main-image').src = src;
+}
+
+function scrollToRelated() {
+  document.getElementById('related').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Модальне вікно
+let modalRedirectUrl = '';
+
+function showModal(productName, url) {
+  modalRedirectUrl = url;
+  document.getElementById('modalText').textContent = `Перейти на сторінку «${productName}»?`;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  document.getElementById('modalConfirmBtn').onclick = function() {
+    window.location.href = modalRedirectUrl;
+  };
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modalOverlay').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeModal();
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeModal();
+  }
+});
+</script>
+
+{% endblock %}

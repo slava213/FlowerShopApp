@@ -1,122 +1,141 @@
 {% extends "base.html" %}
 
-{% block title %}Замовити букет у Кельменцях | Квіти від Тамари
-<script>
-  // Захист від подвійного сабміту — блокуємо кнопку одразу після кліку
-  document.querySelectorAll('form').forEach(form => {
-    form.addEventListener('submit', function() {
-      const btn = this.querySelector('button[type="submit"]');
-      if (!btn) return;
-      btn.disabled = true;
-      btn.style.opacity = '0.6';
-      btn.style.cursor = 'not-allowed';
-      const span = btn.querySelector('span');
-      if (span) span.textContent = 'Надсилається...';
-    });
-  });
-</script>
-
-{% endblock %}
+{% block title %}Замовити букет — Квіти від Тамари | Кельменці{% endblock %}
 
 {% block head %}
-<meta name="description" content="Замовити авторський букет у Кельменцях 🌸 Заповніть форму онлайн — і ми створимо ідеальний букет спеціально для вас. Магазин «Квіти від Тамари»." />
-<meta name="keywords" content="замовити букет Кельменці, купити букет онлайн Кельменці, авторський букет Кельменці" />
-<meta name="robots" content="index, follow" />
-<link rel="canonical" href="https://kvityvid-tamary.ua/order" />
-<meta property="og:title" content="Замовити букет у Кельменцях | Квіти від Тамари" />
-<meta property="og:description" content="Заповніть форму онлайн — і ми створимо ідеальний букет спеціально для вас." />
-<meta property="og:type" content="website" />
-<meta property="og:locale" content="uk_UA" />
-<meta property="og:url" content="https://kvityvid-tamary.ua/order" />
+<meta name="description" content="Замовте авторський букет квітів онлайн у квітковому магазині «Квіти від Тамари» у Кельменцях. Швидка доставка по місту та району.">
+<meta name="keywords" content="замовити квіти Кельменці, замовити букет Кельменці, доставка квітів">
 {% endblock %}
 
 {% block content %}
-
-<section class="about-hero">
-    <div class="about-container">
-        <h1>Замовити букет</h1>
-        <p class="about-intro">
-            Заповніть форму і ми зв'яжемося з вами
-        </p>
-    </div>
-</section>
-
 <section class="order-section">
-    <div class="about-container">
-        <form class="order-form" method="POST" action="/order" enctype="multipart/form-data">
-
-            <h2 class="section-title">Форма замовлення</h2>
-
-            {% if error %}
-              <p style="color:red; font-size:15px;">{{ error }}</p>
-            {% endif %}
-
-            <input type="text" name="name"
-                placeholder="Як до вас звертатися" required>
-
-            <input type="tel" name="phone" id="phone"
-                placeholder="+380 (__) __-__-__"
-                maxlength="19" required>
-
-            <textarea class="order-description" name="description"
-                placeholder="Опишіть замовлення (тип букета, подія, квіти...)"
-                required></textarea>
-
-            <div class="upload-block">
-                <p>Додати фото-приклад (необов'язково)</p>
-                <label class="upload-label">
-                    <input type="file" name="photo" id="photoInput" accept="image/*">
-                    <span>Натисніть щоб завантажити фото</span>
-                </label>
-                <div class="preview-box">
-                    <img id="photoPreview">
-                </div>
-            </div>
-
-            <textarea class="order-small" name="wishes"
-                placeholder="Ваші побажання (необов'язково)"></textarea>
-
-            <button type="submit" class="order-btn"><span>Замовити</span></button>
-
-        </form>
+  <div class="order-container">
+    <div class="order-header">
+      <span class="small-text">Оформлення замовлення</span>
+      <h1>Замовити букет</h1>
+      <p class="order-subtitle">Заповніть форму і ми зв'яжемось з вами для підтвердження</p>
     </div>
+
+    {% if flower %}
+    <!-- Превью обраного букету -->
+    <div class="selected-flower-preview">
+      <div class="preview-image">
+        <img src="{{ flower.image }}" alt="{{ flower.name }}">
+      </div>
+      <div class="preview-info">
+        <h3>{{ flower.name }}</h3>
+        <p class="preview-price">{{ flower.price }} грн</p>
+        <p class="preview-description">{{ flower.description }}</p>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <div class="error-message">
+      <span class="error-icon">⚠️</span>
+      <span>{{ error }}</span>
+    </div>
+    {% endif %}
+
+    <form class="order-form" method="POST" enctype="multipart/form-data">
+      <p class="form-group-label">Контактна інформація</p>
+      
+      <input type="text" name="name" placeholder="Ваше ім'я *" required="">
+      <input type="tel" name="phone" placeholder="Номер телефону *" required="" pattern="\+?[0-9\s\-\(\)]{10,}" title="Введіть коректний номер телефону">
+
+      <div class="form-divider">
+        <span>Деталі замовлення</span>
+      </div>
+
+      {% if flower %}
+      <textarea class="order-description" name="description" placeholder="Опис замовлення *" required="">{{ flower.name }} ({{ flower.price }} грн)
+
+Опис: {{ flower.description }}
+
+Склад: {{ flower.composition }}
+Розмір: {{ flower.size }}
+Кольорова гама: {{ flower.colors }}</textarea>
+      {% else %}
+      <textarea class="order-description" name="description" placeholder="Опишіть бажаний букет: кольорова гама, квіти, розмір, бюджет... *" required=""></textarea>
+      {% endif %}
+
+      <textarea class="order-small" name="wishes" placeholder="Додаткові побажання (необов'язково)"></textarea>
+
+      <div class="upload-block">
+        <span class="upload-icon">📷</span>
+        <p>Додайте фото для прикладу</p>
+        <label class="upload-label">
+          Вибрати фото
+          <input type="file" name="photo" accept="image/*" onchange="previewImage(event)">
+        </label>
+        <div class="preview-box">
+          {% if flower %}
+          <img id="imagePreview" src="{{ flower.image }}" style="display: block;">
+          {% else %}
+          <img id="imagePreview">
+          {% endif %}
+        </div>
+      </div>
+
+      <button type="submit" class="order-btn">
+        <span>Надіслати замовлення</span>
+      </button>
+
+      <p class="form-note">
+        Натискаючи кнопку, ви погоджуєтесь з обробкою персональних даних
+      </p>
+    </form>
+
+    <div class="order-contacts">
+      <p>Або зв'яжіться з нами напряму:</p>
+      <div class="contact-links">
+        <a href="tel:+380976982154" class="contact-link">
+          <span class="contact-icon">📞</span>
+          <span>+38 (097) 698 21 54</span>
+        </a>
+        <a href="https://t.me/kvity_tamara" class="contact-link" target="_blank">
+          <span class="contact-icon">💬</span>
+          <span>Telegram</span>
+        </a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <script>
-  function phoneMask(input) {
-    input.addEventListener('input', function () {
-      let val = this.value.replace(/\D/g, '');
-      if (val.startsWith('380')) val = val.slice(3);
-      else if (val.startsWith('0')) val = val.slice(1);
-      val = val.slice(0, 9);
-      let result = '+380 ';
-      if (val.length > 0) result += '(' + val.slice(0, 2);
-      if (val.length >= 2) result += ') ' + val.slice(2, 5);
-      if (val.length >= 5) result += '-' + val.slice(5, 7);
-      if (val.length >= 7) result += '-' + val.slice(7, 9);
-      this.value = result;
-    });
-    input.addEventListener('keydown', function (e) {
-      if (e.key === 'Backspace' && this.value === '+380 ') this.value = '';
-    });
-    input.addEventListener('focus', function () {
-      if (!this.value) this.value = '+380 ';
-    });
+function previewImage(event) {
+  const file = event.target.files[0];
+  const preview = document.getElementById('imagePreview');
+  
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      preview.src = e.target.result;
+      preview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
   }
+}
 
-  phoneMask(document.getElementById('phone'));
-
-  document.getElementById('photoInput')?.addEventListener('change', function() {
-    const preview = document.getElementById('photoPreview');
-    if (this.files && this.files[0]) {
-      const reader = new FileReader();
-      reader.onload = e => {
-        preview.src = e.target.result;
-        preview.style.display = 'block';
-      };
-      reader.readAsDataURL(this.files[0]);
+// Форматування телефону
+document.querySelector('input[name="phone"]').addEventListener('input', function(e) {
+  let value = e.target.value.replace(/\D/g, '');
+  if (value.length > 0 && !value.startsWith('380')) {
+    if (value.startsWith('0')) {
+      value = '38' + value;
+    } else if (!value.startsWith('38')) {
+      value = '380' + value;
     }
-  });
+  }
+  
+  let formatted = '';
+  if (value.length > 0) formatted += '+' + value.substring(0, 2);
+  if (value.length > 2) formatted += ' (' + value.substring(2, 5);
+  if (value.length > 5) formatted += ') ' + value.substring(5, 8);
+  if (value.length > 8) formatted += ' ' + value.substring(8, 10);
+  if (value.length > 10) formatted += ' ' + value.substring(10, 12);
+  
+  e.target.value = formatted;
+});
 </script>
-
 {% endblock %}

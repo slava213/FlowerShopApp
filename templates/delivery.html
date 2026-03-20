@@ -1,198 +1,231 @@
-{% extends "base.html" %}
+<body>{% extends "base.html" %}
 
-{% block title %}Доставка квітів у Кельменцях | Квіти від Тамари
-<script>
-  // Захист від подвійного сабміту — блокуємо кнопку одразу після кліку
-  document.querySelectorAll('form').forEach(form => {
-    form.addEventListener('submit', function() {
-      const btn = this.querySelector('button[type="submit"]');
-      if (!btn) return;
-      btn.disabled = true;
-      btn.style.opacity = '0.6';
-      btn.style.cursor = 'not-allowed';
-      const span = btn.querySelector('span');
-      if (span) span.textContent = 'Надсилається...';
-    });
-  });
-</script>
-
-{% endblock %}
+{% block title %}Доставка квітів — Квіти від Тамари | Кельменці{% endblock %}
 
 {% block head %}
-<meta name="description" content="Замовити доставку квітів у Кельменцях 🚚 Швидка доставка букетів по Кельменцях та Кельменецькому районі. Магазин «Квіти від Тамари»." />
-<meta name="keywords" content="доставка квітів Кельменці, замовити доставку букета Кельменці, квіти з доставкою Кельменці" />
-<meta name="robots" content="index, follow" />
-<link rel="canonical" href="https://kvityvid-tamary.ua/delivery" />
-<meta property="og:title" content="Доставка квітів у Кельменцях | Квіти від Тамари" />
-<meta property="og:description" content="Швидка доставка букетів по Кельменцях та Кельменецькому районі. Замовте онлайн — доставимо вчасно." />
-<meta property="og:type" content="website" />
-<meta property="og:locale" content="uk_UA" />
-<meta property="og:url" content="https://kvityvid-tamary.ua/delivery" />
+<meta name="description" content="Доставка квітів по Кельменцях та районі. Замовте букет з доставкою для близьких — здивуйте їх приємним сюрпризом!">
+<meta name="keywords" content="доставка квітів Кельменці, доставка букетів, квіти з доставкою">
 {% endblock %}
 
 {% block content %}
-
-<section class="about-hero">
-  <div class="about-container">
-    <h1>Замовити доставку</h1>
-    <p class="about-intro">
-      Заповніть форму — і ми доставимо квіти прямо до дверей
-    </p>
-  </div>
-</section>
-
 <section class="order-section">
-  <div class="about-container">
+  <div class="order-container">
+    <div class="order-header">
+      <span class="small-text">Оформлення доставки</span>
+      <h1>Доставка квітів</h1>
+      <p class="order-subtitle">Здивуйте близьких приємним сюрпризом — ми доставимо квіти особисто</p>
+    </div>
 
-    <form class="order-form delivery-form" method="POST" action="/delivery" enctype="multipart/form-data">
+    {% if flower %}
+    <!-- Превью обраного букету -->
+    <div class="selected-flower-preview">
+      <div class="preview-image">
+        <img src="{{ flower.image }}" alt="{{ flower.name }}">
+      </div>
+      <div class="preview-info">
+        <h3>{{ flower.name }}</h3>
+        <p class="preview-price">{{ flower.price }} грн</p>
+        <p class="preview-description">{{ flower.description }}</p>
+      </div>
+    </div>
+    {% endif %}
 
-      <h2 class="section-title">Форма доставки</h2>
+    {% if error %}
+    <div class="error-message">
+      <span class="error-icon">⚠️</span>
+      <span>{{ error }}</span>
+    </div>
+    {% endif %}
 
-      {% if error %}
-        <p style="color:red; font-size:15px;">{{ error }}</p>
+    <form class="order-form" method="POST" enctype="multipart/form-data">
+      <p class="form-group-label">Ваші дані (відправник)</p>
+      
+      <input type="text" name="sender_name" placeholder="Ваше ім'я *" required="">
+      <input type="tel" name="sender_phone" placeholder="Ваш телефон *" required="">
+
+      <div class="form-divider">
+        <span>Отримувач</span>
+      </div>
+
+      <input type="text" name="recipient_name" placeholder="Ім'я отримувача *" required="">
+      <input type="tel" name="recipient_phone" placeholder="Телефон отримувача *" required="">
+
+      <div class="form-divider">
+        <span>Адреса доставки</span>
+      </div>
+
+      <input type="text" name="city" placeholder="Місто *" value="Кельменці" required="">
+      <input type="text" name="address" placeholder="Адреса (вулиця, будинок, квартира) *" required="">
+
+      <div class="form-divider">
+        <span>Додаткові послуги</span>
+      </div>
+
+      <div class="greeting-toggle">
+        <p class="toggle-label">Відеозйомка вручення:</p>
+        <div class="toggle-options">
+          <label class="toggle-opt">
+            <input type="radio" name="video" value="no" checked="">
+            <span>Ні</span>
+          </label>
+          <label class="toggle-opt">
+            <input type="radio" name="video" value="yes">
+            <span>Так (+100 грн)</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="greeting-toggle">
+        <p class="toggle-label">Листівка з привітанням:</p>
+        <div class="toggle-options">
+          <label class="toggle-opt">
+            <input type="radio" name="greeting" value="no" checked="">
+            <span>Ні</span>
+          </label>
+          <label class="toggle-opt">
+            <input type="radio" name="greeting" value="yes" onclick="toggleGreetingText(true)">
+            <span>Так</span>
+          </label>
+        </div>
+        <div class="greeting-extra" id="greetingTextBlock" style="display: none; margin-top: 16px;">
+          <textarea class="order-small" name="greeting_text" placeholder="Текст привітання"></textarea>
+        </div>
+      </div>
+
+      <div class="greeting-toggle">
+        <p class="toggle-label">Музичний супровід:</p>
+        <div class="toggle-options">
+          <label class="toggle-opt">
+            <input type="radio" name="music" value="no" checked="">
+            <span>Ні</span>
+          </label>
+          <label class="toggle-opt">
+            <input type="radio" name="music" value="yes" onclick="toggleMusicText(true)">
+            <span>Так (+50 грн)</span>
+          </label>
+        </div>
+        <div class="greeting-extra" id="musicTextBlock" style="display: none; margin-top: 16px;">
+          <input type="text" name="music_text" placeholder="Назва пісні або посилання">
+        </div>
+      </div>
+
+      <div class="form-divider">
+        <span>Деталі замовлення</span>
+      </div>
+
+      {% if flower %}
+      <textarea class="order-description" name="description" placeholder="Опис замовлення *" required="">{{ flower.name }} ({{ flower.price }} грн)
+
+Опис: {{ flower.description }}
+
+Склад: {{ flower.composition }}
+Розмір: {{ flower.size }}
+Кольорова гама: {{ flower.colors }}</textarea>
+      {% else %}
+      <textarea class="order-description" name="description" placeholder="Опишіть бажаний букет: кольорова гама, квіти, розмір, бюджет... *" required=""></textarea>
       {% endif %}
 
-      <div class="form-group-label">Від кого</div>
-      <input type="text" name="sender_name" placeholder="Ваше ім'я" required>
-      <input type="tel" name="sender_phone" id="sender_phone"
-        placeholder="+380 (__) __-__-__" maxlength="19" required>
-
-      <div class="form-divider"><span>Отримувач</span></div>
-      <input type="text" name="recipient_name" placeholder="Ім'я отримувача" required>
-      <input type="tel" name="recipient_phone" id="recipient_phone"
-        placeholder="+380 (__) __-__-__" maxlength="19" required>
-
-      <div class="form-divider"><span>Адреса доставки</span></div>
-      <input type="text" name="city" placeholder="Населений пункт (місто, село...)" required>
-      <input type="text" name="address" placeholder="Вулиця, будинок, квартира" required>
-
-      <div class="form-divider"><span>Додатково</span></div>
-
-      <div class="greeting-toggle">
-        <p class="toggle-label">Зняти відео на доставці?</p>
-        <div class="toggle-options">
-          <label class="toggle-opt">
-            <input type="radio" name="video" value="yes" checked>
-            <span>Так</span>
-          </label>
-          <label class="toggle-opt">
-            <input type="radio" name="video" value="no">
-            <span>Ні</span>
-          </label>
-        </div>
-      </div>
-
-      <div class="greeting-toggle">
-        <p class="toggle-label">Додати привітання?</p>
-        <div class="toggle-options">
-          <label class="toggle-opt">
-            <input type="radio" name="greeting" value="no" checked>
-            <span>Ні</span>
-          </label>
-          <label class="toggle-opt">
-            <input type="radio" name="greeting" value="yes">
-            <span>Так</span>
-          </label>
-        </div>
-      </div>
-
-      <div id="greetingCustom" class="greeting-extra" style="display:none;">
-        <textarea class="order-description" name="greeting_text"
-          placeholder="Опишіть людину, для якої скласти привітання..."></textarea>
-      </div>
-
-      <div class="greeting-toggle">
-        <p class="toggle-label">Додати музику?</p>
-        <div class="toggle-options">
-          <label class="toggle-opt">
-            <input type="radio" name="music" value="no" checked>
-            <span>Ні</span>
-          </label>
-          <label class="toggle-opt">
-            <input type="radio" name="music" value="yes">
-            <span>Так</span>
-          </label>
-        </div>
-      </div>
-
-      <div id="musicCustom" class="greeting-extra" style="display:none;">
-        <input type="text" name="music_text" placeholder="Назва пісні або посилання...">
-      </div>
-
-      <div class="form-divider"><span>Букет та побажання</span></div>
-      <textarea class="order-description" name="description"
-        placeholder="Опишіть замовлення (тип букета, подія, квіти...)" required></textarea>
+      <textarea class="order-small" name="wishes" placeholder="Додаткові побажання (необов'язково)"></textarea>
 
       <div class="upload-block">
-        <p>Додати фото-приклад (необов'язково)</p>
+        <span class="upload-icon">📷</span>
+        <p>Додайте фото для прикладу</p>
         <label class="upload-label">
-          <input type="file" name="photo" id="photoInput" accept="image/*">
-          <span>Натисніть щоб завантажити фото</span>
+          Вибрати фото
+          <input type="file" name="photo" accept="image/*" onchange="previewImage(event)">
         </label>
         <div class="preview-box">
-          <img id="photoPreview">
+          {% if flower %}
+          <img id="imagePreview" src="{{ flower.image }}" style="display: block;">
+          {% else %}
+          <img id="imagePreview">
+          {% endif %}
         </div>
       </div>
 
-      <textarea class="order-small" name="wishes"
-        placeholder="Додаткові побажання (необов'язково)"></textarea>
+      <button type="submit" class="order-btn">
+        <span>Оформити доставку</span>
+      </button>
 
-      <button type="submit" class="order-btn"><span>Замовити доставку</span></button>
-
+      <p class="form-note">
+        Натискаючи кнопку, ви погоджуєтесь з обробкою персональних даних
+      </p>
     </form>
+
+    <div class="order-contacts">
+      <p>Або зв'яжіться з нами напряму:</p>
+      <div class="contact-links">
+        <a href="tel:+380976982154" class="contact-link">
+          <span class="contact-icon">📞</span>
+          <span>+38 (097) 698 21 54</span>
+        </a>
+        <a href="https://t.me/kvity_tamara" class="contact-link" target="_blank">
+          <span class="contact-icon">💬</span>
+          <span>Telegram</span>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
 <script>
-  function phoneMask(input) {
-    input.addEventListener('input', function () {
-      let val = this.value.replace(/\D/g, '');
-      if (val.startsWith('380')) val = val.slice(3);
-      else if (val.startsWith('0')) val = val.slice(1);
-      val = val.slice(0, 9);
-      let result = '+380 ';
-      if (val.length > 0) result += '(' + val.slice(0, 2);
-      if (val.length >= 2) result += ') ' + val.slice(2, 5);
-      if (val.length >= 5) result += '-' + val.slice(5, 7);
-      if (val.length >= 7) result += '-' + val.slice(7, 9);
-      this.value = result;
-    });
-    input.addEventListener('keydown', function (e) {
-      if (e.key === 'Backspace' && this.value === '+380 ') this.value = '';
-    });
-    input.addEventListener('focus', function () {
-      if (!this.value) this.value = '+380 ';
-    });
+function previewImage(event) {
+  const file = event.target.files[0];
+  const preview = document.getElementById('imagePreview');
+  
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      preview.src = e.target.result;
+      preview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
   }
+}
 
-  phoneMask(document.getElementById('sender_phone'));
-  phoneMask(document.getElementById('recipient_phone'));
+function toggleGreetingText(show) {
+  document.getElementById('greetingTextBlock').style.display = show ? 'block' : 'none';
+}
 
-  document.querySelectorAll('input[name="greeting"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-      document.getElementById('greetingCustom').style.display =
-        radio.value === 'yes' ? 'block' : 'none';
-    });
+function toggleMusicText(show) {
+  document.getElementById('musicTextBlock').style.display = show ? 'block' : 'none';
+}
+
+// Обробка радіокнопок
+document.querySelectorAll('input[name="greeting"]').forEach(function(radio) {
+  radio.addEventListener('change', function() {
+    toggleGreetingText(this.value === 'yes');
   });
+});
 
-  document.querySelectorAll('input[name="music"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-      document.getElementById('musicCustom').style.display =
-        radio.value === 'yes' ? 'block' : 'none';
-    });
+document.querySelectorAll('input[name="music"]').forEach(function(radio) {
+  radio.addEventListener('change', function() {
+    toggleMusicText(this.value === 'yes');
   });
+});
 
-  document.getElementById('photoInput')?.addEventListener('change', function () {
-    const preview = document.getElementById('photoPreview');
-    if (this.files && this.files[0]) {
-      const reader = new FileReader();
-      reader.onload = e => {
-        preview.src = e.target.result;
-        preview.style.display = 'block';
-      };
-      reader.readAsDataURL(this.files[0]);
+// Форматування телефону
+document.querySelectorAll('input[type="tel"]').forEach(function(input) {
+  input.addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length > 0 && !value.startsWith('380')) {
+      if (value.startsWith('0')) {
+        value = '38' + value;
+      } else if (!value.startsWith('38')) {
+        value = '380' + value;
+      }
     }
+    
+    let formatted = '';
+    if (value.length > 0) formatted += '+' + value.substring(0, 2);
+    if (value.length > 2) formatted += ' (' + value.substring(2, 5);
+    if (value.length > 5) formatted += ') ' + value.substring(5, 8);
+    if (value.length > 8) formatted += ' ' + value.substring(8, 10);
+    if (value.length > 10) formatted += ' ' + value.substring(10, 12);
+    
+    e.target.value = formatted;
   });
+});
 </script>
-
 {% endblock %}
+</body>

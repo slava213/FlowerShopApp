@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Троянди — Квіти від Тамари | Кельменці{% endblock %}
+
+{% block head %}
+<meta name="description" content="Купити троянди у Кельменцях. Свіжі троянди Ecuador, піоновидні, кущові — букети з троянд на замовлення.">
+<meta name="keywords" content="троянди Кельменці, купити троянди, букет троянд, троянди Ecuador">
+{% endblock %}
+
+{% block content %}
+
+<section class="roses-hero">
+  <div class="roses-hero-content">
+    <span class="small-text">Преміум якість</span>
+    <h1>Троянди</h1>
+    <p class="roses-subtitle">Свіжі троянди найвищої якості з найкращих плантацій світу. Класика флористики у кожному букеті.</p>
+    <a href="/order" class="order-btn"><span>Замовити букет</span></a>
+  </div>
+  <div class="roses-hero-image">
+    <div class="roses-hero-img-wrap">
+      <img src="/static/images/img_6.png" alt="Троянди Кельменці">
+    </div>
+  </div>
+</section>
+
+<section class="roses-types">
+  <div class="roses-types-container">
+    <div class="order-header">
+      <span class="small-text">Наш асортимент</span>
+      <h2>Сорти троянд</h2>
+      <p class="order-subtitle">Ми працюємо з найкращими сортами, щоб ваш букет тримався якнайдовше</p>
+    </div>
+    <div class="roses-types-grid">
+      <div class="rose-type-card">
+        <div class="rose-type-icon">🌹</div>
+        <h3>Ecuador</h3>
+        <p>Висококласні троянди з Еквадору. Великі бутони, насичені кольори, стебло 60–90 см. Тримаються 2–3 тижні.</p>
+      </div>
+      <div class="rose-type-card">
+        <div class="rose-type-icon">🌸</div>
+        <h3>Піоновидні</h3>
+        <p>Пишні, з великою кількістю пелюсток. Створюють ефект розкоші. Улюблениці наречених та романтиків.</p>
+      </div>
+      <div class="rose-type-card">
+        <div class="rose-type-icon">💐</div>
+        <h3>Кущові</h3>
+        <p>Декілька квіток на одному стеблі. Ідеальні для об'ємних букетів. Чудове поєднання ціни та краси.</p>
+      </div>
+      <div class="rose-type-card">
+        <div class="rose-type-icon">🌺</div>
+        <h3>Спрей-троянди</h3>
+        <p>Міні-троянди з маленькими ніжними бутонами. Чудово доповнюють основні квіти у композиціях.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="roses-products">
+  <div class="roses-types-container">
+    <div class="order-header">
+      <span class="small-text">Замовити</span>
+      <h2>Букети з троянд</h2>
+      <p class="order-subtitle">Готові варіанти або індивідуальне замовлення під ваш бюджет</p>
+    </div>
+    <div class="product-grid">
+      {% for f in flowers %}
+      <div class="product-card premium-card" onclick="window.location.href='/flowers/{{ f.id }}'">
+        <div class="product-card-img">
+          <img src="{{ f.image }}" alt="{{ f.name }}">
+          <div class="product-card-label">
+            <p>{{ f.name }}</p>
+            <span class="product-price">від {{ f.price }} грн</span>
+          </div>
+        </div>
+        <div class="product-card-caption">{{ f.name }}</div>
+        <div class="card-shine"></div>
+      </div>
+      {% else %}
+      <p class="roses-no-products">Незабаром тут будуть букети з троянд</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="roses-why">
+  <div class="roses-types-container">
+    <div class="order-header">
+      <span class="small-text">Гарантія якості</span>
+      <h2>Чому обирають нас</h2>
+    </div>
+    <div class="roses-why-grid">
+      <div class="roses-why-item">
+        <span class="roses-why-icon">✓</span>
+        <div>
+          <h4>Свіжість гарантована</h4>
+          <p>Квіти надходять безпосередньо від постачальників. Замовляємо під кожен букет.</p>
+        </div>
+      </div>
+      <div class="roses-why-item">
+        <span class="roses-why-icon">✓</span>
+        <div>
+          <h4>Довгий термін</h4>
+          <p>Правильний догляд і відбір сортів гарантують свіжість від 10 до 21 дня.</p>
+        </div>
+      </div>
+      <div class="roses-why-item">
+        <span class="roses-why-icon">✓</span>
+        <div>
+          <h4>Будь-яка кількість</h4>
+          <p>Від 1 до 101 троянди. Будь-яка колірна гама та упаковка.</p>
+        </div>
+      </div>
+      <div class="roses-why-item">
+        <span class="roses-why-icon">✓</span>
+        <div>
+          <h4>Фото перед відправкою</h4>
+          <p>Завжди надсилаємо фото готового букета для вашого схвалення.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="roses-cta">
+  <div class="roses-cta-inner">
+    <h2>Хочете індивідуальний букет з троянд?</h2>
+    <p>Опишіть побажання — і ми створимо щось особливе саме для вас</p>
+    <div class="roses-cta-btns">
+      <a href="/order" class="order-btn"><span>Замовити онлайн</span></a>
+      <a href="tel:+380976982154" class="back-btn"><span>📞 Подзвонити</span></a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

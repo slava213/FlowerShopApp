@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Приклади робіт — Квіти від Тамари | Кельменці{% endblock %}
+
+{% block head %}
+<meta name="description" content="Приклади букетів та флористичних композицій від Тамари у Кельменцях. Авторські роботи з натуральних квітів.">
+<meta name="keywords" content="приклади букетів Кельменці, флористика, авторські букети, композиції">
+{% endblock %}
+
+{% block content %}
+<section class="examples-section">
+  <div class="examples-container">
+    <div class="order-header">
+      <span class="small-text">Галерея робіт</span>
+      <h1>Приклади наших букетів</h1>
+      <p class="order-subtitle">Реальні роботи нашого флориста — букети та композиції для будь-якого приводу</p>
+    </div>
+
+    <div class="examples-filter">
+      <button class="filter-btn active" data-filter="all">Всі</button>
+      <button class="filter-btn" data-filter="bouquet">Букети</button>
+      <button class="filter-btn" data-filter="composition">Композиції</button>
+    </div>
+
+    {% if not examples %}
+    <div class="examples-empty">
+      <div class="empty-icon">🌸</div>
+      <h3>Поки що немає прикладів</h3>
+      <p>Незабаром тут з'являться наші роботи.<br>Щоб додати — напишіть боту в Telegram.</p>
+      <a href="https://t.me/0976982154" class="order-btn examples-tg-btn">
+        <span>Написати в Telegram</span>
+      </a>
+    </div>
+    {% else %}
+    <div class="examples-grid" id="examplesGrid">
+      {% for item in examples %}
+      <div class="example-card" data-category="{{ item.category }}">
+        <div class="example-card-img">
+          <img src="{{ item.image }}" alt="{{ item.name }}">
+          {% if item.category == 'bouquet' %}
+          <span class="example-badge">Букет</span>
+          {% else %}
+          <span class="example-badge example-badge-comp">Композиція</span>
+          {% endif %}
+        </div>
+        <div class="example-card-body">
+          <h3 class="example-card-title">{{ item.name }}</h3>
+          {% if item.price %}
+          <p class="example-card-price">від {{ item.price }} грн</p>
+          {% endif %}
+          <a href="/examples/{{ loop.index0 }}" class="example-view-btn">
+            Подивитися
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const filter = this.dataset.filter;
+    document.querySelectorAll('.example-card').forEach(card => {
+      card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'block' : 'none';
+    });
+  });
+});
+</script>
+{% endblock %}

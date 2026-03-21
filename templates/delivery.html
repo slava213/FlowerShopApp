@@ -1,4 +1,4 @@
-<body>{% extends "base.html" %}
+{% extends "base.html" %}
 
 {% block title %}Доставка квітів — Квіти від Тамари | Кельменці{% endblock %}
 
@@ -17,7 +17,6 @@
     </div>
 
     {% if flower %}
-    <!-- Превью обраного букету -->
     <div class="selected-flower-preview">
       <div class="preview-image">
         <img src="{{ flower.image }}" alt="{{ flower.name }}">
@@ -38,83 +37,84 @@
     {% endif %}
 
     <form class="order-form" method="POST" enctype="multipart/form-data">
-      <p class="form-group-label">Ваші дані (відправник)</p>
-      
-      <input type="text" name="sender_name" placeholder="Ваше ім'я *" required="">
-      <input type="tel" name="sender_phone" placeholder="Ваш телефон *" required="">
 
-      <div class="form-divider">
-        <span>Отримувач</span>
-      </div>
-
-      <input type="text" name="recipient_name" placeholder="Ім'я отримувача *" required="">
-      <input type="tel" name="recipient_phone" placeholder="Телефон отримувача *" required="">
-
-      <div class="form-divider">
-        <span>Адреса доставки</span>
-      </div>
-
-      <input type="text" name="city" placeholder="Місто *" value="Кельменці" required="">
-      <input type="text" name="address" placeholder="Адреса (вулиця, будинок, квартира) *" required="">
-
-      <div class="form-divider">
-        <span>Додаткові послуги</span>
-      </div>
-
-      <div class="greeting-toggle">
-        <p class="toggle-label">Відеозйомка вручення:</p>
+      <!-- Кому доставка -->
+      <div class="delivery-to-block">
+        <p class="form-group-label">Кому доставка?</p>
         <div class="toggle-options">
           <label class="toggle-opt">
-            <input type="radio" name="video" value="no" checked="">
-            <span>Ні</span>
+            <input type="radio" name="delivery_to" value="self" checked id="delivSelf">
+            <span>Собі</span>
           </label>
           <label class="toggle-opt">
-            <input type="radio" name="video" value="yes">
-            <span>Так (+100 грн)</span>
+            <input type="radio" name="delivery_to" value="other" id="delivOther">
+            <span>Іншій людині</span>
           </label>
         </div>
       </div>
 
-      <div class="greeting-toggle">
-        <p class="toggle-label">Листівка з привітанням:</p>
-        <div class="toggle-options">
-          <label class="toggle-opt">
-            <input type="radio" name="greeting" value="no" checked="">
-            <span>Ні</span>
-          </label>
-          <label class="toggle-opt">
-            <input type="radio" name="greeting" value="yes" onclick="toggleGreetingText(true)">
-            <span>Так</span>
-          </label>
+      <!-- Форма "Собі" -->
+      <div id="formSelf">
+        <p class="form-group-label">Контактна інформація</p>
+        <input type="text" name="self_name" placeholder="Ваше ім'я *">
+        <input type="tel" name="self_phone" placeholder="Ваш телефон *">
+
+        <div class="form-divider"><span>Адреса доставки</span></div>
+        <input type="text" name="self_city" placeholder="Населений пункт *" value="Кельменці">
+        <input type="text" name="self_address" placeholder="Адреса (вулиця, будинок, квартира) *">
+      </div>
+
+      <!-- Форма "Іншій людині" -->
+      <div id="formOther" class="form-other-block">
+        <p class="form-group-label">Ваші дані (відправник)</p>
+        <input type="text" name="sender_name" placeholder="Ваше ім'я *">
+        <input type="tel" name="sender_phone" placeholder="Ваш телефон *">
+
+        <div class="form-divider"><span>Отримувач</span></div>
+        <input type="text" name="recipient_name" placeholder="Ім'я отримувача *">
+        <input type="tel" name="recipient_phone" placeholder="Телефон отримувача *">
+
+        <div class="form-divider"><span>Адреса доставки</span></div>
+        <input type="text" name="city" placeholder="Населений пункт *" value="Кельменці">
+        <input type="text" name="address" placeholder="Адреса (вулиця, будинок, квартира) *">
+
+        <div class="form-divider"><span>Додаткові послуги</span></div>
+
+        <div class="greeting-toggle">
+          <p class="toggle-label">Відеозйомка вручення:</p>
+          <div class="toggle-options">
+            <label class="toggle-opt"><input type="radio" name="video" value="no" checked><span>Ні</span></label>
+            <label class="toggle-opt"><input type="radio" name="video" value="yes"><span>Так (+100 грн)</span></label>
+          </div>
         </div>
-        <div class="greeting-extra" id="greetingTextBlock" style="display: none; margin-top: 16px;">
-          <textarea class="order-small" name="greeting_text" placeholder="Текст привітання"></textarea>
+
+        <div class="greeting-toggle">
+          <p class="toggle-label">Листівка з привітанням:</p>
+          <div class="toggle-options">
+            <label class="toggle-opt"><input type="radio" name="greeting" value="no" checked><span>Ні</span></label>
+            <label class="toggle-opt"><input type="radio" name="greeting" value="yes"><span>Так</span></label>
+          </div>
+          <div class="greeting-extra" id="greetingTextBlock">
+            <textarea class="order-small" name="greeting_text" placeholder="Текст привітання"></textarea>
+          </div>
+        </div>
+
+        <div class="greeting-toggle">
+          <p class="toggle-label">Музичний супровід:</p>
+          <div class="toggle-options">
+            <label class="toggle-opt"><input type="radio" name="music" value="no" checked><span>Ні</span></label>
+            <label class="toggle-opt"><input type="radio" name="music" value="yes"><span>Так (+50 грн)</span></label>
+          </div>
+          <div class="greeting-extra" id="musicTextBlock">
+            <input type="text" name="music_text" placeholder="Назва пісні або посилання">
+          </div>
         </div>
       </div>
 
-      <div class="greeting-toggle">
-        <p class="toggle-label">Музичний супровід:</p>
-        <div class="toggle-options">
-          <label class="toggle-opt">
-            <input type="radio" name="music" value="no" checked="">
-            <span>Ні</span>
-          </label>
-          <label class="toggle-opt">
-            <input type="radio" name="music" value="yes" onclick="toggleMusicText(true)">
-            <span>Так (+50 грн)</span>
-          </label>
-        </div>
-        <div class="greeting-extra" id="musicTextBlock" style="display: none; margin-top: 16px;">
-          <input type="text" name="music_text" placeholder="Назва пісні або посилання">
-        </div>
-      </div>
-
-      <div class="form-divider">
-        <span>Деталі замовлення</span>
-      </div>
+      <div class="form-divider"><span>Деталі замовлення</span></div>
 
       {% if flower %}
-      <textarea class="order-description" name="description" placeholder="Опис замовлення *" required="">{{ flower.name }} ({{ flower.price }} грн)
+      <textarea class="order-description" name="description" placeholder="Опис замовлення *" required>{{ flower.name }} ({{ flower.price }} грн)
 
 Опис: {{ flower.description }}
 
@@ -122,7 +122,7 @@
 Розмір: {{ flower.size }}
 Кольорова гама: {{ flower.colors }}</textarea>
       {% else %}
-      <textarea class="order-description" name="description" placeholder="Опишіть бажаний букет: кольорова гама, квіти, розмір, бюджет... *" required=""></textarea>
+      <textarea class="order-description" name="description" placeholder="Опишіть бажаний букет: кольорова гама, квіти, розмір, бюджет... *" required></textarea>
       {% endif %}
 
       <textarea class="order-small" name="wishes" placeholder="Додаткові побажання (необов'язково)"></textarea>
@@ -134,22 +134,21 @@
           Вибрати фото
           <input type="file" name="photo" accept="image/*" onchange="previewImage(event)">
         </label>
+        {% if flower %}
+        <input type="hidden" name="server_photo" value="{{ flower.image }}">
+        {% endif %}
         <div class="preview-box">
           {% if flower %}
-          <img id="imagePreview" src="{{ flower.image }}" style="display: block;">
+          <img id="imagePreview" src="{{ flower.image }}" class="preview-visible">
           {% else %}
           <img id="imagePreview">
           {% endif %}
         </div>
       </div>
 
-      <button type="submit" class="order-btn">
-        <span>Оформити доставку</span>
-      </button>
+      <button type="submit" class="order-btn"><span>Оформити доставку</span></button>
 
-      <p class="form-note">
-        Натискаючи кнопку, ви погоджуєтесь з обробкою персональних даних
-      </p>
+      <p class="form-note">Натискаючи кнопку, ви погоджуєтесь з обробкою персональних даних</p>
     </form>
 
     <div class="order-contacts">
@@ -169,63 +168,56 @@
 </section>
 
 <script>
+const delivSelf  = document.getElementById('delivSelf');
+const delivOther = document.getElementById('delivOther');
+const formSelf   = document.getElementById('formSelf');
+const formOther  = document.getElementById('formOther');
+
+function switchDelivery() {
+  const toOther = delivOther.checked;
+  formSelf.style.display  = toOther ? 'none'  : 'block';
+  formOther.style.display = toOther ? 'block' : 'none';
+}
+
+delivSelf.addEventListener('change', switchDelivery);
+delivOther.addEventListener('change', switchDelivery);
+
+document.querySelectorAll('input[name="greeting"]').forEach(r => {
+  r.addEventListener('change', function() {
+    document.getElementById('greetingTextBlock').style.display = this.value === 'yes' ? 'block' : 'none';
+  });
+});
+document.querySelectorAll('input[name="music"]').forEach(r => {
+  r.addEventListener('change', function() {
+    document.getElementById('musicTextBlock').style.display = this.value === 'yes' ? 'block' : 'none';
+  });
+});
+
 function previewImage(event) {
   const file = event.target.files[0];
   const preview = document.getElementById('imagePreview');
-  
   if (file) {
     const reader = new FileReader();
-    reader.onload = function(e) {
-      preview.src = e.target.result;
-      preview.style.display = 'block';
-    };
+    reader.onload = e => { preview.src = e.target.result; preview.style.display = 'block'; };
     reader.readAsDataURL(file);
   }
 }
 
-function toggleGreetingText(show) {
-  document.getElementById('greetingTextBlock').style.display = show ? 'block' : 'none';
-}
-
-function toggleMusicText(show) {
-  document.getElementById('musicTextBlock').style.display = show ? 'block' : 'none';
-}
-
-// Обробка радіокнопок
-document.querySelectorAll('input[name="greeting"]').forEach(function(radio) {
-  radio.addEventListener('change', function() {
-    toggleGreetingText(this.value === 'yes');
-  });
-});
-
-document.querySelectorAll('input[name="music"]').forEach(function(radio) {
-  radio.addEventListener('change', function() {
-    toggleMusicText(this.value === 'yes');
-  });
-});
-
-// Форматування телефону
 document.querySelectorAll('input[type="tel"]').forEach(function(input) {
   input.addEventListener('input', function(e) {
     let value = e.target.value.replace(/\D/g, '');
     if (value.length > 0 && !value.startsWith('380')) {
-      if (value.startsWith('0')) {
-        value = '38' + value;
-      } else if (!value.startsWith('38')) {
-        value = '380' + value;
-      }
+      if (value.startsWith('0')) value = '38' + value;
+      else if (!value.startsWith('38')) value = '380' + value;
     }
-    
     let formatted = '';
-    if (value.length > 0) formatted += '+' + value.substring(0, 2);
-    if (value.length > 2) formatted += ' (' + value.substring(2, 5);
-    if (value.length > 5) formatted += ') ' + value.substring(5, 8);
-    if (value.length > 8) formatted += ' ' + value.substring(8, 10);
+    if (value.length > 0)  formatted += '+' + value.substring(0, 2);
+    if (value.length > 2)  formatted += ' (' + value.substring(2, 5);
+    if (value.length > 5)  formatted += ') ' + value.substring(5, 8);
+    if (value.length > 8)  formatted += ' ' + value.substring(8, 10);
     if (value.length > 10) formatted += ' ' + value.substring(10, 12);
-    
     e.target.value = formatted;
   });
 });
 </script>
 {% endblock %}
-</body>

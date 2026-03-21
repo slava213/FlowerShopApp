@@ -3,10 +3,10 @@
 {% block title %}{{ flower.name }} — Квіти від Тамари | Кельменці{% endblock %}
 
 {% block head %}
-<meta name="description" content="{{ flower.description[:150] }}... Замовляйте онлайн або телефоном у квітковому магазині «Квіти від Тамари».">
+<meta name="description" content="{{ flower.description[:150] if flower.description else flower.name }}... Замовляйте онлайн або телефоном у квітковому магазині «Квіти від Тамари».">
 <meta name="keywords" content="{{ flower.name }}, квіти Кельменці, букети Кельменці, купити квіти">
 <meta property="og:title" content="{{ flower.name }} — Квіти від Тамари">
-<meta property="og:description" content="{{ flower.description[:150] }}...">
+<meta property="og:description" content="{{ flower.description[:150] if flower.description else flower.name }}...">
 <meta property="og:type" content="product">
 <meta property="og:image" content="{{ flower.image }}">
 {% endblock %}
@@ -16,7 +16,7 @@
 <section class="flower-detail">
   <div class="flower-detail-container">
 
-    <!-- Зображення товару -->
+    <!-- Зображення -->
     <div class="flower-image-section">
       <div class="flower-image-wrapper premium-card">
         <img src="{{ flower.image }}" alt="{{ flower.name }} — квіти Кельменці" class="flower-main-image">
@@ -25,6 +25,7 @@
         <div class="product-badge {{ flower.badge_class }}">{{ flower.badge }}</div>
         {% endif %}
       </div>
+      {% if flower.gallery %}
       <div class="flower-thumbnails">
         {% for thumb in flower.gallery %}
         <div class="flower-thumb" onclick="changeMainImage('{{ thumb }}')">
@@ -32,14 +33,19 @@
         </div>
         {% endfor %}
       </div>
+      {% endif %}
     </div>
 
-    <!-- Інформація про товар -->
+    <!-- Інформація -->
     <div class="flower-info-section">
       <nav class="breadcrumbs">
         <a href="/">Головна</a>
         <span class="breadcrumb-sep">/</span>
+        {% if back_url %}
+        <a href="{{ back_url }}">Приклади</a>
+        {% else %}
         <a href="/#products">Букети</a>
+        {% endif %}
         <span class="breadcrumb-sep">/</span>
         <span class="breadcrumb-current">{{ flower.name }}</span>
       </nav>
@@ -53,11 +59,14 @@
         {% endif %}
       </div>
 
+      {% if flower.description %}
       <div class="flower-description">
         <p>{{ flower.description }}</p>
       </div>
+      {% endif %}
 
       <div class="flower-details">
+        {% if flower.composition %}
         <div class="flower-detail-item">
           <span class="detail-icon">🌸</span>
           <div class="detail-content">
@@ -65,6 +74,8 @@
             <span class="detail-value">{{ flower.composition }}</span>
           </div>
         </div>
+        {% endif %}
+        {% if flower.size %}
         <div class="flower-detail-item">
           <span class="detail-icon">📏</span>
           <div class="detail-content">
@@ -72,6 +83,8 @@
             <span class="detail-value">{{ flower.size }}</span>
           </div>
         </div>
+        {% endif %}
+        {% if flower.colors %}
         <div class="flower-detail-item">
           <span class="detail-icon">🎨</span>
           <div class="detail-content">
@@ -79,6 +92,8 @@
             <span class="detail-value">{{ flower.colors }}</span>
           </div>
         </div>
+        {% endif %}
+        {% if flower.freshness %}
         <div class="flower-detail-item">
           <span class="detail-icon">⏳</span>
           <div class="detail-content">
@@ -86,14 +101,30 @@
             <span class="detail-value">{{ flower.freshness }}</span>
           </div>
         </div>
+        {% endif %}
       </div>
 
       <div class="flower-actions">
-        <button class="order-btn flower-order-btn" onclick="window.location.href='/order?flower={{ flower_id }}'">
-          <span>Замовити букет</span>
+        {% if flower_id %}
+          {% set order_url = '/order?flower=' ~ flower_id %}
+          {% set delivery_url = '/delivery?flower=' ~ flower_id %}
+        {% elif example_idx is not none %}
+          {% set order_url = '/order?example=' ~ example_idx %}
+          {% set delivery_url = '/delivery?example=' ~ example_idx %}
+        {% else %}
+          {% set order_url = '/order' %}
+          {% set delivery_url = '/delivery' %}
+        {% endif %}
+        <button class="order-btn flower-order-btn"
+                onclick="window.location.href='{{ order_url }}'">
+          <span>Замовити</span>
         </button>
-        <a href="javascript:history.back()" class="back-btn">
-          <span>Повернутись назад</span>
+        <button class="order-btn flower-delivery-btn"
+                onclick="window.location.href='{{ delivery_url }}'">
+          <span>Замовити з доставкою</span>
+        </button>
+        <a href="{{ back_url if back_url else 'javascript:history.back()' }}" class="back-btn">
+          <span>Назад</span>
         </a>
       </div>
 
@@ -111,17 +142,23 @@
           <span>Фото перед відправкою</span>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- Схожі товари -->
+<!-- Схожі -->
+{% if related_flowers %}
 <section class="related-products" id="related">
   <h2>Вам також сподобається</h2>
   <div class="product-grid">
     {% for related in related_flowers %}
-    <div class="product-card premium-card" onclick="showModal('{{ related.name }}', '/flowers/{{ related.id }}')">
+    {% if back_url %}
+    <div class="product-card premium-card"
+         onclick="window.location.href='/examples/{{ loop.index0 }}'">
+    {% else %}
+    <div class="product-card premium-card"
+         onclick="showModal('{{ related.name }}', '/flowers/{{ related.id }}')">
+    {% endif %}
       <div class="product-card-img">
         <img src="{{ related.image }}" alt="{{ related.name }}">
         <div class="product-card-label">
@@ -134,21 +171,11 @@
     </div>
     {% endfor %}
   </div>
-
-  <!-- Фото для переходу в секцію "вам також може сподобатися" -->
-  <div class="related-scroll-hint" onclick="scrollToRelated()">
-    <div class="scroll-images">
-      {% for related in related_flowers[:3] %}
-      <div class="scroll-thumb">
-        <img src="{{ related.image }}" alt="{{ related.name }}">
-      </div>
-      {% endfor %}
-    </div>
-    <span class="scroll-text">Переглянути схожі</span>
-  </div>
 </section>
+{% endif %}
 
-<!-- Модальне вікно підтвердження -->
+{% if not back_url %}
+<!-- Модальне вікно (тільки для /flowers/) -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-container">
     <div class="modal-content">
@@ -172,46 +199,35 @@
     </div>
   </div>
 </div>
+{% endif %}
 
 <script>
 function changeMainImage(src) {
   document.querySelector('.flower-main-image').src = src;
 }
 
-function scrollToRelated() {
-  document.getElementById('related').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// Модальне вікно
+{% if not back_url %}
 let modalRedirectUrl = '';
-
 function showModal(productName, url) {
   modalRedirectUrl = url;
   document.getElementById('modalText').textContent = `Перейти на сторінку «${productName}»?`;
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-
   document.getElementById('modalConfirmBtn').onclick = function() {
     window.location.href = modalRedirectUrl;
   };
 }
-
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
   document.body.style.overflow = '';
 }
-
 document.getElementById('modalOverlay').addEventListener('click', function(e) {
-  if (e.target === this) {
-    closeModal();
-  }
+  if (e.target === this) closeModal();
 });
-
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    closeModal();
-  }
+  if (e.key === 'Escape') closeModal();
 });
+{% endif %}
 </script>
 
 {% endblock %}

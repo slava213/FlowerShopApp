@@ -68,9 +68,12 @@
           Вибрати фото
           <input type="file" name="photo" accept="image/*" onchange="previewImage(event)">
         </label>
+        {% if flower %}
+        <input type="hidden" name="server_photo" value="{{ flower.image }}">
+        {% endif %}
         <div class="preview-box">
           {% if flower %}
-          <img id="imagePreview" src="{{ flower.image }}" style="display: block;">
+          <img id="imagePreview" src="{{ flower.image }}" class="preview-visible">
           {% else %}
           <img id="imagePreview">
           {% endif %}

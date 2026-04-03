@@ -9,11 +9,74 @@ document.addEventListener("DOMContentLoaded", function () {
         entry.target.classList.add("visible");
       }
     });
-  }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
+  }, { threshold: 0.08, rootMargin: "0px 0px -12px 0px" });
 
   sections.forEach(section => {
     sectionObserver.observe(section);
   });
+
+  // ===== КАРТКИ — поява зі стагером при скролі =====
+  const revealSelectors = [
+    ".product-card",
+    ".service-card-new",
+    ".occasion-card",
+    ".why-card-new",
+    ".catalog-card",
+    ".rose-card",
+    ".vase-card",
+    ".acc-card",
+    ".micro-chips",
+    ".section-band__inner",
+    ".section-inline-hint",
+    ".section-foot-note",
+    ".stats-preface",
+  ].join(", ");
+
+  const revealObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.1, rootMargin: "0px 0px -32px 0px" }
+  );
+
+  document.querySelectorAll(revealSelectors).forEach((el, i) => {
+    el.classList.add("reveal-card");
+    const col = 6;
+    el.style.setProperty("--reveal-delay", `${(i % col) * 0.065}s`);
+    revealObserver.observe(el);
+  });
+
+  // ===== ТОВАРИ — легкий 3D-нахил по курсору (тільки desktop) =====
+  const allowTilt =
+    window.matchMedia("(pointer: fine)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (allowTilt) {
+    const maxDeg = 6;
+    document.querySelectorAll(".product-card.premium-card").forEach(card => {
+      let raf = 0;
+      const apply = (e) => {
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          card.style.setProperty("--card-tilt-y", `${px * maxDeg * 2}deg`);
+          card.style.setProperty("--card-tilt-x", `${-py * maxDeg * 2}deg`);
+        });
+      };
+      card.addEventListener("mousemove", apply, { passive: true });
+      card.addEventListener("mouseleave", () => {
+        if (raf) cancelAnimationFrame(raf);
+        card.style.setProperty("--card-tilt-x", "0deg");
+        card.style.setProperty("--card-tilt-y", "0deg");
+      });
+    });
+  }
 
   // ===== HERO ФОТО — тільки плавна поява, без підняття =====
   const heroImages = document.querySelectorAll(".hero-images img");

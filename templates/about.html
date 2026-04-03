@@ -1,47 +1,104 @@
 {% extends "base.html" %}
 
+{% block title %}Купити квіти у Кельменцях — Квіти від Тамари | Букети та доставка{% endblock %}
+{% block body_class %}page-about{% endblock %}
+
 {% block head %}
-<title>Квіти Кельменці — букети та доставка | Квіти від Тамари</title>
-<meta name="description" content="Купити квіти у Кельменцях 🌸 Авторські букети, квіткові композиції та доставка квітів по Кельменцях. Магазин «Квіти від Тамари». Замовляйте онлайн або телефоном.">
-<meta name="keywords" content="квіти Кельменці, купити квіти Кельменці, доставка квітів Кельменці, квітковий магазин Кельменці, букети Кельменці, авторські букети, флорист Кельменці">
-<meta name="robots" content="index, follow">
+<meta name="description" content="Квітковий магазин «Квіти від Тамари» у Кельменцях. Купити свіжі квіти, авторські букети, доставка квітів по Кельменцях та районі. Вул. Довженка, 27. Тел: +38 (097) 698 21 54.">
+<meta name="keywords" content="купити квіти кельменці, квіти кельменці, букети кельменці, доставка квітів кельменці, квітковий магазин кельменці, квіти від тамари">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://kvityvid-tamary.ua/about">
-<meta property="og:title" content="Квіти Кельменці — букети та доставка | Квіти від Тамари">
-<meta property="og:description" content="Авторські букети, квіткові композиції та доставка квітів по Кельменцях. Магазин «Квіти від Тамари» — вул. Довженка, 27.">
+<meta property="og:title" content="Купити квіти у Кельменцях — Квіти від Тамари">
+<meta property="og:description" content="Авторські букети, квіткові композиції та доставка квітів по Кельменцях і районі. Свіжі квіти щодня. Вул. Довженка, 27.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="uk_UA">
+<meta property="og:url" content="https://kvityvid-tamary.ua/about">
+<meta property="og:image" content="https://kvityvid-tamary.ua/static/images/shop1.png">
+<meta name="twitter:card" content="summary_large_image">
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Florist",
-  "name": "Квіти від Тамари",
-  "image": "https://kvityvid-tamary.ua/static/images/shop1.png",
-  "url": "https://kvityvid-tamary.ua/",
-  "telephone": ["+380976982154", "+380986585050"],
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "вулиця Довженка, 27",
-    "addressLocality": "Кельменці",
-    "addressRegion": "Чернівецька область",
-    "postalCode": "60100",
-    "addressCountry": "UA"
-  },
-  "geo": { "@type": "GeoCoordinates", "latitude": 48.4730, "longitude": 26.8370 },
-  "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "08:00", "closes": "20:00" }],
-  "priceRange": "₴₴",
-  "description": "Квітковий магазин у Кельменцях. Авторські букети, квіткові композиції, оформлення свят, доставка квітів.",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Послуги квіткового магазину",
-    "itemListElement": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Авторські букети" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Квіткові композиції" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Оформлення весіль" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Доставка квітів по Кельменцях" } }
-    ]
-  },
-  "sameAs": ["https://www.instagram.com/kvitu_kelmentsi_fotozona/"]
+  "@graph": [
+    {
+      "@type": "Florist",
+      "@id": "https://kvityvid-tamary.ua/#florist",
+      "name": "Квіти від Тамари",
+      "alternateName": "Квіти Кельменці",
+      "description": "Квітковий магазин у Кельменцях. Авторські букети, квіткові композиції, оформлення весіль, доставка квітів по Кельменцях та Кельменецькому районі.",
+      "image": ["https://kvityvid-tamary.ua/static/images/shop1.png","https://kvityvid-tamary.ua/static/images/shop2.png"],
+      "url": "https://kvityvid-tamary.ua/",
+      "telephone": ["+380976982154", "+380986585050"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "вулиця Довженка, 27",
+        "addressLocality": "Кельменці",
+        "addressRegion": "Чернівецька область",
+        "postalCode": "60100",
+        "addressCountry": "UA"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 48.4730,
+        "longitude": 26.8370
+      },
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "08:00",
+        "closes": "20:00"
+      }],
+      "priceRange": "₴₴",
+      "areaServed": {
+        "@type": "City",
+        "name": "Кельменці"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Флористичні послуги Кельменці",
+        "itemListElement": [
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Авторські букети квітів у Кельменцях","description":"Унікальні флористичні букети на замовлення"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Квіткові композиції у коробках та кошиках"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Весільна флористика у Кельменцях","description":"Букет нареченої, бутоньєрки, декор залу"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Доставка квітів по Кельменцях та Кельменецькому районі"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Оформлення свят та фотозон у Кельменцях"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Троянди преміум — 51, 101 і більше штук"}}
+        ]
+      },
+      "sameAs": ["https://www.instagram.com/kvitu_kelmentsi_fotozona/"]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://kvityvid-tamary.ua/about#webpage",
+      "url": "https://kvityvid-tamary.ua/about",
+      "name": "Купити квіти у Кельменцях — про магазин Квіти від Тамари",
+      "description": "Дізнайтеся більше про квітковий магазин «Квіти від Тамари» у Кельменцях. Авторські букети, доставка квітів, оформлення весіль.",
+      "inLanguage": "uk-UA",
+      "isPartOf": {"@id": "https://kvityvid-tamary.ua/#website"},
+      "about": {"@id": "https://kvityvid-tamary.ua/#florist"},
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type":"ListItem","position":1,"name":"Головна","item":"https://kvityvid-tamary.ua/"},
+          {"@type":"ListItem","position":2,"name":"Про магазин","item":"https://kvityvid-tamary.ua/about"}
+        ]
+      }
+    },
+    {
+      "@type": "LocalBusiness",
+      "name": "Квіти від Тамари",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "вулиця Довженка, 27",
+        "addressLocality": "Кельменці",
+        "addressRegion": "Чернівецька область",
+        "postalCode": "60100",
+        "addressCountry": "UA"
+      },
+      "telephone": "+380976982154",
+      "openingHours": "Mo-Su 08:00-20:00"
+    }
+  ]
 }
 </script>
 
@@ -50,390 +107,1985 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Де купити свіжі квіти у Кельменцях?", "acceptedAnswer": { "@type": "Answer", "text": "Купити свіжі квіти у Кельменцях можна у квітковому магазині «Квіти від Тамари» за адресою: вулиця Довженка, 27. Ми працюємо щодня." } },
-    { "@type": "Question", "name": "Чи є доставка квітів у Кельменцях?", "acceptedAnswer": { "@type": "Answer", "text": "Так, магазин «Квіти від Тамари» пропонує швидку доставку квітів по Кельменцях та Кельменецькому районі." } },
-    { "@type": "Question", "name": "Які букети можна замовити у магазині?", "acceptedAnswer": { "@type": "Answer", "text": "Авторські букети, квіткові композиції у коробках і кошиках, букети на день народження, весільні букети, романтичні букети." } },
-    { "@type": "Question", "name": "Чи можна замовити індивідуальний букет?", "acceptedAnswer": { "@type": "Answer", "text": "Так. Флористи магазину «Квіти від Тамари» створюють індивідуальні букети з урахуванням ваших побажань і бюджету." } },
-    { "@type": "Question", "name": "Як замовити квіти онлайн у Кельменцях?", "acceptedAnswer": { "@type": "Answer", "text": "Зателефонуйте за номером +38 (097) 698 21 54 або +38 (098) 658 50 50." } },
-    { "@type": "Question", "name": "Чи займається магазин оформленням весіль у Кельменцях?", "acceptedAnswer": { "@type": "Answer", "text": "Так, пропонуємо повне флористичне оформлення весіль — від букету нареченої до декору залу." } }
+    {"@type":"Question","name":"Де купити свіжі квіти у Кельменцях?","acceptedAnswer":{"@type":"Answer","text":"Купити свіжі квіти у Кельменцях можна у квітковому магазині «Квіти від Тамари» за адресою: вулиця Довженка, 27. Ми працюємо щодня з 08:00 до 20:00 та пропонуємо широкий асортимент букетів для будь-якого приводу."}},
+    {"@type":"Question","name":"Чи є доставка квітів у Кельменцях та районі?","acceptedAnswer":{"@type":"Answer","text":"Так, магазин «Квіти від Тамари» пропонує швидку доставку квітів по Кельменцях та Кельменецькому районі. Можлива термінова доставка протягом 2 годин. Замовлення за тел: +38 (097) 698 21 54."}},
+    {"@type":"Question","name":"Скільки коштують квіти у Кельменцях?","acceptedAnswer":{"@type":"Answer","text":"Ціни на букети в магазині «Квіти від Тамари» починаються від 850 грн. У нас є варіанти на будь-який бюджет — від невеликих композицій до розкішних преміум-букетів."}},
+    {"@type":"Question","name":"Чи можна замовити весільні квіти у Кельменцях?","acceptedAnswer":{"@type":"Answer","text":"Так, «Квіти від Тамари» пропонують повне флористичне оформлення весіль у Кельменцях — букет нареченої, бутоньєрки, арки, декор залу та фотозони."}},
+    {"@type":"Question","name":"Як замовити квіти онлайн у Кельменцях?","acceptedAnswer":{"@type":"Answer","text":"Замовити квіти у Кельменцях можна онлайн через сайт або зателефонувавши за номером +38 (097) 698 21 54 чи +38 (098) 658 50 50. Також пишіть у Telegram або Instagram."}},
+    {"@type":"Question","name":"Чи є знижки при замовленні букетів?","acceptedAnswer":{"@type":"Answer","text":"Так, постійні клієнти магазину «Квіти від Тамари» у Кельменцях отримують знижки та бонуси. Запитуйте про умови при замовленні."}},
+    {"@type":"Question","name":"О котрій годині працює квітковий магазин у Кельменцях?","acceptedAnswer":{"@type":"Answer","text":"Магазин «Квіти від Тамари» на вул. Довженка, 27 у Кельменцях працює щодня з 08:00 до 20:00."}}
   ]
 }
 </script>
+
+<style>
+/* ═══════════════════════════════════
+   ABOUT PAGE — PREMIUM REDESIGN
+   ═══════════════════════════════════ */
+
+/* ─── BREADCRUMB ─── */
+.about-breadcrumb {
+  padding: 20px clamp(24px, 5vw, 80px);
+  background: var(--cream);
+  border-bottom: 1px solid var(--line-soft);
+}
+.about-breadcrumb nav {
+  max-width: 1340px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--gray-light);
+}
+.about-breadcrumb a { color: var(--gray-light); text-decoration: none; transition: color .25s; }
+.about-breadcrumb a:hover { color: var(--accent); }
+.about-breadcrumb span { color: var(--black); font-weight: 500; }
+.about-breadcrumb-sep { opacity: 0.4; }
+
+/* ─── CINEMATIC HERO ─── */
+.ab-hero {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--accent);
+}
+
+.ab-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.ab-hero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  filter: saturate(0.6);
+  transform: scale(1.06);
+  transition: transform 12s ease-out;
+}
+.ab-hero.is-loaded .ab-hero__bg img { transform: scale(1); }
+
+.ab-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(10,14,10,0.92) 0%, rgba(10,14,10,0.55) 45%, rgba(26,56,40,0.2) 100%);
+  z-index: 1;
+}
+
+.ab-hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: clamp(48px,8vw,96px) clamp(24px,5vw,80px) clamp(64px,10vw,112px);
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: flex-end;
+  gap: 40px;
+}
+
+.ab-hero__left { max-width: 780px; }
+
+.ab-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 28px;
+  padding: 8px 20px;
+  border: 1px solid rgba(212,170,80,0.35);
+  border-radius: var(--radius-xl);
+  background: rgba(212,170,80,0.08);
+  backdrop-filter: blur(8px);
+}
+
+.ab-hero__eyebrow::before {
+  content: '';
+  width: 5px; height: 5px;
+  background: var(--gold-light);
+  border-radius: 50%;
+}
+
+.ab-hero__h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(44px, 7vw, 92px);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 28px;
+}
+.ab-hero__h1 em { font-style: italic; color: var(--gold-light); }
+
+.ab-hero__desc {
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 300;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.75;
+  max-width: 560px;
+  margin-bottom: 44px;
+}
+
+.ab-hero__cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ab-hero__btn-primary {
+  padding: 18px 48px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, var(--accent-mid), var(--accent));
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.45s var(--ease-out);
+  box-shadow: 0 8px 36px rgba(26,56,40,0.45);
+  position: relative;
+  overflow: hidden;
+}
+.ab-hero__btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 52px rgba(26,56,40,0.55);
+  background: linear-gradient(135deg, var(--accent-light), var(--accent-mid));
+}
+
+.ab-hero__btn-secondary {
+  padding: 18px 40px;
+  border-radius: var(--radius-xl);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.45s var(--ease-out);
+  backdrop-filter: blur(8px);
+}
+.ab-hero__btn-secondary:hover {
+  border-color: rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-3px);
+}
+
+.ab-hero__right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: right;
+}
+
+.ab-hero__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 20px 28px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-sm);
+  backdrop-filter: blur(12px);
+  transition: all 0.35s var(--ease-out);
+}
+.ab-hero__stat:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(212,170,80,0.3);
+  transform: translateX(-4px);
+}
+
+.ab-hero__stat-num {
+  font-family: var(--font-heading);
+  font-size: 40px;
+  font-weight: 300;
+  color: var(--gold-light);
+  line-height: 1;
+}
+.ab-hero__stat-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+
+/* Scroll indicator */
+.ab-hero__scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.ab-hero__scroll-line {
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.ab-hero__scroll-txt {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+}
+@keyframes scrollPulse {
+  0%,100% { opacity:0.5; transform: scaleY(1); }
+  50%      { opacity:1;   transform: scaleY(0.85); }
+}
+
+/* ─── STORY SPLIT ─── */
+.ab-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 640px;
+  isolation: isolate;
+}
+
+.ab-story__img-col {
+  position: relative;
+  overflow: hidden;
+}
+.ab-story__img-col img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 1.2s var(--ease-out);
+}
+.ab-story__img-col:hover img { transform: scale(1.04); }
+
+.ab-story__img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(26,56,40,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.ab-story__content-col {
+  padding: clamp(56px,8vw,96px) clamp(40px,6vw,96px);
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.ab-story__content-col::before {
+  content: '"';
+  position: absolute;
+  top: 40px;
+  right: 48px;
+  font-family: var(--font-heading);
+  font-size: 200px;
+  line-height: 1;
+  color: rgba(26,56,40,0.06);
+  pointer-events: none;
+}
+
+.ab-story__year-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin-bottom: 20px;
+}
+.ab-story__year-badge::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1.5px;
+  background: var(--accent-light);
+}
+
+.ab-story__h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  color: var(--black);
+  margin-bottom: 28px;
+  line-height: 1.1;
+}
+
+.ab-story__text {
+  font-size: 17px;
+  color: var(--gray);
+  line-height: 1.88;
+  margin-bottom: 18px;
+}
+.ab-story__text:last-of-type { margin-bottom: 40px; }
+
+.ab-story__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1.5px solid rgba(26,56,40,0.22);
+  padding-bottom: 4px;
+  transition: all 0.35s var(--ease-out);
+}
+.ab-story__link::after { content: '→'; transition: transform 0.35s var(--ease-out); }
+.ab-story__link:hover { color: var(--accent-light); border-color: var(--accent-light); }
+.ab-story__link:hover::after { transform: translateX(5px); }
+
+/* ─── NUMBERS BAND ─── */
+.ab-numbers {
+  background:
+    radial-gradient(ellipse 100% 80% at 80% 20%, rgba(82,134,106,0.3) 0%, transparent 50%),
+    linear-gradient(155deg, var(--surface-dark) 0%, var(--accent) 45%, #152922 100%);
+  padding: clamp(56px,8vw,88px) clamp(24px,5vw,80px);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.ab-numbers::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -5%;
+  width: 560px; height: 560px;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.ab-numbers__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.ab-numbers__item {
+  text-align: center;
+  padding: 36px 20px;
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(8px);
+  transition: all 0.45s var(--ease-out);
+}
+.ab-numbers__item:hover {
+  border-color: rgba(212,170,80,0.28);
+  background: rgba(255,255,255,0.07);
+  transform: translateY(-6px);
+}
+
+.ab-numbers__num {
+  font-family: var(--font-heading);
+  font-size: clamp(44px, 6vw, 72px);
+  font-weight: 300;
+  line-height: 1;
+  background: linear-gradient(92deg, rgba(255,255,255,0.95) 0%, var(--gold-light) 50%, rgba(255,255,255,0.9) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmerGold 5s linear infinite;
+  margin-bottom: 10px;
+}
+.ab-numbers__label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.58);
+  line-height: 1.4;
+}
+
+/* ─── SERVICES GRID ─── */
+.ab-services {
+  padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
+  background: var(--white);
+  position: relative;
+}
+
+.ab-services::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(30,61,47,0.035) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.ab-section-head {
+  max-width: 700px;
+  margin: 0 auto clamp(44px,6vw,72px);
+  text-align: center;
+  position: relative;
+}
+
+.ab-kicker {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin-bottom: 14px;
+}
+
+.ab-h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  color: var(--black);
+  margin-bottom: 16px;
+}
+
+.ab-subtitle {
+  font-size: 16px;
+  color: var(--gray);
+  line-height: 1.72;
+  font-weight: 300;
+}
+
+.ab-section-head::after {
+  content: '';
+  display: block;
+  width: 44px;
+  height: 1px;
+  margin: 24px auto 0;
+  background: linear-gradient(90deg, transparent, var(--gold-mid), transparent);
+}
+
+.ab-services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ab-service-card {
+  position: relative;
+  padding: 44px 32px 48px;
+  background: linear-gradient(150deg, var(--cream) 0%, #f0ebe0 100%);
+  border-radius: calc(var(--radius-md) + 4px);
+  border: 1px solid rgba(30,61,47,0.08);
+  overflow: hidden;
+  transition: all 0.55s var(--ease-spring);
+  box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.65);
+}
+
+.ab-service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent), var(--accent-mid));
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-out);
+}
+.ab-service-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--gold-light));
+  transform: scaleX(0);
+  transition: transform 0.55s var(--ease-out);
+  transform-origin: center;
+}
+.ab-service-card:hover::before { opacity: 1; }
+.ab-service-card:hover::after  { transform: scaleX(1); }
+.ab-service-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 28px 56px rgba(13,16,12,0.14), 0 0 0 1px rgba(255,255,255,0.06);
+  border-color: rgba(30,61,47,0.04);
+}
+
+.ab-service-card .card-shine {
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.42), transparent);
+  transform: skewX(-25deg);
+  pointer-events: none;
+  z-index: 10;
+}
+.ab-service-card:hover .card-shine { animation: premiumShine 0.85s ease-out; }
+
+.ab-service-icon {
+  font-size: 38px;
+  width: 72px; height: 72px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.55);
+  box-shadow: 0 4px 16px rgba(13,16,12,0.06), inset 0 1px 0 rgba(255,255,255,0.9);
+  margin-bottom: 22px;
+  position: relative; z-index: 1;
+  transition: transform 0.55s var(--ease-spring), background 0.5s;
+}
+.ab-service-card:hover .ab-service-icon {
+  transform: scale(1.12) rotate(8deg);
+  background: rgba(255,255,255,0.12);
+}
+
+.ab-service-card h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 12px;
+  position: relative; z-index: 1;
+  transition: color 0.4s;
+}
+.ab-service-card p {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.78;
+  position: relative; z-index: 1;
+  transition: color 0.4s;
+}
+.ab-service-card:hover h3,
+.ab-service-card:hover p { color: var(--white); }
+
+/* ─── WHY US CARDS ─── */
+.ab-why {
+  padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
+  background: var(--cream);
+  position: relative;
+}
+
+.ab-why__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.ab-why-card {
+  padding: 48px 40px;
+  background: var(--white);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  border-right: 1px solid var(--cream-mid);
+  border-bottom: 1px solid var(--cream-mid);
+  transition: all 0.5s var(--ease-spring);
+}
+.ab-why-card:nth-child(3),
+.ab-why-card:nth-child(6) { border-right: none; }
+.ab-why-card:nth-child(4),
+.ab-why-card:nth-child(5),
+.ab-why-card:nth-child(6) { border-bottom: none; }
+
+.ab-why-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2.5px;
+  background: linear-gradient(90deg, var(--accent), var(--gold-light));
+  transition: width 0.55s var(--ease-out);
+}
+.ab-why-card:hover::before { width: 100%; }
+
+.ab-why-card:hover {
+  background: linear-gradient(135deg, var(--white), var(--cream));
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 16px 40px rgba(13,16,12,0.07);
+  z-index: 2;
+}
+
+.ab-why-num {
+  font-family: var(--font-heading);
+  font-size: 60px;
+  font-weight: 300;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.32;
+  line-height: 1;
+  margin-bottom: 18px;
+  transition: opacity 0.45s;
+}
+.ab-why-card:hover .ab-why-num { opacity: 0.6; }
+
+.ab-why-card h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 12px;
+  color: var(--black);
+}
+.ab-why-card p { font-size: 15px; color: var(--gray); line-height: 1.82; }
+
+/* ─── FLORISTS ─── */
+.ab-team {
+  padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
+  background: var(--white);
+  text-align: center;
+}
+
+.ab-team__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.ab-florist-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: calc(var(--radius-md) + 4px);
+  box-shadow: var(--shadow-md);
+  transition: all 0.55s var(--ease-out);
+}
+.ab-florist-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-hover);
+}
+
+.ab-florist-card__img-wrap {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+}
+.ab-florist-card__img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 1s var(--ease-out);
+}
+.ab-florist-card:hover .ab-florist-card__img-wrap img { transform: scale(1.06); }
+
+.ab-florist-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,14,10,0.85) 0%, rgba(10,14,10,0.1) 55%, transparent 100%);
+}
+
+.ab-florist-card__info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 32px 32px 36px;
+  text-align: left;
+}
+
+.ab-florist-card__name {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+.ab-florist-card__role {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 12px;
+}
+.ab-florist-card__bio {
+  font-size: 14.5px;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.65;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: all 0.5s var(--ease-out);
+  max-height: 0;
+  overflow: hidden;
+}
+.ab-florist-card:hover .ab-florist-card__bio {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 200px;
+}
+
+/* ─── PROCESS TIMELINE ─── */
+.ab-process {
+  padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 100%, rgba(42,84,64,0.4) 0%, transparent 58%),
+    linear-gradient(168deg, var(--surface-dark) 0%, var(--surface-dark-mid) 45%, #1a221c 100%);
+  position: relative;
+  overflow: hidden;
+}
+.ab-process::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 900px; height: 900px;
+  background: radial-gradient(circle, rgba(30,61,47,0.14) 0%, transparent 58%);
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+}
+
+.ab-process .ab-kicker { color: var(--gold-light); }
+.ab-process .ab-h2 { color: var(--white); }
+.ab-process .ab-subtitle { color: rgba(255,255,255,0.65); }
+.ab-process .ab-section-head::after {
+  background: linear-gradient(90deg, transparent, rgba(212,170,80,0.55), transparent);
+}
+
+.ab-process__steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.ab-process__step {
+  position: relative;
+  padding: 40px 28px;
+  text-align: center;
+}
+
+/* Connector line */
+.ab-process__step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 64px;
+  right: -1px;
+  width: 2px;
+  height: 40%;
+  background: linear-gradient(to bottom, rgba(212,170,80,0.35), transparent);
+}
+
+.ab-process__num {
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px;
+  background: linear-gradient(135deg, var(--accent-mid), var(--accent));
+  border: 1px solid rgba(212,170,80,0.25);
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 400;
+  border-radius: 50%;
+  box-shadow: 0 6px 24px rgba(26,56,40,0.4);
+  position: relative; z-index: 2;
+  transition: transform 0.45s var(--ease-spring), box-shadow 0.45s;
+}
+.ab-process__step:hover .ab-process__num {
+  transform: scale(1.12);
+  box-shadow: 0 10px 36px rgba(26,56,40,0.55);
+}
+
+.ab-process__step h3 {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.ab-process__step p { font-size: 14.5px; color: rgba(255,255,255,0.55); line-height: 1.72; }
+
+/* ─── PHOTO GALLERY ─── */
+.ab-gallery {
+  padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
+  background: var(--cream);
+}
+
+.ab-gallery__address {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+.ab-gallery__hours {
+  text-align: center;
+  font-size: 13px;
+  color: var(--gray-mid);
+  letter-spacing: 0.06em;
+  margin-bottom: clamp(32px,5vw,56px);
+}
+
+/* Masonry-like 8-photo grid */
+.ab-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 280px);
+  gap: 16px;
+  max-width: 1340px;
+  margin: 0 auto;
+}
+
+.ab-gallery__item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  transition: all 0.55s var(--ease-out);
+}
+
+/* Larger feature photos */
+.ab-gallery__item:nth-child(1) {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.ab-gallery__item:nth-child(4) {
+  grid-column: span 2;
+}
+
+.ab-gallery__item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.85s var(--ease-out);
+  display: block;
+}
+.ab-gallery__item:hover img { transform: scale(1.08); }
+
+.ab-gallery__item:hover {
+  box-shadow: var(--shadow-hover);
+  transform: scale(1.02);
+  z-index: 2;
+}
+
+.ab-gallery__item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26,56,40,0.45) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-out);
+}
+.ab-gallery__item:hover::after { opacity: 1; }
+
+.ab-gallery__caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 20px 22px;
+  z-index: 2;
+  transform: translateY(100%);
+  transition: transform 0.5s var(--ease-out);
+}
+.ab-gallery__item:hover .ab-gallery__caption { transform: translateY(0); }
+
+.ab-gallery__caption-text {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--white);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* ─── VALUES STRIP ─── */
+.ab-values {
+  padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
+  background: var(--white);
+}
+
+.ab-values__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ab-value-card {
+  position: relative;
+  padding: 44px 28px 48px;
+  background: linear-gradient(165deg, var(--white) 0%, #faf8f4 100%);
+  border-radius: calc(var(--radius-md) + 4px);
+  text-align: center;
+  border: 1px solid rgba(30,61,47,0.08);
+  overflow: hidden;
+  transition: all 0.5s var(--ease-spring);
+  box-shadow: var(--shadow-xs), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+.ab-value-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--gold-light));
+  transform: scaleX(0);
+  transition: transform 0.5s var(--ease-out);
+}
+.ab-value-card:hover::before { transform: scaleX(1); }
+.ab-value-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 24px 56px rgba(13,16,12,0.1), 0 0 0 1px rgba(30,61,47,0.12);
+  border-color: rgba(30,61,47,0.14);
+}
+
+.ab-value-icon {
+  font-size: 44px;
+  width: 84px; height: 84px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 22px;
+  border-radius: 22px;
+  background: linear-gradient(145deg, var(--cream), var(--cream-mid));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 6px 18px rgba(13,16,12,0.06);
+  transition: transform 0.55s var(--ease-spring), border-radius 0.5s;
+}
+.ab-value-card:hover .ab-value-icon { transform: scale(1.1) rotate(-5deg); border-radius: 26px; }
+
+.ab-value-card h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 12px;
+  color: var(--black);
+}
+.ab-value-card p { font-size: 14.5px; color: var(--gray); line-height: 1.75; }
+
+/* ─── CONTACT BLOCK ─── */
+.ab-contact {
+  padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
+  background: var(--cream);
+  text-align: center;
+}
+
+.ab-contact__cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto 48px;
+}
+
+.ab-contact-card {
+  padding: 36px 32px;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(30,61,47,0.08);
+  box-shadow: var(--shadow-card);
+  transition: all 0.45s var(--ease-out);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+.ab-contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2.5px;
+  background: linear-gradient(90deg, var(--accent), var(--gold-light));
+  transform: scaleX(0);
+  transition: transform 0.45s;
+}
+.ab-contact-card:hover::before { transform: scaleX(1); }
+.ab-contact-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(30,61,47,0.14);
+}
+
+.ab-contact-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin-bottom: 10px;
+}
+.ab-contact-value {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--black);
+  margin-bottom: 6px;
+  text-decoration: none;
+  display: block;
+  transition: color 0.3s;
+}
+.ab-contact-card:hover .ab-contact-value { color: var(--accent); }
+.ab-contact-hint { font-size: 13px; color: var(--gray-light); }
+
+.ab-contact__social {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.ab-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: var(--radius-xl);
+  border: 1.5px solid rgba(30,61,47,0.14);
+  background: var(--white);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--black);
+  text-decoration: none;
+  transition: all 0.38s var(--ease-out);
+  box-shadow: var(--shadow-xs);
+}
+.ab-social-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ─── FAQ ─── */
+.ab-faq {
+  padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
+  background: var(--white);
+}
+
+.ab-faq__list {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.ab-faq__item { border-bottom: 1px solid rgba(30,61,47,0.09); }
+
+.ab-faq__btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  gap: 16px;
+}
+.ab-faq__btn:hover .ab-faq__q { color: var(--accent); }
+
+.ab-faq__q {
+  font-family: var(--font-heading);
+  font-size: 21px;
+  font-weight: 400;
+  color: var(--black);
+  line-height: 1.4;
+  transition: color 0.3s;
+}
+
+.ab-faq__icon {
+  width: 36px; height: 36px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  color: var(--accent);
+  background: var(--cream);
+  border-radius: 50%;
+  transition: transform 0.38s var(--ease-out), background 0.38s, color 0.38s;
+}
+.ab-faq__item.open .ab-faq__icon {
+  transform: rotate(45deg);
+  background: var(--accent);
+  color: var(--white);
+}
+
+.ab-faq__body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s var(--ease-out), padding 0.45s;
+}
+.ab-faq__item.open .ab-faq__body {
+  max-height: 360px;
+  padding-bottom: 28px;
+}
+.ab-faq__body p { font-size: 16px; line-height: 1.85; color: var(--gray); }
+
+/* ─── FINAL CTA ─── */
+.ab-cta {
+  padding: clamp(96px,12vw,140px) clamp(24px,5vw,80px);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-mid) 55%, var(--accent-light) 100%);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.ab-cta::before {
+  content: '';
+  position: absolute;
+  top: -40%; right: -8%;
+  width: 680px; height: 680px;
+  background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+.ab-cta::after {
+  content: '';
+  position: absolute;
+  bottom: -40%; left: -5%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(176,138,36,0.15) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.ab-cta__inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+
+.ab-cta__eyebrow {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 20px;
+  opacity: 0.95;
+}
+
+.ab-cta h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 20px;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.ab-cta p {
+  font-size: 18px;
+  color: rgba(255,255,255,0.72);
+  margin-bottom: 52px;
+  line-height: 1.75;
+}
+
+.ab-cta__btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ab-cta__btn-white {
+  padding: 20px 52px;
+  border-radius: var(--radius-xl);
+  background: var(--white);
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.45s var(--ease-out);
+  box-shadow: 0 8px 36px rgba(13,16,12,0.18);
+}
+.ab-cta__btn-white:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 52px rgba(13,16,12,0.28);
+  background: var(--gold-light);
+  color: var(--black);
+}
+
+.ab-cta__btn-outline {
+  padding: 20px 44px;
+  border-radius: var(--radius-xl);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.45s var(--ease-out);
+}
+.ab-cta__btn-outline:hover {
+  border-color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-3px);
+}
+
+/* SEO hidden text */
+.ab-seo-rich {
+  padding: clamp(40px,6vw,72px) clamp(24px,5vw,80px);
+  background: var(--cream-deep);
+  border-top: 1px solid var(--line-soft);
+}
+.ab-seo-rich__inner { max-width: 980px; margin: 0 auto; }
+.ab-seo-rich h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(22px,3vw,32px);
+  font-weight: 400;
+  color: var(--black);
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+.ab-seo-rich p { font-size: 15px; color: var(--gray); line-height: 1.82; margin-bottom: 14px; }
+.ab-seo-rich strong { color: var(--accent); font-weight: 600; }
+.ab-seo-rich__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 28px;
+}
+.ab-seo-rich__col ul { list-style: none; padding: 0; }
+.ab-seo-rich__col li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 14.5px;
+  color: var(--gray);
+  margin-bottom: 9px;
+  line-height: 1.65;
+}
+.ab-seo-rich__col li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 8px;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  opacity: 0.7;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1100px) {
+  .ab-hero__content { grid-template-columns: 1fr; }
+  .ab-hero__right { flex-direction: row; flex-wrap: wrap; justify-content: flex-start; }
+  .ab-hero__stat { flex: 1; min-width: 140px; align-items: flex-start; }
+  .ab-services__grid { grid-template-columns: repeat(2, 1fr); }
+  .ab-why__grid { grid-template-columns: repeat(2, 1fr); }
+  .ab-why-card:nth-child(3) { border-right: 1px solid var(--cream-mid); }
+  .ab-why-card:nth-child(4),
+  .ab-why-card:nth-child(5) { border-bottom: 1px solid var(--cream-mid); }
+  .ab-why-card:nth-child(6) { border-right: none; border-bottom: none; }
+  .ab-values__grid { grid-template-columns: repeat(2, 1fr); }
+  .ab-numbers__inner { grid-template-columns: repeat(2, 1fr); }
+  .ab-process__steps { grid-template-columns: repeat(2, 1fr); }
+  .ab-process__step:nth-child(2)::after { display: none; }
+}
+
+@media (max-width: 900px) {
+  .ab-story { grid-template-columns: 1fr; }
+  .ab-story__img-col { height: 400px; }
+  .ab-gallery__grid {
+    grid-template-rows: repeat(4, 200px);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ab-gallery__item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+  .ab-gallery__item:nth-child(4) { grid-column: span 1; }
+}
+
+@media (max-width: 768px) {
+  .ab-hero { min-height: 70vh; }
+  .ab-hero__h1 { font-size: clamp(36px, 8vw, 52px); }
+  .ab-hero__right { display: none; }
+  .ab-services__grid { grid-template-columns: 1fr; }
+  .ab-why__grid { grid-template-columns: 1fr; }
+  .ab-why-card { border-right: none !important; border-bottom: 1px solid var(--cream-mid) !important; }
+  .ab-why-card:last-child { border-bottom: none !important; }
+  .ab-team__grid { grid-template-columns: 1fr; max-width: 440px; }
+  .ab-process__steps { grid-template-columns: 1fr; }
+  .ab-process__step::after { display: none !important; }
+  .ab-numbers__inner { grid-template-columns: repeat(2, 1fr); }
+  .ab-contact__cards { grid-template-columns: 1fr; max-width: 400px; }
+  .ab-values__grid { grid-template-columns: 1fr; }
+  .ab-seo-rich__cols { grid-template-columns: 1fr; }
+  .ab-gallery__grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5, 180px);
+  }
+  .ab-gallery__item:nth-child(1) { grid-column: 1 / -1; grid-row: span 1; }
+  .ab-gallery__item:nth-child(4) { grid-column: span 1; }
+}
+
+@media (max-width: 480px) {
+  .ab-numbers__inner { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .ab-numbers__item { padding: 24px 14px; }
+  .ab-numbers__num { font-size: 38px; }
+  .ab-gallery__grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(8, 200px);
+  }
+  .ab-gallery__item:nth-child(1),
+  .ab-gallery__item:nth-child(4) { grid-column: span 1; grid-row: span 1; }
+  .ab-cta__btns { flex-direction: column; align-items: center; }
+  .ab-cta__btn-white,
+  .ab-cta__btn-outline { width: 100%; max-width: 320px; text-align: center; justify-content: center; display: flex; }
+}
+</style>
 {% endblock %}
 
 {% block content %}
 
-<section class="about-hero">
-  <div class="about-container">
-    <span class="small-text">✦ Про наш магазин</span>
-    <h1>Квіти у Кельменцях —<br><em>«Квіти від Тамари»</em></h1>
-    <p class="about-intro">
-      Затишний <strong>квітковий магазин у Кельменцях</strong>, де кожен букет створюється з любов'ю.
-      Пропонуємо авторські букети, квіткові композиції та
-      <strong>швидку доставку квітів по Кельменцях та районі</strong>.
+<!-- BREADCRUMB -->
+<div class="about-breadcrumb">
+  <nav aria-label="Навігація">
+    <a href="/">Головна</a>
+    <span class="about-breadcrumb-sep">›</span>
+    <span>Про магазин</span>
+  </nav>
+</div>
+
+<!-- ═══════════════════════════
+     CINEMATIC HERO
+     ═══════════════════════════ -->
+<section class="ab-hero" id="ab-hero" itemscope itemtype="https://schema.org/Florist">
+  <div class="ab-hero__bg">
+    <img src="/static/images/shop1.png"
+         alt="Квітковий магазин Квіти від Тамари у Кельменцях — вулиця Довженка, 27"
+         loading="eager" fetchpriority="high">
+  </div>
+  <div class="ab-hero__overlay"></div>
+
+  <div class="ab-hero__content">
+    <div class="ab-hero__left">
+      <div class="ab-hero__eyebrow">Квітковий магазин у Кельменцях</div>
+      <h1 class="ab-hero__h1" itemprop="name">
+        Купити квіти<br>у Кельменцях —<br><em>«Квіти від Тамари»</em>
+      </h1>
+      <p class="ab-hero__desc">
+        Авторські букети, флористичні композиції та швидка доставка квітів по
+        Кельменцях і районі. Свіжі квіти щодня на <span itemprop="address">вул. Довженка, 27</span>.
+      </p>
+      <div class="ab-hero__cta">
+        <a href="/order" class="ab-hero__btn-primary">Замовити букет</a>
+        <a href="tel:+380976982154" class="ab-hero__btn-secondary" itemprop="telephone">
+          097 698 21 54
+        </a>
+      </div>
+    </div>
+
+    <div class="ab-hero__right">
+      <div class="ab-hero__stat">
+        <span class="ab-hero__stat-num">10+</span>
+        <span class="ab-hero__stat-label">Років у Кельменцях</span>
+      </div>
+      <div class="ab-hero__stat">
+        <span class="ab-hero__stat-num">5000+</span>
+        <span class="ab-hero__stat-label">Букетів для клієнтів</span>
+      </div>
+      <div class="ab-hero__stat">
+        <span class="ab-hero__stat-num">щодня</span>
+        <span class="ab-hero__stat-label">08:00 – 20:00</span>
+      </div>
+      <div class="ab-hero__stat">
+        <span class="ab-hero__stat-num">50+</span>
+        <span class="ab-hero__stat-label">Видів квітів</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ab-hero__scroll" aria-hidden="true">
+    <div class="ab-hero__scroll-line"></div>
+    <span class="ab-hero__scroll-txt">Гортайте</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════
+     STORY — SPLIT LAYOUT
+     ═══════════════════════════ -->
+<section class="ab-story">
+  <div class="ab-story__img-col">
+    <img src="/static/images/img_5.png"
+         alt="Флорист магазину Квіти від Тамари створює авторський букет у Кельменцях"
+         loading="lazy">
+    <div class="ab-story__img-overlay"></div>
+  </div>
+  <div class="ab-story__content-col">
+    <div class="ab-story__year-badge">Засновано у 2013 році</div>
+    <h2 class="ab-story__h2">Більше 10 років краси та натхнення у Кельменцях</h2>
+    <p class="ab-story__text">
+      Магазин «<strong>Квіти від Тамари</strong>» розпочав свою роботу як невелика крамничка з мрією —
+      дарувати людям радість через красу живих квітів. Сьогодні ми — провідний
+      <strong>квітковий магазин у Кельменцях</strong> з сотнями задоволених клієнтів.
     </p>
-  </div>
-</section>
-
-<!-- Наша історія -->
-<section class="story-section">
-  <div class="about-container">
-    <div class="story-grid">
-      <div class="story-content">
-        <span class="small-text">✦ Наша історія</span>
-        <h2>Більше 10 років краси та натхнення</h2>
-        <p>Магазин «Квіти від Тамари» розпочав свою роботу у 2013 році як невелика крамничка з мрією — дарувати людям радість через красу живих квітів. За ці роки ми виросли від маленького магазину до провідної флористичної студії Кельменців.</p>
-        <p>Сьогодні наша команда складається з досвідчених флористів, які щодня створюють унікальні композиції для найрізноманітніших приводів — від романтичних освідчень до масштабних весільних торжеств.</p>
-      </div>
-      <div class="story-image">
-        <img src="/static/images/shop1.png" alt="Квітковий магазин Квіти від Тамари">
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="mission">
-  <div class="about-container">
-    <h2>Наша місія</h2>
-    <p class="seo-text">
-      Дарувати людям радість та емоції через красу живих квітів.
-      У магазині <strong>«Квіти від Тамари» у Кельменцях</strong> кожен букет — маленький твір мистецтва,
-      створений із турботою про вас і ваших близьких.
+    <p class="ab-story__text">
+      Наша команда досвідчених флористів щодня створює унікальні букети та квіткові
+      композиції — від ніжних романтичних до розкішних весільних. Щодня ми оновлюємо
+      вітрину та отримуємо свіжі квіти від найкращих постачальників.
     </p>
-    <ul class="seo-list">
-      <li><strong>Кохання</strong> — для романтичних моментів та ніжних освідчень</li>
-      <li><strong>Вдячність</strong> — щоб подякувати тим, хто завжди поруч</li>
-      <li><strong>Ніжність</strong> — для мам, бабусь і найрідніших людей</li>
-      <li><strong>Підтримку</strong> — коли слова не потрібні, а квіти скажуть усе самі</li>
-      <li><strong>Радість</strong> — для святкування важливих моментів життя</li>
-      <li><strong>Пам'ять</strong> — вшанування тих, кого ми любимо</li>
-    </ul>
+    <a href="/order" class="ab-story__link">Замовити квіти онлайн</a>
   </div>
 </section>
 
-<!-- Наші цінності -->
-<section class="values-section">
-  <div class="about-container">
-    <h2>Наші цінності</h2>
-    <div class="values-grid">
-      <div class="value-card premium-card">
-        <div class="value-icon">🌿</div>
-        <h3>Якість понад усе</h3>
-        <p>Ми працюємо лише з перевіреними постачальниками та обираємо найсвіжіші квіти для кожного букету.</p>
-        <div class="card-shine"></div>
+<!-- ═══════════════════════════
+     NUMBERS BAND
+     ═══════════════════════════ -->
+<div class="ab-numbers" aria-label="Магазин у цифрах">
+  <div class="ab-numbers__inner">
+    <div class="ab-numbers__item">
+      <div class="ab-numbers__num">10+</div>
+      <div class="ab-numbers__label">Років на ринку Кельменців</div>
+    </div>
+    <div class="ab-numbers__item">
+      <div class="ab-numbers__num">5000+</div>
+      <div class="ab-numbers__label">Букетів для клієнтів</div>
+    </div>
+    <div class="ab-numbers__item">
+      <div class="ab-numbers__num">50+</div>
+      <div class="ab-numbers__label">Видів свіжих квітів</div>
+    </div>
+    <div class="ab-numbers__item">
+      <div class="ab-numbers__num">2 год</div>
+      <div class="ab-numbers__label">Термінова доставка квітів</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════
+     SERVICES
+     ═══════════════════════════ -->
+<section class="ab-services">
+  <div class="ab-section-head">
+    <p class="ab-kicker">Флористичні послуги</p>
+    <h2 class="ab-h2">Що ми пропонуємо</h2>
+    <p class="ab-subtitle">Повний спектр флористичних послуг у Кельменцях — від авторського букету до оформлення весілля</p>
+  </div>
+
+  <div class="ab-services__grid">
+    <div class="ab-service-card premium-card">
+      <div class="ab-service-icon">💐</div>
+      <h3>Авторські букети</h3>
+      <p>Створюємо <strong>авторські букети квітів у Кельменцях</strong> для будь-якого приводу. Індивідуально, з урахуванням ваших побажань та бюджету.</p>
+      <div class="card-shine"></div>
+    </div>
+    <div class="ab-service-card premium-card">
+      <div class="ab-service-icon">🎁</div>
+      <h3>Квіткові композиції</h3>
+      <p>Стильні флористичні композиції у коробках, кошиках та вазах. Елегантний готовий подарунок, який залишить незабутнє враження.</p>
+      <div class="card-shine"></div>
+    </div>
+    <div class="ab-service-card premium-card">
+      <div class="ab-service-icon">💍</div>
+      <h3>Весільна флористика</h3>
+      <p>Букет нареченої, бутоньєрки, арки, декор залу та фотозони. Повне <strong>весільне оформлення у Кельменцях</strong>.</p>
+      <div class="card-shine"></div>
+    </div>
+    <div class="ab-service-card premium-card">
+      <div class="ab-service-icon">🚚</div>
+      <h3>Доставка квітів</h3>
+      <p><strong>Швидка доставка квітів по Кельменцях та районі</strong>. Термінова доставка протягом 2 годин. Здивуйте близьких сюрпризом.</p>
+      <div class="card-shine"></div>
+    </div>
+    <div class="ab-service-card premium-card">
+      <div class="ab-service-icon">🎂</div>
+      <h3>Оформлення свят</h3>
+      <p>Дні народження, ювілеї, корпоративи. Фотозони, гірлянди та святковий декор будь-якої складності по Кельменцях.</p>
+      <div class="card-shine"></div>
+    </div>
+    <div class="ab-service-card premium-card">
+      <div class="ab-service-icon">🌹</div>
+      <h3>Троянди преміум</h3>
+      <p>Елітні троянди з Еквадору та Голландії. 51, 101 і більше троянд у розкішному оформленні. Доставка по Кельменцях.</p>
+      <div class="card-shine"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════
+     WHY US
+     ═══════════════════════════ -->
+<section class="ab-why">
+  <div class="ab-section-head">
+    <p class="ab-kicker">Наші переваги</p>
+    <h2 class="ab-h2">Чому обирають «Квіти від Тамари»</h2>
+    <p class="ab-subtitle">Якість, турбота та довіра клієнтів — головні цінності нашого квіткового магазину в Кельменцях</p>
+  </div>
+
+  <div class="ab-why__grid">
+    <div class="ab-why-card">
+      <div class="ab-why-num">01</div>
+      <h3>Свіжість щодня</h3>
+      <p>Квіти надходять щодня від найкращих постачальників. Гарантуємо свіжість та довговічність кожного букету — жодних «учорашніх» залишків.</p>
+    </div>
+    <div class="ab-why-card">
+      <div class="ab-why-num">02</div>
+      <h3>Індивідуальний підхід</h3>
+      <p>Кожен букет створюється з урахуванням ваших побажань, стилю та бюджету. Персональна консультація флориста — безкоштовно.</p>
+    </div>
+    <div class="ab-why-card">
+      <div class="ab-why-num">03</div>
+      <h3>Досвідчені флористи</h3>
+      <p>Наші майстри мають багаторічний досвід та слідкують за найновішими трендами у світовій флористиці.</p>
+    </div>
+    <div class="ab-why-card">
+      <div class="ab-why-num">04</div>
+      <h3>Швидка доставка</h3>
+      <p>Доставляємо квіти по Кельменцях та Кельменецькому районі. Можлива термінова доставка протягом 2 годин.</p>
+    </div>
+    <div class="ab-why-card">
+      <div class="ab-why-num">05</div>
+      <h3>Доступні ціни</h3>
+      <p>Букети на будь-який бюджет — від невеликих до розкішних преміум-композицій. Якість залишається незмінно високою.</p>
+    </div>
+    <div class="ab-why-card">
+      <div class="ab-why-num">06</div>
+      <h3>Гарантія задоволення</h3>
+      <p>Якщо букет вас не задовольнить — ми замінимо його безкоштовно. Ваша радість — наша репутація.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════
+     FLORISTS
+     ═══════════════════════════ -->
+<section class="ab-team">
+  <div class="ab-section-head">
+    <p class="ab-kicker">Наша команда</p>
+    <h2 class="ab-h2">Флористи магазину</h2>
+    <p class="ab-subtitle">За кожним букетом стоять талановиті майстри — з душею, досвідом та любов'ю до своєї справи</p>
+  </div>
+
+  <div class="ab-team__grid">
+    <div class="ab-florist-card">
+      <div class="ab-florist-card__img-wrap">
+        <img src="/static/images/florist1.jpg"
+             alt="Тетяна — головний флорист магазину Квіти від Тамари у Кельменцях"
+             loading="lazy">
+        <div class="ab-florist-card__overlay"></div>
       </div>
-      <div class="value-card premium-card">
-        <div class="value-icon">❤️</div>
-        <h3>Любов до справи</h3>
-        <p>Флористика — це не просто робота, це покликання. Ми вкладаємо душу в кожну композицію.</p>
-        <div class="card-shine"></div>
+      <div class="ab-florist-card__info">
+        <div class="ab-florist-card__role">Засновниця · Головний флорист</div>
+        <div class="ab-florist-card__name">Тетяна</div>
+        <div class="ab-florist-card__bio">15 років досвіду. Спеціалізація — ніжні авторські букети, весільна флористика та романтичні композиції для особливих моментів.</div>
       </div>
-      <div class="value-card premium-card">
-        <div class="value-icon">🎨</div>
-        <h3>Творчий підхід</h3>
-        <p>Кожен букет — унікальний витвір мистецтва, створений з урахуванням ваших побажань та особистості отримувача.</p>
-        <div class="card-shine"></div>
+    </div>
+    <div class="ab-florist-card">
+      <div class="ab-florist-card__img-wrap">
+        <img src="/static/images/florist2.jpg"
+             alt="Іванка — флорист магазину Квіти від Тамари у Кельменцях"
+             loading="lazy">
+        <div class="ab-florist-card__overlay"></div>
       </div>
-      <div class="value-card premium-card">
-        <div class="value-icon">🤝</div>
-        <h3>Турбота про клієнтів</h3>
-        <p>Ваша задоволеність — наш головний пріоритет. Ми завжди готові допомогти з вибором та відповісти на всі запитання.</p>
-        <div class="card-shine"></div>
+      <div class="ab-florist-card__info">
+        <div class="ab-florist-card__role">Флорист · Дизайнер</div>
+        <div class="ab-florist-card__name">Іванка</div>
+        <div class="ab-florist-card__bio">Майстер сучасних трендів. Сміливі, оригінальні композиції в стилі мінімалізм і бохо, які дивують та надихають.</div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="services">
-  <div class="about-container">
-    <h2>Наші послуги</h2>
-    <p class="seo-text">Повний спектр флористичних послуг у Кельменцях — від авторських букетів до оформлення весіль.</p>
+<!-- ═══════════════════════════
+     PROCESS
+     ═══════════════════════════ -->
+<section class="ab-process">
+  <div class="ab-section-head">
+    <p class="ab-kicker">Як замовити квіти</p>
+    <h2 class="ab-h2">Просто і швидко</h2>
+    <p class="ab-subtitle">Чотири кроки — і ваш ідеальний букет вже в дорозі</p>
+  </div>
 
-    <div class="services-grid-new">
-      <div class="service-card-new premium-card">
-        <span class="sc-icon">💐</span>
-        <h3>Авторські букети</h3>
-        <p>Створюємо <strong>авторські букети квітів у Кельменцях</strong> для будь-якого приводу. Флористи підбирають квіти за кольором, стилем і настроєм — щоб букет справив справжнє враження.</p>
-        <div class="card-shine"></div>
+  <div class="ab-process__steps">
+    <div class="ab-process__step">
+      <div class="ab-process__num">1</div>
+      <h3>Зв'яжіться з нами</h3>
+      <p>Зателефонуйте або заповніть форму на сайті. Розкажіть про привід та побажання.</p>
+    </div>
+    <div class="ab-process__step">
+      <div class="ab-process__num">2</div>
+      <h3>Консультація флориста</h3>
+      <p>Підберемо квіти, стиль та оформлення під ваш бюджет. Безкоштовно.</p>
+    </div>
+    <div class="ab-process__step">
+      <div class="ab-process__num">3</div>
+      <h3>Створення букету</h3>
+      <p>Флорист з любов'ю збирає вашу композицію з найсвіжіших квітів.</p>
+    </div>
+    <div class="ab-process__step">
+      <div class="ab-process__num">4</div>
+      <h3>Доставка або самовивіз</h3>
+      <p>Заберіть на вул. Довженка, 27 або ми доставимо по Кельменцях.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════
+     PHOTO GALLERY — 8 ФОТО
+     ═══════════════════════════ -->
+<section class="ab-gallery">
+  <div class="ab-section-head">
+    <p class="ab-kicker">Наш магазин</p>
+    <h2 class="ab-h2">Де купити квіти у Кельменцях</h2>
+  </div>
+
+  <div class="ab-gallery__address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+    <span>📍</span>
+    <span itemprop="streetAddress">вулиця Довженка, 27</span>,
+    <span itemprop="addressLocality">Кельменці</span>,
+    <span itemprop="addressRegion">Чернівецька область</span>
+  </div>
+  <p class="ab-gallery__hours">🕐 Працюємо щодня з 08:00 до 20:00 · Свіжі квіти щодня</p>
+
+  <div class="ab-gallery__grid">
+    <div class="ab-gallery__item">
+      <img src="/static/images/shop1.png"
+           alt="Квітковий магазин Квіти від Тамари — вхід, вулиця Довженка 27 Кельменці"
+           loading="lazy">
+      <div class="ab-gallery__caption">
+        <span class="ab-gallery__caption-text">Наш магазин</span>
       </div>
-      <div class="service-card-new premium-card">
-        <span class="sc-icon">🎁</span>
-        <h3>Квіткові композиції</h3>
-        <p>Стильні композиції у коробках та кошиках, подарункові флористичні набори та сучасні інсталяції. Ефектний подарунок, який залишить незабутнє враження.</p>
-        <div class="card-shine"></div>
+    </div>
+    <div class="ab-gallery__item">
+      <img src="/static/images/shop2.png"
+           alt="Вітрина квіткового магазину Кельменці — свіжі букети та композиції"
+           loading="lazy">
+      <div class="ab-gallery__caption">
+        <span class="ab-gallery__caption-text">Вітрина магазину</span>
       </div>
-      <div class="service-card-new premium-card">
-        <span class="sc-icon">💍</span>
-        <h3>Оформлення весіль</h3>
-        <p>Весілля, дні народження, корпоративні заходи — арки, букет нареченої, бутоньєрки, фотозони, повний декор залу. Допоможемо створити атмосферу справжнього свята.</p>
-        <div class="card-shine"></div>
+    </div>
+    <div class="ab-gallery__item">
+      <img src="/static/images/shop3.png"
+           alt="Оформлення весілля флористами Кельменці — декор залу та арки"
+           loading="lazy">
+      <div class="ab-gallery__caption">
+        <span class="ab-gallery__caption-text">Весільне оформлення</span>
       </div>
-      <div class="service-card-new premium-card">
-        <span class="sc-icon">🚚</span>
-        <h3>Доставка квітів</h3>
-        <p><strong>Швидка доставка квітів у Кельменцях та Кельменецькому районі</strong>. Замовте телефоном або онлайн — доставимо вчасно та бережно як несподіваний сюрприз.</p>
-        <div class="card-shine"></div>
+    </div>
+    <div class="ab-gallery__item">
+      <img src="/static/images/shop4.jpg"
+           alt="Доставка свіжих квітів по Кельменцях — замовте букет онлайн"
+           loading="lazy">
+      <div class="ab-gallery__caption">
+        <span class="ab-gallery__caption-text">Доставка квітів</span>
       </div>
-      <div class="service-card-new premium-card">
-        <span class="sc-icon">🌸</span>
-        <h3>Сезонні букети</h3>
-        <p>Тюльпани навесні, соняшники влітку, хризантеми восени — ми завжди маємо найсвіжіші сезонні квіти для ваших особливих моментів.</p>
-        <div class="card-shine"></div>
+    </div>
+    <div class="ab-gallery__item">
+      <img src="/static/images/img.png"
+           alt="Авторський букет від флориста Тамари — квіти Кельменці"
+           loading="lazy">
+      <div class="ab-gallery__caption">
+        <span class="ab-gallery__caption-text">Авторські букети</span>
       </div>
-      <div class="service-card-new premium-card">
-        <span class="sc-icon">🎀</span>
-        <h3>Подарункові набори</h3>
-        <p>Квіти + солодощі, м'які іграшки, повітряні кульки. Комплексні подарунки, які точно здивують та порадують отримувача.</p>
-        <div class="card-shine"></div>
+    </div>
+    <div class="ab-gallery__item">
+      <img src="/static/images/img_1.png"
+           alt="Букет троянд у Кельменцях — купити троянди з доставкою"
+           loading="lazy">
+      <div class="ab-gallery__caption">
+        <span class="ab-gallery__caption-text">Букети троянд</span>
       </div>
-      <div class="service-card-new premium-card">
-        <span class="sc-icon">🪴</span>
-        <h3>Кімнатні рослини</h3>
-        <p>Орхідеї, сукуленти, декоративні рослини у стильних горщиках. Живий подарунок, що радуватиме роками.</p>
-        <div class="card-shine"></div>
+    </div>
+    <div class="ab-gallery__item">
+      <img src="/static/images/img_11.png"
+           alt="Флористична композиція у коробці — купити у Кельменцях"
+           loading="lazy">
+      <div class="ab-gallery__caption">
+        <span class="ab-gallery__caption-text">Композиції у коробках</span>
       </div>
-      <div class="service-card-new premium-card">
-        <span class="sc-icon">📸</span>
-        <h3>Фотозони</h3>
-        <p>Створення квіткових фотозон для весіль, днів народжень та корпоративних заходів. Ідеальний фон для ваших незабутніх фото.</p>
-        <div class="card-shine"></div>
+    </div>
+    <div class="ab-gallery__item">
+      <img src="/static/images/img_8.png"
+           alt="Святкова квіткова композиція — квіти для свята у Кельменцях"
+           loading="lazy">
+      <div class="ab-gallery__caption">
+        <span class="ab-gallery__caption-text">Святкові композиції</span>
       </div>
     </div>
   </div>
 </section>
 
-<section class="why-us">
-  <div class="about-container">
-    <h2>Чому обирають «Квіти від Тамари»</h2>
-    <div class="why-grid-new">
-      <div class="why-card-new">
-        <div class="why-num">01</div>
-        <h3>Свіжі квіти щодня</h3>
-        <p>Тільки свіжозрізані квіти. Жодних «учорашніх» залишків — кожен букет із найкращого матеріалу, що гарантує його довгу красу.</p>
-      </div>
-      <div class="why-card-new">
-        <div class="why-num">02</div>
-        <h3>Сучасний дизайн</h3>
-        <p>Слідкуємо за актуальними трендами у світовій флористиці. Ваш букет буде виглядати модно та оригінально.</p>
-      </div>
-      <div class="why-card-new">
-        <div class="why-num">03</div>
-        <h3>Індивідуальний підхід</h3>
-        <p>Кожен клієнт отримує <strong>персональну консультацію</strong>. Букет створюється під ваші побажання, стиль і бюджет.</p>
-      </div>
-      <div class="why-card-new">
-        <div class="why-num">04</div>
-        <h3>Швидке обслуговування</h3>
-        <p>Замовити <strong>квіти у Кельменцях</strong> можна швидко і зручно — телефоном або онлайн. Ми цінуємо ваш час.</p>
-      </div>
-      <div class="why-card-new">
-        <div class="why-num">05</div>
-        <h3>Доступні ціни</h3>
-        <p>Букети на будь-який бюджет — від скромних до розкішних. Якість залишається незмінною.</p>
-      </div>
-      <div class="why-card-new">
-        <div class="why-num">06</div>
-        <h3>Гарантія свіжості</h3>
-        <p>Якщо букет вас не задовольнить — ми замінимо його безкоштовно. Ваша радість — наша репутація.</p>
-      </div>
+<!-- ═══════════════════════════
+     VALUES
+     ═══════════════════════════ -->
+<section class="ab-values">
+  <div class="ab-section-head">
+    <p class="ab-kicker">Наші цінності</p>
+    <h2 class="ab-h2">Що нами рухає</h2>
+    <p class="ab-subtitle">Принципи, які визначають кожен створений нами букет</p>
+  </div>
+
+  <div class="ab-values__grid">
+    <div class="ab-value-card">
+      <div class="ab-value-icon">🌿</div>
+      <h3>Якість понад усе</h3>
+      <p>Тільки перевірені постачальники та найсвіжіші квіти. Жодних компромісів.</p>
+    </div>
+    <div class="ab-value-card">
+      <div class="ab-value-icon">❤️</div>
+      <h3>Любов до справи</h3>
+      <p>Флористика — це покликання. Вкладаємо душу в кожну композицію, у кожен пелюсток.</p>
+    </div>
+    <div class="ab-value-card">
+      <div class="ab-value-icon">🎨</div>
+      <h3>Творчість і стиль</h3>
+      <p>Кожен букет — унікальний витвір. Слідкуємо за трендами та додаємо власний почерк.</p>
+    </div>
+    <div class="ab-value-card">
+      <div class="ab-value-icon">🤝</div>
+      <h3>Турбота про клієнтів</h3>
+      <p>Ваше задоволення — наш головний пріоритет. Завжди готові допомогти та порадити.</p>
     </div>
   </div>
 </section>
 
-<section class="florists">
-  <div class="about-container">
-    <h2>Наші флористи</h2>
-    <p class="seo-text">За кожним букетом стоять талановиті майстри з душею та досвідом.</p>
-    <div class="florist-grid">
-      <div class="florist-card">
-        <img src="/static/images/florist1.jpg" alt="флорист Тетяна створює ніжний букет">
-        <h3>Тетяна</h3>
-        <p>Засновниця магазину та головний флорист з 15-річним досвідом. Спеціалізація — ніжні авторські букети, весільна флористика та романтичні композиції.</p>
-      </div>
-      <div class="florist-card">
-        <img src="/static/images/florist2.jpg" alt="авторський букет троянд — квіти Кельменці">
-        <h3>Іванка</h3>
-        <p>Майстер сучасних трендових рішень. Створює сміливі, оригінальні композиції у стилі мінімалізм та бохо, які дивують та надихають.</p>
-      </div>
+<!-- ═══════════════════════════
+     CONTACTS
+     ═══════════════════════════ -->
+<section class="ab-contact">
+  <div class="ab-section-head">
+    <p class="ab-kicker">Зв'яжіться з нами</p>
+    <h2 class="ab-h2">Замовте квіти зараз</h2>
+    <p class="ab-subtitle">Ми завжди раді допомогти обрати ідеальний букет. Відповідаємо швидко!</p>
+  </div>
+
+  <div class="ab-contact__cards">
+    <div class="ab-contact-card">
+      <div class="ab-contact-label">Основний номер</div>
+      <a href="tel:+380976982154" class="ab-contact-value">+38 (097) 698 21 54</a>
+      <div class="ab-contact-hint">Viber · Telegram · WhatsApp</div>
     </div>
+    <div class="ab-contact-card">
+      <div class="ab-contact-label">Додатковий номер</div>
+      <a href="tel:+380986585050" class="ab-contact-value">+38 (098) 658 50 50</a>
+      <div class="ab-contact-hint">щодня 08:00 – 20:00</div>
+    </div>
+    <div class="ab-contact-card">
+      <div class="ab-contact-label">Адреса магазину</div>
+      <span class="ab-contact-value" style="font-size:22px">вул. Довженка, 27</span>
+      <div class="ab-contact-hint">Кельменці, Чернівецька область</div>
+    </div>
+    <div class="ab-contact-card">
+      <div class="ab-contact-label">Графік роботи</div>
+      <span class="ab-contact-value" style="font-size:22px">08:00 – 20:00</span>
+      <div class="ab-contact-hint">Без вихідних, щодня</div>
+    </div>
+  </div>
+
+  <div class="ab-contact__social">
+    <a href="https://t.me/0976982154" target="_blank" rel="noopener" class="ab-social-link">
+      ✈️ Telegram
+    </a>
+    <a href="https://www.instagram.com/kvitu_kelmentsi_fotozona/" target="_blank" rel="noopener" class="ab-social-link">
+      📷 Instagram
+    </a>
+    <a href="tel:+380976982154" class="ab-social-link">
+      📞 Зателефонувати
+    </a>
+    <a href="/order" class="ab-social-link">
+      💐 Замовити онлайн
+    </a>
   </div>
 </section>
 
-<!-- Процес роботи -->
-<section class="process-section">
-  <div class="about-container">
-    <h2>Як ми працюємо</h2>
-    <p class="section-subtitle">Простий процес замовлення квітів</p>
-    <div class="process-grid">
-      <div class="process-step premium-card">
-        <div class="process-num">1</div>
-        <h3>Зв'яжіться з нами</h3>
-        <p>Зателефонуйте або заповніть форму на сайті. Розкажіть про привід та ваші побажання.</p>
-        <div class="card-shine"></div>
-      </div>
-      <div class="process-step premium-card">
-        <div class="process-num">2</div>
-        <h3>Консультація</h3>
-        <p>Флорист допоможе обрати квіти, стиль оформлення та підкаже найкращі варіанти для вашого бюджету.</p>
-        <div class="card-shine"></div>
-      </div>
-      <div class="process-step premium-card">
-        <div class="process-num">3</div>
-        <h3>Створення букету</h3>
-        <p>Майстер з любов'ю створює вашу композицію з найсвіжіших квітів.</p>
-        <div class="card-shine"></div>
-      </div>
-      <div class="process-step premium-card">
-        <div class="process-num">4</div>
-        <h3>Доставка або самовивіз</h3>
-        <p>Заберіть букет у магазині або ми доставимо його за вказаною адресою.</p>
-        <div class="card-shine"></div>
+<!-- ═══════════════════════════
+     FAQ
+     ═══════════════════════════ -->
+<section class="ab-faq">
+  <div class="ab-section-head">
+    <p class="ab-kicker">Питання та відповіді</p>
+    <h2 class="ab-h2">Часті запитання</h2>
+    <p class="ab-subtitle">Все, що вам потрібно знати про купівлю квітів у Кельменцях</p>
+  </div>
+
+  <div class="ab-faq__list">
+
+    <div class="ab-faq__item">
+      <button class="ab-faq__btn">
+        <span class="ab-faq__q">Де купити свіжі квіти у Кельменцях?</span>
+        <div class="ab-faq__icon">+</div>
+      </button>
+      <div class="ab-faq__body">
+        <p>Купити свіжі квіти у Кельменцях можна у квітковому магазині «Квіти від Тамари» за адресою: <strong>вулиця Довженка, 27</strong>. Ми працюємо щодня з 08:00 до 20:00 та пропонуємо широкий асортимент авторських букетів, квіткових композицій та окремих квітів для будь-якого приводу.</p>
       </div>
     </div>
+
+    <div class="ab-faq__item">
+      <button class="ab-faq__btn">
+        <span class="ab-faq__q">Чи є доставка квітів у Кельменцях та районі?</span>
+        <div class="ab-faq__icon">+</div>
+      </button>
+      <div class="ab-faq__body">
+        <p>Так! Магазин «Квіти від Тамари» пропонує <strong>швидку доставку квітів по Кельменцях</strong> та Кельменецькому районі. Можлива термінова доставка протягом 2 годин. Для замовлення телефонуйте: +38 (097) 698 21 54 або замовте через сайт.</p>
+      </div>
+    </div>
+
+    <div class="ab-faq__item">
+      <button class="ab-faq__btn">
+        <span class="ab-faq__q">Скільки коштують квіти у Кельменцях?</span>
+        <div class="ab-faq__icon">+</div>
+      </button>
+      <div class="ab-faq__body">
+        <p>Ціни на букети в нашому магазині починаються від <strong>850 грн</strong>. У нас є варіанти на будь-який бюджет — від невеликих композицій до розкішних преміум-букетів. Точна вартість залежить від складу, сезону та побажань. Зателефонуйте для уточнення.</p>
+      </div>
+    </div>
+
+    <div class="ab-faq__item">
+      <button class="ab-faq__btn">
+        <span class="ab-faq__q">Чи можна замовити весільні квіти у Кельменцях?</span>
+        <div class="ab-faq__icon">+</div>
+      </button>
+      <div class="ab-faq__body">
+        <p>Так! «Квіти від Тамари» пропонують <strong>повне флористичне оформлення весіль у Кельменцях</strong> — букет нареченої, бутоньєрки, арки, декор залу та фотозони. Радимо зв'язатися заздалегідь для бронювання дати та обговорення деталей.</p>
+      </div>
+    </div>
+
+    <div class="ab-faq__item">
+      <button class="ab-faq__btn">
+        <span class="ab-faq__q">Як замовити квіти онлайн у Кельменцях?</span>
+        <div class="ab-faq__icon">+</div>
+      </button>
+      <div class="ab-faq__body">
+        <p>Замовити квіти у Кельменцях онлайн дуже просто — заповніть форму на нашому сайті або зателефонуйте: <strong>+38 (097) 698 21 54</strong> або <strong>+38 (098) 658 50 50</strong>. Також пишіть у Telegram чи Instagram — відповімо швидко!</p>
+      </div>
+    </div>
+
+    <div class="ab-faq__item">
+      <button class="ab-faq__btn">
+        <span class="ab-faq__q">О котрій годині працює квітковий магазин у Кельменцях?</span>
+        <div class="ab-faq__icon">+</div>
+      </button>
+      <div class="ab-faq__body">
+        <p>Наш квітковий магазин на <strong>вул. Довженка, 27 у Кельменцях</strong> працює <strong>щодня з 08:00 до 20:00</strong> — без вихідних і свят. Приймаємо замовлення онлайн також у пізній час.</p>
+      </div>
+    </div>
+
+    <div class="ab-faq__item">
+      <button class="ab-faq__btn">
+        <span class="ab-faq__q">Чи є знижки для постійних клієнтів?</span>
+        <div class="ab-faq__icon">+</div>
+      </button>
+      <div class="ab-faq__body">
+        <p>Так, ми цінуємо наших постійних клієнтів! Запитуйте про систему знижок та бонусів при замовленні або при особистому відвідуванні магазину.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<section class="shop-photos">
-  <div class="about-container">
-    <h2>Де купити квіти у Кельменцях</h2>
-    <p class="location-text">📍 вулиця Довженка, 27, Кельменці, Чернівецька область, 60100</p>
-    <p class="seo-text">Наш <strong>квітковий магазин у Кельменцях</strong> розташований у зручному місці — завітайте особисто або замовте доставку.</p>
-    <div class="shop-grid">
-      <img src="/static/images/shop1.png" alt="квітковий магазин Квіти від Тамари Кельменці">
-      <img src="/static/images/shop2.png" alt="квіткова композиція у коробці Кельменці">
-      <img src="/static/images/shop3.png" alt="весільне оформлення від магазину Квіти від Тамари Кельменці">
-      <img src="/static/images/shop4.jpg" alt="доставка квітів Кельменці — свіжий букет">
+<!-- ═══════════════════════════
+     SEO RICH TEXT
+     ═══════════════════════════ -->
+<div class="ab-seo-rich">
+  <div class="ab-seo-rich__inner">
+    <h2>Квітковий магазин «Квіти від Тамари» у Кельменцях — ваш надійний флорист</h2>
+    <p>
+      Шукаєте, де <strong>купити квіти у Кельменцях</strong>? Магазин «Квіти від Тамари» на вулиці Довженка, 27 —
+      найкраще місце для придбання свіжих квітів та авторських букетів у Кельменцях та Кельменецькому районі.
+      Ми пропонуємо широкий асортимент: троянди, тюльпани, хризантеми, лілії, орхідеї та багато іншого.
+    </p>
+    <p>
+      <strong>Доставка квітів у Кельменцях</strong> доступна щодня. Замовте букет онлайн або зателефонуйте —
+      і ми доставимо свіжі квіти за вказаною адресою. Термінова доставка можлива протягом 2 годин.
+      Наші флористи створюють авторські букети на замовлення для будь-якого приводу:
+      день народження, весілля, випускний, романтичне побачення, корпоратив.
+    </p>
+    <div class="ab-seo-rich__cols">
+      <div class="ab-seo-rich__col">
+        <ul>
+          <li>Авторські букети квітів у Кельменцях</li>
+          <li>Доставка квітів по Кельменцях та районі</li>
+          <li>Квіткові композиції у коробках та кошиках</li>
+          <li>Весільна флористика у Кельменцях</li>
+          <li>Оформлення свят та фотозон</li>
+        </ul>
+      </div>
+      <div class="ab-seo-rich__col">
+        <ul>
+          <li>Троянди преміум — 51, 101 і більше штук</li>
+          <li>Букети на день народження та ювілей</li>
+          <li>Романтичні букети для освідчення</li>
+          <li>Корпоративні флористичні подарунки</li>
+          <li>Консультація флориста — безкоштовно</li>
+        </ul>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<section class="faq-section">
-  <div class="about-container">
-    <h2>Часті запитання</h2>
-    <div class="faq-accordion">
-
-      <div class="faq-acc-item">
-        <button class="faq-acc-btn">
-          <span>Де купити свіжі квіти у Кельменцях?</span>
-          <div class="faq-acc-icon">+</div>
-        </button>
-        <div class="faq-acc-body">
-          <p>Купити свіжі квіти у Кельменцях можна у квітковому магазині «Квіти від Тамари» за адресою: вулиця Довженка, 27. Ми працюємо щодня та пропонуємо широкий вибір букетів для будь-якого приводу.</p>
-        </div>
-      </div>
-
-      <div class="faq-acc-item">
-        <button class="faq-acc-btn">
-          <span>Чи є доставка квітів у Кельменцях та районі?</span>
-          <div class="faq-acc-icon">+</div>
-        </button>
-        <div class="faq-acc-body">
-          <p>Так, магазин «Квіти від Тамари» пропонує швидку доставку квітів по Кельменцях та Кельменецькому районі. Для замовлення зателефонуйте нам або заповніть форму онлайн.</p>
-        </div>
-      </div>
-
-      <div class="faq-acc-item">
-        <button class="faq-acc-btn">
-          <span>Які букети можна замовити?</span>
-          <div class="faq-acc-icon">+</div>
-        </button>
-        <div class="faq-acc-body">
-          <p>Авторські букети на будь-який привід, квіткові композиції у коробках і кошиках, букети на день народження та ювілей, весільні букети та оформлення, романтичні букети для побачень.</p>
-        </div>
-      </div>
-
-      <div class="faq-acc-item">
-        <button class="faq-acc-btn">
-          <span>Чи можна замовити індивідуальний букет?</span>
-          <div class="faq-acc-icon">+</div>
-        </button>
-        <div class="faq-acc-body">
-          <p>Так, саме в цьому наша спеціалізація. Флористи «Квітів від Тамари» створюють букети за індивідуальним замовленням з урахуванням ваших побажань, стилю та бюджету.</p>
-        </div>
-      </div>
-
-      <div class="faq-acc-item">
-        <button class="faq-acc-btn">
-          <span>Як замовити квіти онлайн у Кельменцях?</span>
-          <div class="faq-acc-icon">+</div>
-        </button>
-        <div class="faq-acc-body">
-          <p>Зателефонуйте за номером +38 (097) 698 21 54 або +38 (098) 658 50 50 — ми проконсультуємо та швидко оформимо замовлення. Також можна заповнити форму на сайті.</p>
-        </div>
-      </div>
-
-      <div class="faq-acc-item">
-        <button class="faq-acc-btn">
-          <span>Чи займається магазин оформленням весіль у Кельменцях?</span>
-          <div class="faq-acc-icon">+</div>
-        </button>
-        <div class="faq-acc-body">
-          <p>Так, пропонуємо повне флористичне оформлення весіль — від букету нареченої до декору залу. Зв'яжіться з нами заздалегідь, щоб обговорити деталі та забронювати дату.</p>
-        </div>
-      </div>
-
-      <div class="faq-acc-item">
-        <button class="faq-acc-btn">
-          <span>Скільки коштують букети?</span>
-          <div class="faq-acc-icon">+</div>
-        </button>
-        <div class="faq-acc-body">
-          <p>Ціни на букети варіюються залежно від складності та квітів. У нас є варіанти на будь-який бюджет — від невеликих композицій до розкішних преміум-букетів. Зателефонуйте для уточнення.</p>
-        </div>
-      </div>
-
-      <div class="faq-acc-item">
-        <button class="faq-acc-btn">
-          <span>Чи є знижки для постійних клієнтів?</span>
-          <div class="faq-acc-icon">+</div>
-        </button>
-        <div class="faq-acc-body">
-          <p>Так, ми цінуємо наших постійних клієнтів і пропонуємо систему лояльності. Запитуйте про знижки при замовленні.</p>
-        </div>
-      </div>
-
+<!-- ═══════════════════════════
+     FINAL CTA
+     ═══════════════════════════ -->
+<section class="ab-cta">
+  <div class="ab-cta__inner">
+    <span class="ab-cta__eyebrow">Замовте квіти сьогодні</span>
+    <h2>Готові замовити ідеальний букет у Кельменцях?</h2>
+    <p>Наші флористи створять букет, який подарує незабутні емоції. Зателефонуйте або замовте онлайн — відповідаємо швидко!</p>
+    <div class="ab-cta__btns">
+      <a href="/order" class="ab-cta__btn-white">Замовити букет</a>
+      <a href="tel:+380976982154" class="ab-cta__btn-outline">097 698 21 54</a>
     </div>
-  </div>
-</section>
-
-<section class="contact-about">
-  <div class="about-container">
-    <h2>Зв'язатися з нами</h2>
-    <p class="seo-text">Зателефонуйте — ми завжди раді допомогти обрати <strong>ідеальний букет квітів у Кельменцях</strong>.<br>🕐 Працюємо щодня з 08:00 до 20:00.</p>
-    <div class="contact-grid">
-      <a href="tel:+380976982154" class="contact-card">☎ +38 (097) 698 21 54</a>
-      <a href="tel:+380986585050" class="contact-card">☎ +38 (098) 658 50 50</a>
-    </div>
-  </div>
-</section>
-
-<section class="about-order">
-  <div class="about-container">
-    <h2>Замовити квіти у Кельменцях</h2>
-    <p>Хочете порадувати близьку людину? Наші флористи створять букет, який подарує незабутні емоції.</p>
-    <button class="glow-btn" onclick="window.location.href='/order'">Замовити букет</button>
   </div>
 </section>
 
 <script>
-  document.querySelectorAll('.faq-acc-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item = btn.parentElement;
-      const body = item.querySelector('.faq-acc-body');
-      const isOpen = item.classList.contains('open');
+/* FAQ accordion */
+document.querySelectorAll('.ab-faq__btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const body = item.querySelector('.ab-faq__body');
+    const isOpen = item.classList.contains('open');
 
-      // закрити всі
-      document.querySelectorAll('.faq-acc-item').forEach(i => {
-        i.classList.remove('open');
-        i.querySelector('.faq-acc-body').style.maxHeight = '0';
-      });
-
-      if (!isOpen) {
-        item.classList.add('open');
-        body.style.maxHeight = body.scrollHeight + 'px';
-      }
+    document.querySelectorAll('.ab-faq__item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.ab-faq__body').style.maxHeight = '0';
     });
-  });
-</script>
 
+    if (!isOpen) {
+      item.classList.add('open');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  });
+});
+
+/* Hero image parallax + load animation */
+const hero = document.getElementById('ab-hero');
+if (hero) {
+  setTimeout(() => hero.classList.add('is-loaded'), 100);
+
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const bg = hero.querySelector('.ab-hero__bg img');
+    if (bg && scrolled < window.innerHeight) {
+      bg.style.transform = `translateY(${scrolled * 0.25}px)`;
+    }
+  }, { passive: true });
+}
+
+/* Section scroll reveal */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.ab-story, .ab-numbers, .ab-services, .ab-why, .ab-team, .ab-process, .ab-gallery, .ab-values, .ab-contact, .ab-faq, .ab-seo-rich, .ab-cta').forEach(el => {
+  revealObserver.observe(el);
+});
+</script>
 {% endblock %}

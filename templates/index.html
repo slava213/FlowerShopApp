@@ -1,22 +1,56 @@
 {% extends "base.html" %}
 
 {% block title %}Квіти Кельменці — авторські букети та доставка | Квіти від Тамари{% endblock %}
+{% block body_class %}page-home{% endblock %}
 
 {% block head %}
-<meta name="description" content="Квітковий магазин «Квіти від Тамари» у Кельменцях. Авторські букети, квіткові композиції та доставка квітів. Замовляйте онлайн або телефоном.">
-<meta name="keywords" content="квіти Кельменці, купити квіти Кельменці, букети Кельменці, квітковий магазин Кельменці, доставка квітів Кельменці">
-<meta name="robots" content="index, follow">
+<meta name="description" content="Квітковий магазин «Квіти від Тамари» у Кельменцях. Авторські букети, квіткові композиції, троянди преміум та доставка квітів по Кельменцях і районі. Замовлення онлайн і за телефоном +38 (097) 698 21 54.">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://kvityvid-tamary.ua/">
 <meta property="og:title" content="Квіти Кельменці — авторські букети та доставка | Квіти від Тамари">
-<meta property="og:description" content="Авторські букети, квіткові композиції та доставка квітів по Кельменцях.">
+<meta property="og:description" content="Авторські букети, квіткові композиції та доставка квітів по Кельменцях. Вул. Довженка, 27.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="uk_UA">
 <meta property="og:url" content="https://kvityvid-tamary.ua/">
+<meta property="og:image" content="https://kvityvid-tamary.ua/static/images/img.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://kvityvid-tamary.ua/#website",
+      "url": "https://kvityvid-tamary.ua/",
+      "name": "Квіти від Тамари",
+      "inLanguage": "uk-UA",
+      "publisher": { "@id": "https://kvityvid-tamary.ua/#florist" }
+    },
+    {
+      "@type": "Florist",
+      "@id": "https://kvityvid-tamary.ua/#florist",
+      "name": "Квіти від Тамари",
+      "image": "https://kvityvid-tamary.ua/static/images/img.png",
+      "url": "https://kvityvid-tamary.ua/",
+      "telephone": "+380976982154",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "вулиця Довженка, 27",
+        "addressLocality": "Кельменці",
+        "addressRegion": "Чернівецька область",
+        "postalCode": "60100",
+        "addressCountry": "UA"
+      },
+      "priceRange": "₴₴",
+      "sameAs": ["https://www.instagram.com/kvitu_kelmentsi_fotozona/"]
+    }
+  ]
+}
+</script>
 {% endblock %}
 
 {% block content %}
 
-<!-- Модальне вікно підтвердження -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-container">
     <div class="modal-content">
@@ -58,6 +92,27 @@
       <span>Замовити букет</span>
     </button>
     <p class="hero-caption">Свіжі квіти щодня · Доставка по Кельменцях</p>
+    <ul class="hero-chips" aria-label="Швидкі факти">
+      <li>вул. Довженка, 27 · Кельменці</li>
+      <li>щодня 08:00–20:00</li>
+      <li>консультація безкоштовно</li>
+    </ul>
+    <div class="hero-trust" aria-label="Коротко про магазин">
+      <div class="hero-trust-item">
+        <span class="hero-trust-num">10+</span>
+        <span class="hero-trust-label">років досвіду</span>
+      </div>
+      <span class="hero-trust-sep" aria-hidden="true"></span>
+      <div class="hero-trust-item">
+        <span class="hero-trust-num">5000+</span>
+        <span class="hero-trust-label">букетів для клієнтів</span>
+      </div>
+      <span class="hero-trust-sep" aria-hidden="true"></span>
+      <div class="hero-trust-item">
+        <span class="hero-trust-num">щодня</span>
+        <span class="hero-trust-label">оновлення вітрини</span>
+      </div>
+    </div>
   </div>
 
   <div class="hero-images">
@@ -80,53 +135,42 @@
   </div>
 </section>
 
-<!-- Секція послуг -->
-<section class="services">
-  <h2>Наші послуги</h2>
-  <p class="section-subtitle">Повний спектр флористичних послуг для будь-якого приводу</p>
-  <div class="services-grid-new">
-    <div class="service-card-new premium-card">
-      <span class="sc-icon">💐</span>
-      <h3>Авторські букети</h3>
-      <p>Унікальні флористичні композиції, створені з урахуванням ваших побажань. Кожен букет — витвір мистецтва.</p>
-      <div class="card-shine"></div>
-    </div>
-    <div class="service-card-new premium-card">
-      <span class="sc-icon">🎁</span>
-      <h3>Квіткові композиції</h3>
-      <p>Стильні композиції у коробках, кошиках та вазах. Ідеальний подарунок для особливих моментів.</p>
-      <div class="card-shine"></div>
-    </div>
-    <div class="service-card-new premium-card">
-      <span class="sc-icon">💍</span>
-      <h3>Весільна флористика</h3>
-      <p>Букет нареченої, бутоньєрки, арки та повний декор залу. Створимо казкову атмосферу вашого свята.</p>
-      <div class="card-shine"></div>
-    </div>
-    <div class="service-card-new premium-card">
-      <span class="sc-icon">🚚</span>
-      <h3>Доставка квітів</h3>
-      <p>Швидка та бережна доставка по Кельменцях та районі. Здивуйте близьких несподіваним сюрпризом.</p>
-      <div class="card-shine"></div>
-    </div>
-    <div class="service-card-new premium-card">
-      <span class="sc-icon">🎂</span>
-      <h3>Оформлення свят</h3>
-      <p>Дні народження, ювілеї, корпоративи. Фотозони, гірлянди та святковий декор будь-якої складності.</p>
-      <div class="card-shine"></div>
-    </div>
-    <div class="service-card-new premium-card">
-      <span class="sc-icon">🌹</span>
-      <h3>Троянди преміум</h3>
-      <p>Елітні сорти троянд з Еквадору та Голландії. 51, 101 або більше троянд у розкішному оформленні.</p>
-      <div class="card-shine"></div>
-    </div>
-  </div>
-</section>
+<div class="floral-divider" aria-hidden="true">
+  <div class="floral-divider__inner">
+    <svg class="floral-divider__petal floral-divider__petal--left" viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="40" cy="50" rx="28" ry="12" transform="rotate(-35 40 50)" fill="currentColor" opacity="0.35"/>
+      <ellipse cx="24" cy="38" rx="22" ry="9" transform="rotate(-70 24 38)" fill="currentColor" opacity="0.25"/>
+      <ellipse cx="56" cy="32" rx="24" ry="10" transform="rotate(10 56 32)" fill="currentColor" opacity="0.28"/>
+      <ellipse cx="26" cy="65" rx="20" ry="8" transform="rotate(-100 26 65)" fill="currentColor" opacity="0.22"/>
+      <circle cx="40" cy="50" r="7" fill="currentColor" opacity="0.4"/>
+      <path d="M40 57 Q35 80 22 96" stroke="#6b8f5a" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M35 74 Q27 71 22 64" stroke="#6b8f5a" stroke-width="0.8" stroke-linecap="round"/>
+    </svg>
 
-<section class="products" id="products">
-  <h2>Приклади букетів</h2>
-  <p class="section-subtitle">Натхнення для вашого ідеального подарунку</p>
+    <div class="floral-divider__text">
+      <span class="floral-divider__kicker">Квіти від Тамари</span>
+      <p class="floral-divider__phrase">Свіжі щодня — <em>для найщиріших емоцій</em></p>
+    </div>
+
+    <svg class="floral-divider__petal floral-divider__petal--right" viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="40" cy="50" rx="28" ry="12" transform="rotate(35 40 50)" fill="currentColor" opacity="0.35"/>
+      <ellipse cx="56" cy="38" rx="22" ry="9" transform="rotate(70 56 38)" fill="currentColor" opacity="0.25"/>
+      <ellipse cx="24" cy="32" rx="24" ry="10" transform="rotate(-10 24 32)" fill="currentColor" opacity="0.28"/>
+      <ellipse cx="54" cy="65" rx="20" ry="8" transform="rotate(100 54 65)" fill="currentColor" opacity="0.22"/>
+      <circle cx="40" cy="50" r="7" fill="currentColor" opacity="0.4"/>
+      <path d="M40 57 Q45 80 58 96" stroke="#6b8f5a" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M45 74 Q53 71 58 64" stroke="#6b8f5a" stroke-width="0.8" stroke-linecap="round"/>
+    </svg>
+  </div>
+</div>
+
+<section class="products" id="products" aria-labelledby="bouquets-heading">
+  <header class="section-head">
+    <p class="section-kicker">Галерея</p>
+    <h2 id="bouquets-heading">Приклади букетів</h2>
+    <p class="section-subtitle">Натхнення для вашого ідеального подарунку</p>
+    <p class="section-meta">Ціни орієнтовні — фінальна вартість залежить від сезону та складу. Натисніть картку, щоб відкрити детальну сторінку.</p>
+  </header>
   <div class="product-grid">
 
     <div class="product-card premium-card" onclick="showModal('Весняний букет', '/flowers/1')">
@@ -181,11 +225,21 @@
     </div>
 
   </div>
+  <p class="section-foot-note">Більше живих робіт — у розділі <a href="/examples">Приклади</a> та в <a href="/assortment">Ассортименті</a>.</p>
 </section>
 
-<section class="products" id="compositions">
-  <h2>Приклади композицій</h2>
-  <p class="section-subtitle">Елегантні рішення для особливих моментів</p>
+<section class="products products--compositions" id="compositions" aria-labelledby="compositions-heading">
+  <header class="section-head">
+    <p class="section-kicker">Композиції</p>
+    <h2 id="compositions-heading">Приклади композицій</h2>
+    <p class="section-subtitle">Елегантні рішення для особливих моментів</p>
+    <p class="section-meta">Коробки, кошики, стійкі композиції — зручно дарувати та довше тримати форму.</p>
+  </header>
+  <ul class="micro-chips micro-chips--center" aria-label="Переваги композицій">
+    <li>У коробці чи кашпо</li>
+    <li>Готовий подарунок</li>
+    <li>Для дому та офісу</li>
+  </ul>
   <div class="product-grid">
 
     <div class="product-card premium-card" onclick="showModal('Флористична композиція', '/flowers/5')">
@@ -240,40 +294,136 @@
     </div>
 
   </div>
+  <p class="section-foot-note">Потрібні троянди чи аксесуари окремо? Перегляньте <a href="/assortment">каталог</a>.</p>
 </section>
 
-<!-- Чому обирають нас -->
-<section class="why-us">
-  <h2>Чому обирають нас</h2>
-  <p class="section-subtitle">Якість та турбота в кожному букеті</p>
-  <div class="why-grid-new">
-    <div class="why-card-new">
-      <div class="why-num">01</div>
-      <h3>Свіжість кожного дня</h3>
-      <p>Квіти надходять щодня від найкращих постачальників. Гарантуємо свіжість та довговічність кожного букету.</p>
-    </div>
-    <div class="why-card-new">
-      <div class="why-num">02</div>
-      <h3>Індивідуальний підхід</h3>
-      <p>Кожен букет створюється з урахуванням ваших побажань, стилю та бюджету. Персональна консультація безкоштовна.</p>
-    </div>
-    <div class="why-card-new">
-      <div class="why-num">03</div>
-      <h3>Досвідчені флористи</h3>
-      <p>Наші майстри мають багаторічний досвід та слідкують за світовими трендами у флористиці.</p>
-    </div>
-    <div class="why-card-new">
-      <div class="why-num">04</div>
-      <h3>Швидка доставка</h3>
-      <p>Доставляємо по Кельменцях та районі. Можливість термінової доставки протягом 2 годин.</p>
+<section class="section-band section-band--dark" aria-label="Акцент магазину">
+  <div class="section-band__bg" style="background-image: url('{{ url_for('static', filename='images/img_2.png') }}');" role="presentation"></div>
+  <div class="section-band__scrim" role="presentation"></div>
+  <div class="section-band__inner">
+    <blockquote class="section-band__quote">
+      <p>Ми не просто збираємо квіти — ми підкреслюємо ваші слова без зайвого шуму.</p>
+    </blockquote>
+    <div class="section-band__cols">
+      <div class="section-band__col">
+        <span class="section-band__label">Локація</span>
+        <strong>Кельменці</strong>
+        <span class="section-band__hint">зручна адреса в центрі</span>
+      </div>
+      <div class="section-band__col">
+        <span class="section-band__label">Формат</span>
+        <strong>Букет + декор</strong>
+        <span class="section-band__hint">від мінімалізму до розкоші</span>
+      </div>
+      <div class="section-band__col">
+        <span class="section-band__label">Зв'язок</span>
+        <strong><a href="tel:+380976982154">097 698 21 54</a></strong>
+        <span class="section-band__hint">Telegram · Viber · Instagram</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Популярні приводи -->
-<section class="occasions">
-  <h2>Квіти на будь-який привід</h2>
-  <p class="section-subtitle">Знайдіть ідеальний букет для вашого свята</p>
+<section class="services" aria-labelledby="packaging-heading">
+  <header class="section-head">
+    <p class="section-kicker">Деталі</p>
+    <h2 id="packaging-heading">Стиль та оформлення</h2>
+    <p class="section-subtitle">Обирайте формат, який найкраще передасть ваші почуття</p>
+    <p class="section-meta">Від класичного крафту до сучасного мінімалізму — ми знаємо, як підкреслити красу кожної квітки.</p>
+  </header>
+  <ul class="micro-chips micro-chips--center" aria-label="Що пропонуємо коротко">
+    <li>Сучасні матеріали</li>
+    <li>Еко-пакування</li>
+    <li>Стрічки на вибір</li>
+    <li>Листівки в подарунок</li>
+  </ul>
+  <div class="services-grid-new">
+    <div class="service-card-new premium-card">
+      <span class="sc-icon">🎀</span>
+      <h3>Атласні стрічки</h3>
+      <p>Підбираємо колір стрічки тон-в-тон до букета або створюємо яскравий контраст для вау-ефекту.</p>
+      <div class="card-shine"></div>
+    </div>
+    <div class="service-card-new premium-card">
+      <span class="sc-icon">📜</span>
+      <h3>Дизайнерське пакування</h3>
+      <p>Матовий фоаміран, корейська плівка чи натуральний крафт — оформлення, що тримає форму.</p>
+      <div class="card-shine"></div>
+    </div>
+    <div class="service-card-new premium-card">
+      <span class="sc-icon">✉️</span>
+      <h3>Авторські листівки</h3>
+      <p>Додамо мінімалістичну картку з вашим текстом, написаним від руки, абсолютно безкоштовно.</p>
+      <div class="card-shine"></div>
+    </div>
+    <div class="service-card-new premium-card">
+      <span class="sc-icon">🧺</span>
+      <h3>Плетені кошики</h3>
+      <p>Затишний формат для об'ємних композицій. Зручно переносити та не потрібна ваза.</p>
+      <div class="card-shine"></div>
+    </div>
+    <div class="service-card-new premium-card">
+      <span class="sc-icon">📦</span>
+      <h3>Шляпні коробки</h3>
+      <p>Преміальний вигляд та вбудована флористична губка, яка зберігає квіти свіжими довше.</p>
+      <div class="card-shine"></div>
+    </div>
+    <div class="service-card-new premium-card">
+      <span class="sc-icon">🌿</span>
+      <h3>Без пакування</h3>
+      <p>Елегантність під стрічку. Ідеально для монобукетів з еквадорських троянд або півоній.</p>
+      <div class="card-shine"></div>
+    </div>
+  </div>
+  <p class="section-foot-note">Маєте власну ідею пакування? <a href="/order">Вкажіть це при замовленні</a>.</p>
+</section>
+
+<section class="why-us why-us--photo" aria-labelledby="care-heading">
+  <div class="why-us__photo" style="background-image: url('{{ url_for('static', filename='images/img_5.png') }}');" role="presentation"></div>
+  <div class="why-us__scrim" role="presentation"></div>
+  <header class="section-head section-head--on-dark">
+    <p class="section-kicker">Турбота</p>
+    <h2 id="care-heading">Як зберегти свіжість</h2>
+    <p class="section-subtitle"><br>Кілька простих правил для довголіття квітів</p>
+    <p class="section-meta section-meta--on-dark">Ваш букет може радувати значно довше, якщо приділити йому трохи уваги.</p>
+  </header>
+  <ul class="micro-chips micro-chips--on-dark" aria-label="Правила догляду">
+    <li>Міняйте воду</li>
+    <li>Підрізайте стебла</li>
+    <li>Уникайте сонця</li>
+  </ul>
+  <div class="why-grid-new">
+    <div class="why-card-new">
+      <div class="why-num">01</div>
+      <h3>Свіжа вода щодня</h3>
+      <p>Використовуйте прохолодну чисту воду. Оновлюйте її кожного дня, щоб запобігти розвитку бактерій у вазі.</p>
+    </div>
+    <div class="why-card-new">
+      <div class="why-num">02</div>
+      <h3>Правильний зріз</h3>
+      <p>Підрізайте стебла на 1-2 см під кутом 45° гострим ножем перед тим, як поставити квіти у воду. Не використовуйте ножиці.</p>
+    </div>
+    <div class="why-card-new">
+      <div class="why-num">03</div>
+      <h3>Чистота листя</h3>
+      <p>Слідкуйте, щоб листя не торкалося води. Це найшвидший спосіб зіпсувати воду та скоротити життя букету.</p>
+    </div>
+    <div class="why-card-new">
+      <div class="why-num">04</div>
+      <h3>Ідеальне місце</h3>
+      <p>Тримайте квіти подалі від прямих сонячних променів, протягів, кондиціонерів та стиглих фруктів.</p>
+    </div>
+  </div>
+</section>
+
+<section class="occasions" aria-labelledby="occasions-heading">
+  <header class="section-head">
+    <p class="section-kicker">Приводи</p>
+    <h2 id="occasions-heading">Квіти на будь-який привід</h2>
+    <p class="section-subtitle">Знайдіть ідеальний букет для вашого свята</p>
+    <p class="section-meta">Підкажемо відтінки та форму під ваш стиль — від стриманого до яскравого.</p>
+  </header>
+  <p class="section-inline-hint"><span>Швидко збираємо</span><span class="section-inline-hint__dot" aria-hidden="true"></span><span>Фото перед відправкою за бажанням</span><span class="section-inline-hint__dot" aria-hidden="true"></span><span>Оплата зручним способом</span></p>
   <div class="occasions-grid">
     <div class="occasion-card premium-card">
       <div class="occasion-icon">🎂</div>
@@ -312,17 +462,18 @@
       <div class="card-shine"></div>
     </div>
   </div>
+  <p class="section-foot-note">Є незвичний привід? <a href="/order">Напишіть нам</a> — запропонуємо ідею та орієнтовну вартість.</p>
 </section>
 
-<!-- Статистика -->
-<section class="stats-section">
+<section class="stats-section noise-layer" aria-label="Наші досягнення">
+  <p class="stats-preface">Цифри — лише частина історії. Головне — ваші емоції, коли отримуєте букет.</p>
   <div class="stats-grid">
     <div class="stat-item">
-      <div class="stat-num">5000+</div>
+      <div class="stat-num">500+</div>
       <div class="stat-label">Щасливих клієнтів</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">10+</div>
+      <div class="stat-num">15+</div>
       <div class="stat-label">Років досвіду</div>
     </div>
     <div class="stat-item">
@@ -330,17 +481,18 @@
       <div class="stat-label">Видів квітів</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">24/7</div>
+      <div class="stat-num">8:00 - 21:00</div>
       <div class="stat-label">Приймаємо замовлення</div>
     </div>
   </div>
 </section>
 
-<!-- CTA секція -->
-<section class="cta-section">
+<section class="cta-section noise-layer" aria-labelledby="cta-heading">
   <div class="cta-content">
-    <h2>Готові замовити букет мрії?</h2>
-    <p>Зателефонуйте нам або залиште заявку онлайн — ми створимо для вас щось особливе</p>
+    <p class="cta-eyebrow">Персональний підхід</p>
+    <h2 id="cta-heading">Готові замовити букет мрії?</h2>
+    <p class="cta-lead">Зателефонуйте або залиште заявку онлайн — підкажемо по квітам, термінах і бюджету.</p>
+    <p class="cta-micro">Середній час відповіді в робочі години — до 15 хв. Також можна написати в <a href="https://t.me/0976982154" rel="noopener">Telegram</a> або <a href="https://www.instagram.com/kvitu_kelmentsi_fotozona/" rel="noopener">Instagram</a>.</p>
     <div class="cta-buttons">
       <button class="order-btn" onclick="window.location.href='/order'">
         <span>Замовити букет</span>
@@ -361,7 +513,7 @@ function showModal(productName, url) {
   document.getElementById('modalText').textContent = `Перейти на сторінку «${productName}»?`;
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-  
+
   document.getElementById('modalConfirmBtn').onclick = function() {
     window.location.href = modalRedirectUrl;
   };
@@ -383,14 +535,5 @@ document.addEventListener('keydown', function(e) {
     closeModal();
   }
 });
-
-// Плавна прокрутка до секції
-function scrollToSection(sectionId) {
-  const section = document.getElementById(sectionId);
-  if (section) {
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
 </script>
-
 {% endblock %}

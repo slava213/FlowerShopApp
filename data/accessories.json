@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Заєць",
+    "price": "365",
+    "description": "Мяка іграшка",
+    "image": "/static/uploads/catalog_20260322224916.jpg"
+  },
+  {
+    "name": "123",
+    "price": "123",
+    "description": "123",
+    "image": null
+  }
+]

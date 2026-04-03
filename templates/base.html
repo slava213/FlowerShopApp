@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Квіти від Тамари — квітковий магазин у Кельменцях{% endblock %}</title>
+    <meta name="theme-color" content="#1a3828">
 
     {% block head %}{% endblock %}
 
@@ -11,12 +13,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="{% block body_class %}{% endblock %}">
 
   <header class="header">
-    <img src="{{ url_for('static', filename='images/logo-removebg-preview.png') }}"
-         class="logo"
-         alt="Квіти від Тамари — квітковий магазин у Кельменцях">
+    <a href="{{ url_for('main') }}" class="logo-link" aria-label="Квіти від Тамари — на головну">
+      <img src="{{ url_for('static', filename='images/logo-removebg-preview.png') }}"
+           class="logo"
+           width="118"
+           alt="Квіти від Тамари — квітковий магазин у Кельменцях">
+    </a>
 
     <nav class="nav" id="navMenu" aria-label="Головне меню">
         <a href="/">Головна</a>
@@ -24,7 +29,7 @@
         <a href="/order">Замовити</a>
         <a href="/delivery">Доставка</a>
         <a href="/examples">Приклади</a>
-        <a href="/roses">Троянди</a>
+        <a href="/assortment">Ассортимент</a>
         <a href="tel:+380976982154" class="nav-phone">+38 (097) 698 21 54</a>
     </nav>
 
@@ -52,7 +57,7 @@
               Авторські букети та флористичні композиції.
               Створюємо красу з любов'ю.
           </p>
-          <p class="copyright">© 2025 Усі права захищені</p>
+          <p class="copyright">© 2026 Усі права захищені</p>
       </div>
 
       <div class="footer-block">
@@ -62,7 +67,7 @@
           <a href="/order" class="footer-link">Замовити</a>
           <a href="/delivery" class="footer-link">Доставка</a>
           <a href="/examples" class="footer-link">Приклади</a>
-          <a href="/roses" class="footer-link">Троянди</a>
+          <a href="/assortment" class="footer-link">Ассортимент</a>
       </div>
 
       <div class="footer-block">
@@ -99,7 +104,7 @@
     </div>
   </footer>
 
-  <script src="{{ url_for('static', filename='script.js') }}"></script>'
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 
   <script>
     const burger = document.getElementById('burgerBtn');

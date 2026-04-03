@@ -1,0 +1,290 @@
+{% extends "base.html" %}
+
+{% block title %}Асортимент — Квіти від Тамари | Кельменці{% endblock %}
+
+{% block head %}
+<meta name="description" content="Асортимент квіткового магазину «Квіти від Тамари» — троянди, квіти, вазони та аксесуари у Кельменцях.">
+{% endblock %}
+
+{% block content %}
+
+<section class="assortment-hero">
+  <div class="assortment-hero-inner">
+    <span class="small-text">Квіти від Тамари</span>
+    <h1>Асорти<em>мент</em></h1>
+    <p class="assortment-hero-sub">Свіжі квіти, живі рослини та вишукані аксесуари — все в одному місці</p>
+    <nav class="assortment-nav">
+      <a href="#roses"       class="assortment-nav-btn">🌹 Троянди</a>
+      <a href="#other"       class="assortment-nav-btn">🌸 Інші квіти</a>
+      <a href="#vases"       class="assortment-nav-btn">🪴 Вазони</a>
+      <a href="#accessories" class="assortment-nav-btn">🎀 Аксесуари</a>
+    </nav>
+  </div>
+</section>
+
+<section class="assortment-section" id="roses">
+  <div class="assortment-container">
+    <div class="assortment-section-header">
+      <div class="assortment-section-heading">
+        <p class="assortment-section-eyebrow">Преміум сорти</p>
+        <div class="assortment-divider"></div>
+        <h2>Троянди</h2>
+        <p>Натисніть на сорт — дізнайтесь ціну та опис</p>
+      </div>
+    </div>
+
+    {% if roses %}
+    <div class="roses-grid">
+      {% for rose in roses %}
+      <a href="/assortment/rose/{{ loop.index0 }}" class="rose-card">
+        <div class="rose-card-img">
+          {% if rose.image %}
+          <img src="{{ rose.image }}" alt="{{ rose.name }}" loading="lazy">
+          {% else %}
+          <div class="rose-card-placeholder">🌹</div>
+          {% endif %}
+        </div>
+        <span class="rose-card-arrow">→</span>
+        <div class="rose-card-body">
+          <p class="rose-card-tag">Троянда · сорт</p>
+          <h3>{{ rose.name }}</h3>
+          <p class="rose-card-price"><strong>{{ rose.price }}</strong> грн/шт</p>
+          {% if rose.description %}
+          <p class="rose-card-desc">{{ rose.description[:120] }}{% if rose.description|length > 120 %}…{% endif %}</p>
+          {% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="assortment-empty">
+      <span class="assortment-empty-icon">🌹</span>
+      <p>Незабаром тут з'являться сорти троянд.</p>
+      <p class="assortment-empty-hint">Додайте через Telegram-бота → 🌹 Троянди</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="assortment-section" id="other">
+  <div class="assortment-container">
+    <div class="assortment-section-header">
+      <div class="assortment-section-heading">
+        <p class="assortment-section-eyebrow">Широкий вибір</p>
+        <div class="assortment-divider"></div>
+        <h2>Інші квіти</h2>
+        <p>Натисніть — побачите деталі та ціну</p>
+      </div>
+    </div>
+
+    {% if other %}
+    <div class="catalog-grid">
+      {% for item in other %}
+      <div class="catalog-card js-modal-trigger"
+           data-name="{{ item.name }}"
+           data-price="{{ item.price }}"
+           data-desc="{{ item.description or '' }}"
+           data-img="{{ item.image or '' }}"
+           data-type="other">
+        {% if item.image %}
+        <div class="catalog-card-img">
+          <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy">
+        </div>
+        {% else %}
+        <div class="catalog-card-emoji">🌸</div>
+        {% endif %}
+        <div class="catalog-card-body">
+          <h3>{{ item.name }}</h3>
+          <p class="catalog-card-price">{{ item.price }} грн/шт</p>
+          <p class="catalog-card-tap">Деталі →</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="assortment-empty">
+      <span class="assortment-empty-icon">🌸</span>
+      <p>Незабаром тут з'являться квіти.</p>
+      <p class="assortment-empty-hint">Додайте через Telegram-бота → 🌸 Інші квіти</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="assortment-section" id="vases">
+  <div class="assortment-container">
+    <div class="assortment-section-header">
+      <div class="assortment-section-heading">
+        <p class="assortment-section-eyebrow" style="color:var(--gold)">Для дому та офісу</p>
+        <div class="assortment-divider" style="background:linear-gradient(90deg,var(--gold),var(--gold-light),transparent)"></div>
+        <h2>Вазони</h2>
+        <p>Живі рослини — зелений затишок у вашому просторі</p>
+      </div>
+    </div>
+
+    {% if vases %}
+    <div class="vases-grid">
+      {% for item in vases %}
+      <div class="vase-card js-modal-trigger"
+           data-name="{{ item.name }}"
+           data-price="{{ item.price }}"
+           data-desc="{{ item.description or '' }}"
+           data-img="{{ item.image or '' }}"
+           data-type="vase">
+        {% if item.image %}
+        <div class="vase-card-img">
+          <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy">
+        </div>
+        {% else %}
+        <div class="vase-card-emoji">🪴</div>
+        {% endif %}
+        <div class="vase-card-body">
+          <h3>{{ item.name }}</h3>
+          <p class="vase-card-price">{{ item.price }} грн/шт</p>
+          <p class="vase-card-tap">Деталі →</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="assortment-empty">
+      <span class="assortment-empty-icon">🪴</span>
+      <p>Незабаром тут з'являться вазони та рослини.</p>
+      <p class="assortment-empty-hint">Додайте через Telegram-бота → 🪴 Вазони</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="assortment-section" id="accessories">
+  <div class="assortment-container">
+    <div class="assortment-section-header">
+      <div class="assortment-section-heading">
+        <p class="assortment-section-eyebrow">Для оформлення</p>
+        <div class="assortment-divider"></div>
+        <h2>Аксесуари</h2>
+        <p>Стрічки, пакування, листівки та декор</p>
+      </div>
+    </div>
+
+    {% if accessories %}
+    <div class="accessories-grid">
+      {% for item in accessories %}
+      <div class="acc-card js-modal-trigger"
+           data-name="{{ item.name }}"
+           data-price="{{ item.price }}"
+           data-desc="{{ item.description or '' }}"
+           data-img="{{ item.image or '' }}"
+           data-type="acc">
+        {% if item.image %}
+        <div class="acc-card-img">
+          <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy">
+        </div>
+        {% else %}
+        <div class="acc-card-emoji">🎀</div>
+        {% endif %}
+        <div class="acc-card-body">
+          <h3>{{ item.name }}</h3>
+          <p class="acc-card-price">{{ item.price }} грн/шт</p>
+          <p class="catalog-card-tap">Деталі →</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="assortment-empty">
+      <span class="assortment-empty-icon">🎀</span>
+      <p>Незабаром тут з'являться аксесуари.</p>
+      <p class="assortment-empty-hint">Додайте через Telegram-бота → 🎀 Аксесуари</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<div class="prem-modal-overlay" id="premModal" role="dialog" aria-modal="true" aria-labelledby="premModalName">
+  <div class="prem-modal-box">
+    <button class="prem-modal-x" onclick="closePremModal()" aria-label="Закрити">✕</button>
+    <div class="prem-modal-body" id="premModalBody">
+      <div class="prem-modal-img-col" id="premModalImgCol">
+        <img id="premModalImg" src="" alt="">
+      </div>
+      <div class="prem-modal-info-col">
+        <p class="prem-modal-eyebrow" id="premModalEyebrow">Квіти від Тамари</p>
+        <h2 class="prem-modal-name" id="premModalName"></h2>
+        <div class="prem-modal-price-row">
+          <span class="prem-modal-price-val" id="premModalPrice"></span>
+          <span class="prem-modal-price-unit">грн / шт</span>
+        </div>
+        <p class="prem-modal-desc" id="premModalDesc"></p>
+        <button class="prem-modal-close-btn" onclick="closePremModal()">Закрити</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const MODAL_LABELS = {
+  other: '🌸 Квітка',
+  vase:  '🪴 Вазон',
+  acc:   '🎀 Аксесуар',
+};
+
+function openPremModal(name, price, desc, img, type) {
+  const overlay = document.getElementById('premModal');
+  const body    = document.getElementById('premModalBody');
+  const imgCol  = document.getElementById('premModalImgCol');
+  const imgEl   = document.getElementById('premModalImg');
+
+  document.getElementById('premModalEyebrow').textContent = MODAL_LABELS[type] || 'Квіти від Тамари';
+  document.getElementById('premModalName').textContent    = name;
+  document.getElementById('premModalPrice').textContent   = price;
+  document.getElementById('premModalDesc').textContent    = desc || '';
+
+  overlay.classList.toggle('vase-modal', type === 'vase');
+
+  if (img) {
+    imgEl.src = img;
+    imgEl.alt = name;
+    imgCol.style.display = '';
+    body.classList.remove('no-img');
+  } else {
+    imgCol.style.display = 'none';
+    body.classList.add('no-img');
+  }
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePremModal() {
+  document.getElementById('premModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Слухачі подій для відкриття карток (через data-атрибути)
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.js-modal-trigger').forEach(card => {
+    card.addEventListener('click', function() {
+      const name  = this.dataset.name;
+      const price = this.dataset.price;
+      const desc  = this.dataset.desc;
+      const img   = this.dataset.img;
+      const type  = this.dataset.type;
+
+      openPremModal(name, price, desc, img, type);
+    });
+  });
+});
+
+// Закриття по кліку за межами вікна
+document.getElementById('premModal').addEventListener('click', function(e) {
+  if (e.target === this) closePremModal();
+});
+
+// Закриття на клавішу Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePremModal();
+});
+</script>
+
+{% endblock %}

@@ -15,8 +15,12 @@ app = Flask(__name__)
 bot = telebot.TeleBot(os.getenv('api_key'))
 
 USERS = [5347872932, 6673440979, 5258794783]
-UPLOAD_FOLDER = "static/uploads"
-EXAMPLES_FILE = "data/examples.json"
+UPLOAD_FOLDER    = "static/uploads"
+EXAMPLES_FILE    = "data/examples.json"
+ROSES_FILE       = "data/roses.json"
+OTHER_FILE       = "data/other_flowers.json"
+ACCESSORIES_FILE = "data/accessories.json"
+VASES_FILE       = "data/vases.json"
 ORDER_COOLDOWN = {}
 MAX_ORDERS = 5
 COOLDOWN_MINUTES = 30
@@ -35,40 +39,40 @@ FLOWERS_DATA = {
     8: {'id':8,'name':'Преміум композиція','price':1800,'old_price':2100,'image':'/static/images/img_10.png','description':'Розкішна преміум композиція з найкращих квітів світу.','composition':'Орхідеї, піоновидні троянди Ecuador, антуріум','size':'40x40 см','colors':'Благородні відтінки','freshness':'14-18 днів','badge':'Хіт','badge_class':'','category':'composition','gallery':[]},
 }
 
-# =========================================================
-# Приклади — завантаження / збереження JSON
-# =========================================================
-def load_examples():
-    if not os.path.exists(EXAMPLES_FILE):
-        return []
-    with open(EXAMPLES_FILE, 'r', encoding='utf-8') as f:
-        return json.load(f)
+def _load_json(path):
+    if not os.path.exists(path): return []
+    with open(path, 'r', encoding='utf-8') as f: return json.load(f)
 
-def save_examples(data):
-    os.makedirs(os.path.dirname(EXAMPLES_FILE), exist_ok=True)
-    with open(EXAMPLES_FILE, 'w', encoding='utf-8') as f:
+def _save_json(path, data):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
+def load_examples():       return _load_json(EXAMPLES_FILE)
+def save_examples(d):      _save_json(EXAMPLES_FILE, d)
+def load_roses():          return _load_json(ROSES_FILE)
+def save_roses(d):         _save_json(ROSES_FILE, d)
+def load_other():          return _load_json(OTHER_FILE)
+def save_other(d):         _save_json(OTHER_FILE, d)
+def load_accessories():    return _load_json(ACCESSORIES_FILE)
+def save_accessories(d):   _save_json(ACCESSORIES_FILE, d)
+def load_vases():          return _load_json(VASES_FILE)
+def save_vases(d):         _save_json(VASES_FILE, d)
 
 EXAMPLES_DATA = load_examples()
 
-
-# =========================================================
-# Стани бота
-# =========================================================
 BOT_STATES = {}
-def get_state(cid): return BOT_STATES.get(cid, {})
+def get_state(cid):    return BOT_STATES.get(cid, {})
 def set_state(cid, d): BOT_STATES[cid] = d
-def clear_state(cid): BOT_STATES.pop(cid, None)
+def clear_state(cid):  BOT_STATES.pop(cid, None)
 
-# =========================================================
-# Утиліти
-# =========================================================
 def make_order_hash(*args):
     return hashlib.md5('|'.join(str(a) for a in args).encode()).hexdigest()
 
 def is_duplicate(h):
     now = datetime.now()
-    for k in [k for k,v in RECENT_ORDERS.items() if now-v>timedelta(seconds=DUPLICATE_WINDOW_SECONDS)]:
+    for k in [k for k,v in RECENT_ORDERS.items()
+              if now-v > timedelta(seconds=DUPLICATE_WINDOW_SECONDS)]:
         del RECENT_ORDERS[k]
     if h in RECENT_ORDERS: return True
     RECENT_ORDERS[h] = now; return False
@@ -111,36 +115,62 @@ def save_photo_from_bot(file_id, prefix='item'):
     with open(fpath, 'wb') as f: f.write(data)
     return '/' + fpath.replace('\\', '/')
 
-# =========================================================
-# Клавіатури
-# =========================================================
+def cat_label(category):
+    return {'bouquet':'💐 Букет','composition':'🌸 Композиція','rose_bouquet':'🌹 Букет з троянд'}.get(category, category)
+
 def kb_main():
-    kb = types.InlineKeyboardMarkup(row_width=2)
+    kb = types.InlineKeyboardMarkup(row_width=1)
+    kb.add(types.InlineKeyboardButton("─── 📦 АСОРТИМЕНТ ───", callback_data="noop"))
     kb.add(
-        types.InlineKeyboardButton("➕ Додати букет",      callback_data="add_fl_bouquet"),
-        types.InlineKeyboardButton("➕ Додати композицію", callback_data="add_fl_composition"),
+        types.InlineKeyboardButton("🌹 Троянди",     callback_data="menu_roses"),
+        types.InlineKeyboardButton("🌸 Інші квіти",  callback_data="menu_other"),
+        types.InlineKeyboardButton("🎀 Аксесуари",   callback_data="menu_accessories"),
+        types.InlineKeyboardButton("🪴 Вазони",      callback_data="menu_vases"),
     )
+    kb.add(types.InlineKeyboardButton("─── 🖼 ПРИКЛАДИ РОБІТ ───", callback_data="noop"))
     kb.add(
-        types.InlineKeyboardButton("🖼 Переглянути приклади", callback_data="menu_examples"),
+        types.InlineKeyboardButton("🖼 Всі приклади",           callback_data="menu_examples"),
+        types.InlineKeyboardButton("💐 Додати букет",           callback_data="add_fl_bouquet"),
+        types.InlineKeyboardButton("🌸 Додати композицію",      callback_data="add_fl_composition"),
+        types.InlineKeyboardButton("🌹 Додати букет з троянд",  callback_data="add_fl_rose_bouquet"),
     )
     return kb
 
+def kb_catalog_list(items, section, title):
+    kb = types.InlineKeyboardMarkup(row_width=1)
+    for i, item in enumerate(items):
+        kb.add(types.InlineKeyboardButton(
+            f"{item['name']} — {item['price']} грн/шт",
+            callback_data=f"view_{section}_{i}"
+        ))
+    kb.add(types.InlineKeyboardButton("➕ Додати новий запис", callback_data=f"add_{section}_start"))
+    kb.add(types.InlineKeyboardButton("◀️ Головне меню",       callback_data="back_main"))
+    return kb
 
+def kb_catalog_actions(section, idx):
+    kb = types.InlineKeyboardMarkup(row_width=2)
+    kb.add(
+        types.InlineKeyboardButton("🗑 Видалити",      callback_data=f"del_{section}_{idx}"),
+        types.InlineKeyboardButton("◀️ До списку",     callback_data=f"menu_{section}"),
+    )
+    return kb
 
-def kb_example_list():
+def kb_examples_list():
     kb = types.InlineKeyboardMarkup(row_width=1)
     for i, ex in enumerate(EXAMPLES_DATA):
-        cat = 'Букет' if ex['category']=='bouquet' else 'Композиція'
-        kb.add(types.InlineKeyboardButton(f"[{cat}] {ex['name']}", callback_data=f"view_ex_{i}"))
-    kb.add(types.InlineKeyboardButton("➕ Додати приклад", callback_data="add_ex_start"))
-    kb.add(types.InlineKeyboardButton("◀️ Назад",          callback_data="back_main"))
+        label = cat_label(ex.get('category',''))
+        kb.add(types.InlineKeyboardButton(
+            f"{label} {ex['name']}",
+            callback_data=f"view_ex_{i}"
+        ))
+    kb.add(types.InlineKeyboardButton("◀️ Головне меню", callback_data="back_main"))
     return kb
 
 def kb_example_actions(idx):
     kb = types.InlineKeyboardMarkup(row_width=2)
     kb.add(
-        types.InlineKeyboardButton("🗑 Видалити", callback_data=f"del_ex_{idx}"),
-        types.InlineKeyboardButton("◀️ Назад",   callback_data="menu_examples"),
+        types.InlineKeyboardButton("🗑 Видалити",   callback_data=f"del_ex_{idx}"),
+        types.InlineKeyboardButton("◀️ До списку", callback_data="menu_examples"),
     )
     return kb
 
@@ -150,217 +180,315 @@ def kb_badge():
         kb.add(types.InlineKeyboardButton(b, callback_data=f"badge_{b}"))
     return kb
 
-def kb_ex_category():
-    kb = types.InlineKeyboardMarkup(row_width=2)
-    kb.add(
-        types.InlineKeyboardButton("💐 Букет",      callback_data="ex_cat_bouquet"),
-        types.InlineKeyboardButton("🌸 Композиція", callback_data="ex_cat_composition"),
-    )
-    return kb
-
-# =========================================================
-# /start
-# =========================================================
 @bot.message_handler(commands=['start'])
 def cmd_start(message):
     if message.chat.id not in USERS:
-        bot.send_message(message.chat.id, "❌ Доступ заборонено.")
-        return
-    bot.send_message(message.chat.id, "👋 Оберіть розділ:", reply_markup=kb_main())
+        bot.send_message(message.chat.id, "❌ Доступ заборонено."); return
+    bot.send_message(message.chat.id,
+        "👋 *Панель керування сайтом*\n\nОберіть що хочете зробити:",
+        parse_mode='Markdown', reply_markup=kb_main())
 
-# =========================================================
-# Callback
-# =========================================================
 @bot.callback_query_handler(func=lambda c: True)
 def on_callback(call):
-    cid = call.message.chat.id
-    mid = call.message.message_id
+    cid  = call.message.chat.id
+    mid  = call.message.message_id
     data = call.data
     if cid not in USERS:
         bot.answer_callback_query(call.id); return
     bot.answer_callback_query(call.id)
 
+    if data == 'noop': return
+
     if data == 'back_main':
-        bot.edit_message_text("👋 Оберіть розділ:", cid, mid, reply_markup=kb_main()); return
+        bot.edit_message_text(
+            "👋 *Панель керування сайтом*\n\nОберіть що хочете зробити:",
+            cid, mid, parse_mode='Markdown', reply_markup=kb_main()); return
 
+    CATALOG = {
+        'roses':       (load_roses,       save_roses,       '🌹 Троянди'),
+        'other':       (load_other,       save_other,       '🌸 Інші квіти'),
+        'accessories': (load_accessories, save_accessories, '🎀 Аксесуари'),
+        'vases':       (load_vases,       save_vases,       '🪴 Вазони'),
+    }
 
+    for sec, (loader, _, title) in CATALOG.items():
+        if data == f'menu_{sec}':
+            items = loader()
+            txt = f"*{title}*\n{'Список порожній — додайте перший запис ⬇️' if not items else f'{len(items)} позицій'}"
+            bot.edit_message_text(txt, cid, mid, parse_mode='Markdown',
+                                  reply_markup=kb_catalog_list(items, sec, title)); return
+
+    for sec, (loader, _, title) in CATALOG.items():
+        if data.startswith(f'view_{sec}_'):
+            idx = int(data.split('_')[-1])
+            items = loader()
+            if idx >= len(items):
+                bot.edit_message_text("❌ Не знайдено.", cid, mid, reply_markup=kb_main()); return
+            item = items[idx]
+            txt = f"*{item['name']}*\n💰 {item['price']} грн/шт\n📝 {item.get('description') or '—'}"
+            img = item.get('image')
+            if img:
+                try:
+                    bot.delete_message(cid, mid)
+                    bot.send_photo(cid, open(img.lstrip('/'), 'rb'),
+                                   caption=txt, parse_mode='Markdown',
+                                   reply_markup=kb_catalog_actions(sec, idx))
+                except:
+                    bot.send_message(cid, txt, parse_mode='Markdown',
+                                     reply_markup=kb_catalog_actions(sec, idx))
+            else:
+                bot.edit_message_text(txt, cid, mid, parse_mode='Markdown',
+                                      reply_markup=kb_catalog_actions(sec, idx))
+            return
+
+    for sec, (loader, saver, title) in CATALOG.items():
+        if data.startswith(f'del_{sec}_'):
+            idx   = int(data.split('_')[-1])
+            items = loader()
+            if idx < len(items):
+                name = items.pop(idx)['name']
+                saver(items)
+                txt = f"✅ *«{name}»* видалено.\n\n*{title}*\n{len(items)} позицій"
+                bot.edit_message_text(txt, cid, mid, parse_mode='Markdown',
+                                      reply_markup=kb_catalog_list(items, sec, title)); return
+
+    for sec in CATALOG:
+        if data == f'add_{sec}_start':
+            set_state(cid, {'mode': f'catalog_{sec}', 'step': 'cat_name'})
+            bot.edit_message_text(
+                f"➕ *Додавання до {CATALOG[sec][2]}*\n\nКрок 1/3 — Введіть *назву*:",
+                cid, mid, parse_mode='Markdown'); return
 
     if data == 'menu_examples':
-        bot.edit_message_text("🖼 Приклади робіт:", cid, mid, reply_markup=kb_example_list()); return
-
-
-
-
-
-    # Додати букет/композицію → одразу форма
-    if data.startswith('add_fl_'):
-        category = data.split('add_fl_')[1]
-        set_state(cid, {'mode':'flower','category':category,'step':'name'})
-        cat_label = 'букет' if category=='bouquet' else 'композицію'
+        if not EXAMPLES_DATA:
+            bot.edit_message_text(
+                "🖼 *Приклади робіт*\n\nСписок порожній.",
+                cid, mid, parse_mode='Markdown', reply_markup=kb_examples_list()); return
         bot.edit_message_text(
-            f"➕ Додаємо {cat_label} до розділу *Приклади*\n\nВведіть *назву*:",
-            cid, mid, parse_mode='Markdown'); return
+            f"🖼 *Приклади робіт* — {len(EXAMPLES_DATA)} шт.",
+            cid, mid, parse_mode='Markdown', reply_markup=kb_examples_list()); return
 
-    # Значок
-    if data.startswith('badge_'):
-        badge_text = data[6:]
-        state = get_state(cid)
-        if state.get('mode') == 'flower':
-            bmap = {'Хіт':('Хіт',''),'Новинка':('Новинка','new'),'Преміум':('Преміум','premium'),'Без значка':(None,'')}
-            badge, badge_class = bmap.get(badge_text,(None,''))
-            state.update({'badge':badge,'badge_class':badge_class,'step':'photo'})
-            set_state(cid, state)
-            bot.send_message(cid, "📷 Надішліть фото букету:"); return
-
-    # Категорія прикладу
-    if data in ('ex_cat_bouquet','ex_cat_composition'):
-        category = 'bouquet' if data=='ex_cat_bouquet' else 'composition'
-        state = get_state(cid)
-        state.update({'category':category,'step':'ex_name'})
-        set_state(cid, state)
-        bot.edit_message_text("Введіть *назву* прикладу:", cid, mid, parse_mode='Markdown'); return
-
-    # Додати приклад
-    if data == 'add_ex_start':
-        set_state(cid, {'mode':'example','step':'ex_category'})
-        bot.edit_message_text("🖼 Новий приклад.\n\nОберіть тип:", cid, mid, reply_markup=kb_ex_category()); return
-
-    # Перегляд прикладу
     if data.startswith('view_ex_'):
         idx = int(data.split('_')[-1])
         if idx >= len(EXAMPLES_DATA):
-            bot.edit_message_text("❌ Не знайдено.", cid, mid, reply_markup=kb_example_list()); return
+            bot.edit_message_text("❌ Не знайдено.", cid, mid,
+                                  reply_markup=kb_examples_list()); return
         ex = EXAMPLES_DATA[idx]
-        cat = 'Букет' if ex['category']=='bouquet' else 'Композиція'
-        text = (f"🖼 *{ex['name']}*\n📦 {cat}\n💰 {ex.get('price','—') or '—'} грн\n"
-                f"🌸 {ex.get('composition','—')}\n📏 {ex.get('size','—')}\n"
-                f"🎨 {ex.get('colors','—')}\n⏳ {ex.get('freshness','—')}")
-        bot.edit_message_text(text, cid, mid, parse_mode='Markdown', reply_markup=kb_example_actions(idx)); return
+        label = cat_label(ex.get('category',''))
+        txt = (f"🖼 *{ex['name']}*\n{label}\n\n"
+               f"💰 {ex.get('price') or '—'} грн\n"
+               f"📝 {ex.get('description') or '—'}\n"
+               f"🌸 Склад: {ex.get('composition') or '—'}\n"
+               f"📏 Розмір: {ex.get('size') or '—'}\n"
+               f"🎨 Кольори: {ex.get('colors') or '—'}\n"
+               f"⏳ Свіжість: {ex.get('freshness') or '—'}")
+        bot.edit_message_text(txt, cid, mid, parse_mode='Markdown',
+                              reply_markup=kb_example_actions(idx)); return
 
-    # Видалення прикладу
     if data.startswith('del_ex_'):
         idx = int(data.split('_')[-1])
         if idx < len(EXAMPLES_DATA):
             name = EXAMPLES_DATA.pop(idx)['name']
             save_examples(EXAMPLES_DATA)
-            bot.edit_message_text(f"✅ «{name}» видалено.", cid, mid, reply_markup=kb_example_list()); return
+            bot.edit_message_text(
+                f"✅ *«{name}»* видалено.\n\n🖼 *Приклади робіт* — {len(EXAMPLES_DATA)} шт.",
+                cid, mid, parse_mode='Markdown', reply_markup=kb_examples_list()); return
 
-# =========================================================
-# Текст — покрокове заповнення
-# =========================================================
+    if data.startswith('add_fl_'):
+        category = data[7:]
+        set_state(cid, {'mode': 'example', 'category': category, 'step': 'ex_name'})
+        lbl = cat_label(category)
+        bot.edit_message_text(
+            f"➕ *Новий приклад — {lbl}*\n\nКрок 1 — Введіть *назву*:",
+            cid, mid, parse_mode='Markdown'); return
+
+    if data.startswith('badge_'):
+        badge_text = data[6:]
+        state = get_state(cid)
+        if state.get('mode') == 'flower':
+            bmap = {'Хіт':('Хіт',''),'Новинка':('Новинка','new'),
+                    'Преміум':('Преміум','premium'),'Без значка':(None,'')}
+            badge, badge_class = bmap.get(badge_text, (None,''))
+            state.update({'badge': badge, 'badge_class': badge_class, 'step': 'photo'})
+            set_state(cid, state)
+            bot.send_message(cid, "📷 Надішліть фото букету:"); return
+
 @bot.message_handler(content_types=['text'])
 def on_text(message):
     cid = message.chat.id
     if cid not in USERS: return
     state = get_state(cid)
-    step = state.get('step')
-    mode = state.get('mode')
+    step  = state.get('step')
+    mode  = state.get('mode')
 
     def ask(text, kb=None):
         bot.send_message(cid, text, parse_mode='Markdown', reply_markup=kb)
 
     def skip(val):
-        return None if val.strip()=='-' else val.strip()
+        return None if val.strip() == '-' else val.strip()
 
-    if mode == 'flower':
-        if step=='name':
-            state.update({'name':message.text.strip(),'step':'price'}); set_state(cid,state); ask("Ціна (грн):")
-        elif step=='price':
-            state.update({'price':message.text.strip(),'step':'old_price'}); set_state(cid,state); ask("Стара ціна (або `-`):")
-        elif step=='old_price':
-            state.update({'old_price':skip(message.text),'step':'description'}); set_state(cid,state); ask("*Опис*:")
-        elif step=='description':
-            state.update({'description':message.text.strip(),'step':'composition'}); set_state(cid,state); ask("*Склад* (або `-`):")
-        elif step=='composition':
-            state.update({'composition':skip(message.text) or '','step':'size'}); set_state(cid,state); ask("*Розмір* (або `-`):")
-        elif step=='size':
-            state.update({'size':skip(message.text) or '','step':'colors'}); set_state(cid,state); ask("*Кольорова гама* (або `-`):")
-        elif step=='colors':
-            state.update({'colors':skip(message.text) or '','step':'freshness'}); set_state(cid,state); ask("*Свіжість* (або `-`):")
-        elif step=='freshness':
-            state.update({'freshness':skip(message.text) or '','step':'badge'}); set_state(cid,state); ask("Оберіть *значок*:", kb_badge())
+    if mode == 'example':
+        if step == 'ex_name':
+            state.update({'name': message.text.strip(), 'step': 'ex_description'})
+            set_state(cid, state); ask("Крок 2 — *Опис* (або `-` щоб пропустити):")
+        elif step == 'ex_description':
+            state.update({'description': skip(message.text) or '', 'step': 'ex_composition'})
+            set_state(cid, state); ask("Крок 3 — *Склад* (або `-`):")
+        elif step == 'ex_composition':
+            state.update({'composition': skip(message.text) or '', 'step': 'ex_size'})
+            set_state(cid, state); ask("Крок 4 — *Розмір* (або `-`):")
+        elif step == 'ex_size':
+            state.update({'size': skip(message.text) or '', 'step': 'ex_colors'})
+            set_state(cid, state); ask("Крок 5 — *Кольорова гама* (або `-`):")
+        elif step == 'ex_colors':
+            state.update({'colors': skip(message.text) or '', 'step': 'ex_freshness'})
+            set_state(cid, state); ask("Крок 6 — *Свіжість* (або `-`):")
+        elif step == 'ex_freshness':
+            state.update({'freshness': skip(message.text) or '', 'step': 'ex_price'})
+            set_state(cid, state); ask("Крок 7 — *Ціна* в грн (або `-`):")
+        elif step == 'ex_price':
+            state.update({'price': skip(message.text), 'step': 'ex_photo'})
+            set_state(cid, state); ask("Крок 8 — 📷 Надішліть *фото*:")
 
-    elif mode == 'example':
-        if step=='ex_name':
-            state.update({'name':message.text.strip(),'step':'ex_description'}); set_state(cid,state); ask("*Опис* (або `-`):")
-        elif step=='ex_description':
-            state.update({'description':skip(message.text) or '','step':'ex_composition'}); set_state(cid,state); ask("*Склад* (або `-`):")
-        elif step=='ex_composition':
-            state.update({'composition':skip(message.text) or '','step':'ex_size'}); set_state(cid,state); ask("*Розмір* (або `-`):")
-        elif step=='ex_size':
-            state.update({'size':skip(message.text) or '','step':'ex_colors'}); set_state(cid,state); ask("*Кольорова гама* (або `-`):")
-        elif step=='ex_colors':
-            state.update({'colors':skip(message.text) or '','step':'ex_freshness'}); set_state(cid,state); ask("*Свіжість* (або `-`):")
-        elif step=='ex_freshness':
-            state.update({'freshness':skip(message.text) or '','step':'ex_price'}); set_state(cid,state); ask("*Ціна* (або `-`):")
-        elif step=='ex_price':
-            state.update({'price':skip(message.text),'step':'ex_photo'}); set_state(cid,state); ask("📷 Надішліть фото:")
+    elif mode == 'flower':
+        if step == 'name':
+            state.update({'name': message.text.strip(), 'step': 'price'})
+            set_state(cid, state); ask("Крок 2 — *Ціна* (грн):")
+        elif step == 'price':
+            state.update({'price': message.text.strip(), 'step': 'old_price'})
+            set_state(cid, state); ask("Крок 3 — Стара ціна (або `-`):")
+        elif step == 'old_price':
+            state.update({'old_price': skip(message.text), 'step': 'description'})
+            set_state(cid, state); ask("Крок 4 — *Опис*:")
+        elif step == 'description':
+            state.update({'description': message.text.strip(), 'step': 'composition'})
+            set_state(cid, state); ask("Крок 5 — *Склад* (або `-`):")
+        elif step == 'composition':
+            state.update({'composition': skip(message.text) or '', 'step': 'size'})
+            set_state(cid, state); ask("Крок 6 — *Розмір* (або `-`):")
+        elif step == 'size':
+            state.update({'size': skip(message.text) or '', 'step': 'colors'})
+            set_state(cid, state); ask("Крок 7 — *Кольорова гама* (або `-`):")
+        elif step == 'colors':
+            state.update({'colors': skip(message.text) or '', 'step': 'freshness'})
+            set_state(cid, state); ask("Крок 8 — *Свіжість* (або `-`):")
+        elif step == 'freshness':
+            state.update({'freshness': skip(message.text) or '', 'step': 'badge'})
+            set_state(cid, state); ask("Крок 9 — Оберіть *значок*:", kb_badge())
 
-# =========================================================
-# Фото — збереження
-# =========================================================
+    elif mode and mode.startswith('catalog_'):
+        section = mode.replace('catalog_', '')
+        CATALOG_INFO = {
+            'roses':       (load_roses,       save_roses,       '🌹 Троянди'),
+            'other':       (load_other,       save_other,       '🌸 Інші квіти'),
+            'accessories': (load_accessories, save_accessories, '🎀 Аксесуари'),
+            'vases':       (load_vases,       save_vases,       '🪴 Вазони'),
+        }
+        loader, saver, title = CATALOG_INFO[section]
+
+        if step == 'cat_name':
+            state.update({'name': message.text.strip(), 'step': 'cat_price'})
+            set_state(cid, state); ask("Крок 2/3 — *Ціна* за штуку (грн):")
+        elif step == 'cat_price':
+            state.update({'price': message.text.strip(), 'step': 'cat_desc'})
+            set_state(cid, state); ask("Крок 3/3 — *Опис* (або `-`):")
+        elif step == 'cat_desc':
+            state.update({'description': skip(message.text) or '', 'step': 'cat_photo'})
+            set_state(cid, state)
+            ask("📷 Надішліть *фото* (або `-` щоб пропустити):")
+        elif step == 'cat_photo' and message.text and message.text.strip() == '-':
+            items = loader()
+            items.append({
+                'name': state['name'],
+                'price': state['price'],
+                'description': state.get('description', ''),
+                'image': None,
+            })
+            saver(items)
+            clear_state(cid)
+            ask(f"✅ *«{state['name']}»* додано до {title}!")
+
 @bot.message_handler(content_types=['photo'])
 def on_photo(message):
     cid = message.chat.id
     if cid not in USERS: return
     state = get_state(cid)
-    step = state.get('step')
-    mode = state.get('mode')
+    step  = state.get('step')
+    mode  = state.get('mode')
 
-    # Фото для букета — зберігаємо в EXAMPLES_DATA
-    if mode == 'flower' and step == 'photo':
-        image_url = save_photo_from_bot(message.photo[-1].file_id, prefix='flower')
-        EXAMPLES_DATA.append({
-            'id': len(EXAMPLES_DATA),
-            'category': state['category'],
-            'name': state['name'],
-            'price': state.get('price'),
-            'old_price': state.get('old_price'),
-            'description': state.get('description', ''),
-            'composition': state.get('composition', ''),
-            'size': state.get('size', ''),
-            'colors': state.get('colors', ''),
-            'freshness': state.get('freshness', ''),
-            'badge': state.get('badge'),
-            'badge_class': state.get('badge_class', ''),
-            'gallery': [],
-            'image': image_url,
-        })
-        save_examples(EXAMPLES_DATA)
-        clear_state(cid)
-        bot.send_message(
-            cid,
-            f"✅ «{state['name']}» додано на сторінку Приклади!",
-            reply_markup=kb_example_list()
-        )
-        return
-
-    # Фото для прикладу
     if mode == 'example' and step == 'ex_photo':
         image_url = save_photo_from_bot(message.photo[-1].file_id, prefix='example')
         EXAMPLES_DATA.append({
-            'id': len(EXAMPLES_DATA),
-            'category': state['category'],
-            'name': state['name'],
-            'price': state.get('price'),
-            'old_price': None,
+            'id':          len(EXAMPLES_DATA),
+            'category':    state['category'],
+            'name':        state['name'],
+            'price':       state.get('price'),
+            'old_price':   None,
             'description': state.get('description', ''),
             'composition': state.get('composition', ''),
-            'size': state.get('size', ''),
-            'colors': state.get('colors', ''),
-            'freshness': state.get('freshness', ''),
-            'badge': None,
+            'size':        state.get('size', ''),
+            'colors':      state.get('colors', ''),
+            'freshness':   state.get('freshness', ''),
+            'badge':       None,
             'badge_class': '',
-            'gallery': [],
-            'image': image_url,
+            'gallery':     [],
+            'image':       image_url,
         })
         save_examples(EXAMPLES_DATA)
         clear_state(cid)
-        bot.send_message(
-            cid,
-            f"✅ Приклад «{state['name']}» додано на сайт!",
-            reply_markup=kb_example_list()
-        )
+        lbl = cat_label(state['category'])
+        bot.send_message(cid,
+            f"✅ {lbl} *«{state['name']}»* додано на сайт!",
+            parse_mode='Markdown', reply_markup=kb_main())
+        return
+
+    if mode == 'flower' and step == 'photo':
+        image_url = save_photo_from_bot(message.photo[-1].file_id, prefix='flower')
+        EXAMPLES_DATA.append({
+            'id':          len(EXAMPLES_DATA),
+            'category':    state['category'],
+            'name':        state['name'],
+            'price':       state.get('price'),
+            'old_price':   state.get('old_price'),
+            'description': state.get('description', ''),
+            'composition': state.get('composition', ''),
+            'size':        state.get('size', ''),
+            'colors':      state.get('colors', ''),
+            'freshness':   state.get('freshness', ''),
+            'badge':       state.get('badge'),
+            'badge_class': state.get('badge_class', ''),
+            'gallery':     [],
+            'image':       image_url,
+        })
+        save_examples(EXAMPLES_DATA)
+        clear_state(cid)
+        bot.send_message(cid,
+            f"✅ *«{state['name']}»* додано до Прикладів!",
+            parse_mode='Markdown', reply_markup=kb_main())
+        return
+
+    if mode and mode.startswith('catalog_') and step == 'cat_photo':
+        section = mode.replace('catalog_', '')
+        CATALOG_INFO = {
+            'roses':       (load_roses,       save_roses,       '🌹 Троянди'),
+            'other':       (load_other,       save_other,       '🌸 Інші квіти'),
+            'accessories': (load_accessories, save_accessories, '🎀 Аксесуари'),
+            'vases':       (load_vases,       save_vases,       '🪴 Вазони'),
+        }
+        loader, saver, title = CATALOG_INFO[section]
+        image_url = save_photo_from_bot(message.photo[-1].file_id, prefix='catalog')
+        items = loader()
+        items.append({
+            'name':        state['name'],
+            'price':       state['price'],
+            'description': state.get('description', ''),
+            'image':       image_url,
+        })
+        saver(items)
+        clear_state(cid)
+        bot.send_message(cid,
+            f"✅ *«{state['name']}»* додано до {title}!",
+            parse_mode='Markdown', reply_markup=kb_catalog_list(items, section, title))
         return
 
     bot.send_message(cid, "⚠️ Зараз не очікується фото. Натисніть /start")
@@ -370,7 +498,13 @@ def on_photo(message):
 # =========================================================
 @app.route('/')
 def main():
-    return render_template('index.html')
+    products = list(FLOWERS_DATA.values())
+    examples = EXAMPLES_DATA[:6] if EXAMPLES_DATA else []
+    featured = [f for f in products if f.get('badge')][:4]
+    return render_template('index.html',
+        products=products,
+        featured_products=featured if featured else None,
+        examples=examples if examples else None)
 
 @app.route('/about')
 def about():
@@ -381,8 +515,9 @@ def flower_detail(flower_id):
     flower = FLOWERS_DATA.get(flower_id)
     if not flower: return render_template('404.html'), 404
     related = [f for fid,f in FLOWERS_DATA.items()
-               if fid!=flower_id and f['category']==flower['category']][:3]
-    return render_template('flower_detail.html', flower=flower, flower_id=flower_id, example_idx=None, related_flowers=related)
+               if fid != flower_id and f['category'] == flower['category']][:3]
+    return render_template('flower_detail.html', flower=flower,
+                           flower_id=flower_id, example_idx=None, related_flowers=related)
 
 @app.route('/examples')
 def examples():
@@ -393,21 +528,37 @@ def example_detail(idx):
     if idx < 0 or idx >= len(EXAMPLES_DATA):
         return render_template('404.html'), 404
     flower = EXAMPLES_DATA[idx]
-    related = [
-        ex for i, ex in enumerate(EXAMPLES_DATA)
-        if i != idx and ex.get('category') == flower.get('category')
-    ][:3]
+    related = [(i, ex) for i, ex in enumerate(EXAMPLES_DATA)
+               if i != idx and ex.get('category') == flower.get('category')][:3]
+    related_flowers = [ex for _, ex in related]
     return render_template('flower_detail.html', flower=flower,
                            flower_id=None, example_idx=idx,
-                           related_flowers=related, back_url='/examples')
+                           related_flowers=related_flowers, back_url='/examples')
 
-@app.route('/roses')
-def roses():
-    return render_template('roses.html', flowers=[f for f in FLOWERS_DATA.values() if f['category']=='bouquet'])
+@app.route('/assortment')
+def assortment():
+    rose_examples = [(i, ex) for i, ex in enumerate(EXAMPLES_DATA)
+                     if ex.get('category') == 'rose_bouquet']
+    return render_template('assortment.html',
+                           roses=load_roses(),
+                           other=load_other(),
+                           accessories=load_accessories(),
+                           vases=load_vases(),
+                           rose_examples=rose_examples)
+
+@app.route('/assortment/rose/<int:idx>')
+def rose_detail(idx):
+    roses = load_roses()
+    if idx < 0 or idx >= len(roses):
+        return render_template('404.html'), 404
+    rose_examples = [(i, ex) for i, ex in enumerate(EXAMPLES_DATA)
+                     if ex.get('category') == 'rose_bouquet']
+    return render_template('rose_detail.html', rose=roses[idx], idx=idx,
+                           rose_examples=rose_examples)
 
 @app.route('/order', methods=['GET','POST'])
 def order():
-    flower_id = request.args.get('flower', type=int)
+    flower_id   = request.args.get('flower', type=int)
     example_idx = request.args.get('example', type=int)
     if flower_id is not None:
         flower = FLOWERS_DATA.get(flower_id)
@@ -415,19 +566,20 @@ def order():
         flower = EXAMPLES_DATA[example_idx]
     else:
         flower = None
+
     if request.method == 'POST':
         ip = request.remote_addr
         allowed, error = check_cooldown(ip)
         if not allowed:
-            notify_blocked_ip(ip,'Замовлення')
+            notify_blocked_ip(ip, 'Замовлення')
             return render_template('order.html', error=error, flower=flower)
-        name = request.form.get('name','').strip()
-        phone = request.form.get('phone','').strip()
+        name        = request.form.get('name','').strip()
+        phone       = request.form.get('phone','').strip()
         description = request.form.get('description','').strip()
-        wishes = request.form.get('wishes','').strip()
-        if not name or len(phone)<12 or not description:
+        wishes      = request.form.get('wishes','').strip()
+        if not name or len(phone) < 12 or not description:
             return render_template('order.html', error="Заповніть всі обов'язкові поля", flower=flower)
-        if is_duplicate(make_order_hash(ip,name,phone,description)):
+        if is_duplicate(make_order_hash(ip, name, phone, description)):
             return render_template('complete_order.html')
         photo = request.files.get('photo'); photo_path = None
         if photo and photo.filename:
@@ -437,11 +589,10 @@ def order():
             os.makedirs(UPLOAD_FOLDER, exist_ok=True)
             photo_path = os.path.join(UPLOAD_FOLDER, secure_filename(photo.filename))
             photo.save(photo_path)
-        # Якщо фото не завантажено але є фото від прикладу
         if not photo_path:
-            server_photo = request.form.get('server_photo', '').strip()
-            if server_photo and os.path.exists(server_photo.lstrip('/')):
-                photo_path = server_photo.lstrip('/')
+            sp = request.form.get('server_photo','').strip()
+            if sp and os.path.exists(sp.lstrip('/')):
+                photo_path = sp.lstrip('/')
         text = (f"🌸 *Нове замовлення*\n\n⏰ {datetime.now().strftime('%d.%m.%Y %H:%M')}\n\n"
                 f"👤 *Замовник:* {name}\n📞 {phone}\n\n🛒 {description}\n💭 {wishes or '—'}")
         for uid in USERS:
@@ -456,7 +607,7 @@ def order():
 
 @app.route('/delivery', methods=['GET','POST'])
 def delivery():
-    flower_id = request.args.get('flower', type=int)
+    flower_id   = request.args.get('flower', type=int)
     example_idx = request.args.get('example', type=int)
     if flower_id is not None:
         flower = FLOWERS_DATA.get(flower_id)
@@ -464,18 +615,21 @@ def delivery():
         flower = EXAMPLES_DATA[example_idx]
     else:
         flower = None
+
     if request.method == 'POST':
         ip = request.remote_addr
         allowed, error = check_cooldown(ip)
         if not allowed:
-            notify_blocked_ip(ip,'Доставка')
+            notify_blocked_ip(ip, 'Доставка')
             return render_template('delivery.html', error=error, flower=flower)
         delivery_to = request.form.get('delivery_to','self')
         description = request.form.get('description','').strip()
-        wishes = request.form.get('wishes','').strip()
+        wishes      = request.form.get('wishes','').strip()
         if delivery_to == 'self':
-            name=request.form.get('self_name','').strip(); phone=request.form.get('self_phone','').strip()
-            city=request.form.get('self_city','').strip(); address=request.form.get('self_address','').strip()
+            name    = request.form.get('self_name','').strip()
+            phone   = request.form.get('self_phone','').strip()
+            city    = request.form.get('self_city','').strip()
+            address = request.form.get('self_address','').strip()
             if not name or len(phone)<12 or not city or not address or not description:
                 return render_template('delivery.html', error="Заповніть всі обов'язкові поля", flower=flower)
             if is_duplicate(make_order_hash(ip,name,phone,city,address,description)):
@@ -483,12 +637,17 @@ def delivery():
             text = (f"🚚 *Доставка (собі)*\n\n⏰ {datetime.now().strftime('%d.%m.%Y %H:%M')}\n\n"
                     f"👤 {name}\n📞 {phone}\n📍 {city}, {address}\n\n🛒 {description}\n💭 {wishes or '—'}")
         else:
-            sn=request.form.get('sender_name','').strip(); sp=request.form.get('sender_phone','').strip()
-            rn=request.form.get('recipient_name','').strip(); rp=request.form.get('recipient_phone','').strip()
-            city=request.form.get('city','').strip(); address=request.form.get('address','').strip()
-            video=request.form.get('video','no'); greeting=request.form.get('greeting','no')
-            gt=request.form.get('greeting_text','').strip(); music=request.form.get('music','no')
-            mt=request.form.get('music_text','').strip()
+            sn  = request.form.get('sender_name','').strip()
+            sp  = request.form.get('sender_phone','').strip()
+            rn  = request.form.get('recipient_name','').strip()
+            rp  = request.form.get('recipient_phone','').strip()
+            city    = request.form.get('city','').strip()
+            address = request.form.get('address','').strip()
+            video   = request.form.get('video','no')
+            greeting= request.form.get('greeting','no')
+            gt      = request.form.get('greeting_text','').strip()
+            music   = request.form.get('music','no')
+            mt      = request.form.get('music_text','').strip()
             if not all([sn,sp,rn,rp,city,address,description]):
                 return render_template('delivery.html', error="Заповніть всі обов'язкові поля", flower=flower)
             if is_duplicate(make_order_hash(ip,sn,sp,rn,rp,description)):
@@ -508,9 +667,9 @@ def delivery():
             photo_path = os.path.join(UPLOAD_FOLDER, secure_filename(photo.filename))
             photo.save(photo_path)
         if not photo_path:
-            server_photo = request.form.get('server_photo', '').strip()
-            if server_photo and os.path.exists(server_photo.lstrip('/')):
-                photo_path = server_photo.lstrip('/')
+            sp2 = request.form.get('server_photo','').strip()
+            if sp2 and os.path.exists(sp2.lstrip('/')):
+                photo_path = sp2.lstrip('/')
         for uid in USERS:
             try:
                 bot.send_message(uid, text, parse_mode='Markdown')
@@ -520,6 +679,7 @@ def delivery():
         register_order(ip)
         return render_template('complete_order.html')
     return render_template('delivery.html', flower=flower)
+
 
 if __name__ == '__main__':
     threading.Thread(target=bot.infinity_polling, daemon=True).start()

@@ -9,6 +9,7 @@
 <meta property="og:description" content="{{ flower.description[:150] if flower.description else flower.name }}...">
 <meta property="og:type" content="product">
 <meta property="og:image" content="{{ flower.image }}">
+
 {% endblock %}
 
 {% block content %}
@@ -40,17 +41,18 @@
     <div class="flower-info-section">
       <nav class="breadcrumbs">
         <a href="/">Головна</a>
-        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-sep">›</span>
         {% if back_url %}
         <a href="{{ back_url }}">Приклади</a>
         {% else %}
         <a href="/#products">Букети</a>
         {% endif %}
-        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-sep">›</span>
         <span class="breadcrumb-current">{{ flower.name }}</span>
       </nav>
 
       <h1 class="flower-title">{{ flower.name }}</h1>
+      <div class="flower-title-line"></div>
 
       <div class="flower-price-block">
         <span class="flower-price">{{ flower.price }} грн</span>
@@ -115,15 +117,16 @@
           {% set order_url = '/order' %}
           {% set delivery_url = '/delivery' %}
         {% endif %}
-        <button class="order-btn flower-order-btn"
-                onclick="window.location.href='{{ order_url }}'">
+        <a href="{{ order_url }}" class="flower-btn flower-btn-primary">
+          <span class="flower-btn-icon"></span>
           <span>Замовити</span>
-        </button>
-        <button class="order-btn flower-delivery-btn"
-                onclick="window.location.href='{{ delivery_url }}'">
-          <span>Замовити з доставкою</span>
-        </button>
-        <a href="{{ back_url if back_url else 'javascript:history.back()' }}" class="back-btn">
+        </a>
+        <a href="{{ delivery_url }}" class="flower-btn flower-btn-delivery">
+          <span class="flower-btn-icon"></span>
+          <span>Доставка</span>
+        </a>
+        <a href="{{ back_url if back_url else 'javascript:history.back()' }}" class="flower-btn flower-btn-back">
+          <span>←</span>
           <span>Назад</span>
         </a>
       </div>
@@ -146,28 +149,97 @@
   </div>
 </section>
 
-<!-- Схожі -->
+<!-- Вам також сподобається -->
 {% if related_flowers %}
 <section class="related-products" id="related">
-  <h2>Вам також сподобається</h2>
-  <div class="product-grid">
+  <div class="related-products-header">
+    <span class="related-products-tag">Колекція</span>
+    <h2>Вам також сподобається</h2>
+    <p class="section-subtitle">Інші букети від нашого флориста, які можуть вас зацікавити</p>
+  </div>
+
+  {% if back_url %}
+  <!-- Перегляд з прикладів — картки example-card стилю -->
+  <div class="related-examples-grid">
     {% for related in related_flowers %}
-    {% if back_url %}
-    <div class="product-card premium-card"
-         onclick="window.location.href='/examples/{{ loop.index0 }}'">
-    {% else %}
-    <div class="product-card premium-card"
-         onclick="showModal('{{ related.name }}', '/flowers/{{ related.id }}')">
-    {% endif %}
-      <div class="product-card-img">
+    <div class="rel-example-card" onclick="window.location.href='/examples/{{ loop.index0 }}'">
+      <div class="rel-example-card-img">
         <img src="{{ related.image }}" alt="{{ related.name }}">
-        <div class="product-card-label">
-          <p>{{ related.name }}</p>
-          <span class="product-price">від {{ related.price }} грн</span>
-        </div>
+        <span class="rel-card-badge">🌸 Букет</span>
+        {% if related.price %}
+        <span class="rel-card-price-overlay">{{ related.price }} грн</span>
+        {% endif %}
       </div>
-      <div class="product-card-caption">{{ related.name }}</div>
-      <div class="card-shine"></div>
+      <div class="rel-example-card-body">
+        <h3 class="rel-example-card-title">{{ related.name }}</h3>
+        <a href="/examples/{{ loop.index0 }}" class="rel-example-view-btn">
+          <span>Переглянути</span>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% else %}
+  <!-- Перегляд з /flowers/ — модальне підтвердження -->
+  <div class="related-examples-grid">
+    {% for related in related_flowers %}
+    <div class="rel-example-card" onclick="showModal('{{ related.name }}', '/flowers/{{ related.id }}')">
+      <div class="rel-example-card-img">
+        <img src="{{ related.image }}" alt="{{ related.name }}">
+        <span class="rel-card-badge">🌸 Букет</span>
+        {% if related.price %}
+        <span class="rel-card-price-overlay">від {{ related.price }} грн</span>
+        {% endif %}
+      </div>
+      <div class="rel-example-card-body">
+        <h3 class="rel-example-card-title">{{ related.name }}</h3>
+        <button class="rel-example-view-btn" onclick="event.stopPropagation(); showModal('{{ related.name }}', '/flowers/{{ related.id }}')">
+          <span>Переглянути</span>
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+</section>
+{% endif %}
+
+<!-- Рандомні букети та композиції -->
+{% if random_examples %}
+<section class="related-products" id="random-examples">
+  <div class="related-products-header">
+    <span class="related-products-tag">✨ Роботи флориста</span>
+    <h2>Вам також сподобається</h2>
+    <p class="section-subtitle">Букети та композиції від нашого флориста — ручна робота з любов'ю</p>
+  </div>
+
+  <div class="related-examples-grid">
+    {% for real_idx, item in random_examples %}
+    <div class="rel-example-card">
+      <div class="rel-example-card-img">
+        <img src="{{ item.image }}" alt="{{ item.name }}">
+        {% if item.category == 'rose_bouquet' %}
+        <span class="rel-card-badge">🌹 З троянд</span>
+        {% elif item.category == 'composition' %}
+        <span class="rel-card-badge">🌸 Композиція</span>
+        {% else %}
+        <span class="rel-card-badge">💐 Букет</span>
+        {% endif %}
+        {% if item.price %}
+        <span class="rel-card-price-overlay">від {{ item.price }} грн</span>
+        {% endif %}
+      </div>
+      <div class="rel-example-card-body">
+        <h3 class="rel-example-card-title">{{ item.name }}</h3>
+        {% if item.price %}
+        <p class="rel-example-card-price">від {{ item.price }} грн</p>
+        {% endif %}
+        <a href="/examples/{{ real_idx }}" class="rel-example-view-btn">
+          <span>Подивитися</span>
+        </a>
+      </div>
     </div>
     {% endfor %}
   </div>
@@ -193,7 +265,7 @@
           <span>Скасувати</span>
         </button>
         <button class="modal-btn modal-btn-confirm" id="modalConfirmBtn">
-          <span>Перейти</span>
+          <span>Перейти →</span>
         </button>
       </div>
     </div>
@@ -203,7 +275,15 @@
 
 <script>
 function changeMainImage(src) {
-  document.querySelector('.flower-main-image').src = src;
+  const img = document.querySelector('.flower-main-image');
+  img.style.opacity = '0';
+  img.style.transform = 'scale(1.03)';
+  setTimeout(() => {
+    img.src = src;
+    img.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+    img.style.opacity = '1';
+    img.style.transform = 'scale(1)';
+  }, 200);
 }
 
 {% if not back_url %}

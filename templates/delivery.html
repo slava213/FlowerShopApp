@@ -175,8 +175,8 @@ const formOther  = document.getElementById('formOther');
 
 function switchDelivery() {
   const toOther = delivOther.checked;
-  formSelf.style.display  = toOther ? 'none'  : 'block';
-  formOther.style.display = toOther ? 'block' : 'none';
+  formSelf.style.display  = toOther ? 'none'  : 'flex';
+  formOther.style.display = toOther ? 'flex' : 'none';
 }
 
 delivSelf.addEventListener('change', switchDelivery);

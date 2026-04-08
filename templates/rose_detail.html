@@ -11,6 +11,7 @@
 <section class="flower-detail">
   <div class="flower-detail-container">
 
+    <!-- Зображення -->
     <div class="flower-image-section">
       <div class="flower-image-wrapper premium-card">
         {% if rose.image %}
@@ -22,18 +23,22 @@
       </div>
     </div>
 
+    <!-- Інформація -->
     <div class="flower-info-section">
       <nav class="breadcrumbs">
         <a href="/">Головна</a>
-        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-sep">›</span>
         <a href="/assortment">Асортимент</a>
-        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-sep">›</span>
         <a href="/assortment#roses">Троянди</a>
-        <span class="breadcrumb-sep">/</span>
-        <span class="breadcrumb-current">{{ rose.name }}</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-current breadcrumb-current-rose">{{ rose.name }}</span>
       </nav>
 
+      <div class="flower-variety-tag">🌹 Троянда</div>
+
       <h1 class="flower-title">{{ rose.name }}</h1>
+      <div class="flower-title-line flower-title-line-rose"></div>
 
       <div class="flower-price-block">
         <span class="flower-price">{{ rose.price }} грн</span>
@@ -41,7 +46,7 @@
       </div>
 
       {% if rose.description %}
-      <div class="flower-description">
+      <div class="flower-description flower-description-rose">
         <p>{{ rose.description }}</p>
       </div>
       {% endif %}
@@ -71,21 +76,30 @@
 <!-- Вам також сподобається — приклади букетів з троянд -->
 {% if rose_examples %}
 <section class="related-products">
-  <h2>Вам також сподобається</h2>
-  <p class="section-subtitle">Букети з троянд від нашого флориста</p>
-  <div class="examples-grid" style="max-width:1100px;margin:0 auto 0;padding:0 24px 60px;">
+  <div class="related-products-header">
+    <span class="related-products-tag related-products-tag-rose">🌹 З троянд</span>
+    <h2>Вам також сподобається</h2>
+    <p class="section-subtitle">Букети з троянд від нашого флориста — ручна робота з любов'ю</p>
+  </div>
+
+  <div class="related-examples-grid">
     {% for real_idx, item in rose_examples %}
-    <div class="example-card">
-      <div class="example-card-img">
+    <div class="rel-example-card rel-example-card-rose">
+      <div class="rel-example-card-img">
         <img src="{{ item.image }}" alt="{{ item.name }}">
-        <span class="example-badge example-badge-rose">🌹 З троянд</span>
-      </div>
-      <div class="example-card-body">
-        <h3 class="example-card-title">{{ item.name }}</h3>
+        <span class="rel-card-badge rel-card-badge-rose">🌹 З троянд</span>
         {% if item.price %}
-        <p class="example-card-price">від {{ item.price }} грн</p>
+        <span class="rel-card-price-overlay">від {{ item.price }} грн</span>
         {% endif %}
-        <a href="/examples/{{ real_idx }}" class="example-view-btn">Подивитися</a>
+      </div>
+      <div class="rel-example-card-body">
+        <h3 class="rel-example-card-title">{{ item.name }}</h3>
+        {% if item.price %}
+        <p class="rel-example-card-price">від {{ item.price }} грн</p>
+        {% endif %}
+        <a href="/examples/{{ real_idx }}" class="rel-example-view-btn rel-example-view-btn-rose">
+          <span>Подивитися</span>
+        </a>
       </div>
     </div>
     {% endfor %}

@@ -19,6 +19,7 @@
     <div class="examples-filter">
       <button class="filter-btn active" data-filter="all">Всі</button>
       <button class="filter-btn" data-filter="bouquet">Букети</button>
+      <button class="filter-btn filter-btn-rose" data-filter="rose_bouquet">🌹 З троянд</button>
       <button class="filter-btn" data-filter="composition">Композиції</button>
     </div>
 
@@ -39,6 +40,8 @@
           <img src="{{ item.image }}" alt="{{ item.name }}">
           {% if item.category == 'bouquet' %}
           <span class="example-badge">Букет</span>
+          {% elif item.category == 'rose_bouquet' %}
+          <span class="example-badge example-badge-rose">🌹 З троянд</span>
           {% else %}
           <span class="example-badge example-badge-comp">Композиція</span>
           {% endif %}
@@ -66,7 +69,8 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     this.classList.add('active');
     const filter = this.dataset.filter;
     document.querySelectorAll('.example-card').forEach(card => {
-      card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'block' : 'none';
+      const show = filter === 'all' || card.dataset.category === filter;
+      card.style.display = show ? '' : 'none';
     });
   });
 });

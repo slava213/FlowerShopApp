@@ -16,6 +16,8 @@
 <meta property="og:image" content="https://kvityvid-tamary.ua/static/images/shop1.png">
 <meta name="twitter:card" content="summary_large_image">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -57,9 +59,9 @@
         "@type": "OfferCatalog",
         "name": "Флористичні послуги Кельменці",
         "itemListElement": [
-          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Авторські букети квітів у Кельменцях","description":"Унікальні флористичні букети на замовлення"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Авторські букети квітів у Кельменцях"}},
           {"@type":"Offer","itemOffered":{"@type":"Service","name":"Квіткові композиції у коробках та кошиках"}},
-          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Весільна флористика у Кельменцях","description":"Букет нареченої, бутоньєрки, декор залу"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Весільна флористика у Кельменцях"}},
           {"@type":"Offer","itemOffered":{"@type":"Service","name":"Доставка квітів по Кельменцях та Кельменецькому районі"}},
           {"@type":"Offer","itemOffered":{"@type":"Service","name":"Оформлення свят та фотозон у Кельменцях"}},
           {"@type":"Offer","itemOffered":{"@type":"Service","name":"Троянди преміум — 51, 101 і більше штук"}}
@@ -72,7 +74,7 @@
       "@id": "https://kvityvid-tamary.ua/about#webpage",
       "url": "https://kvityvid-tamary.ua/about",
       "name": "Купити квіти у Кельменцях — про магазин Квіти від Тамари",
-      "description": "Дізнайтеся більше про квітковий магазин «Квіти від Тамари» у Кельменцях. Авторські букети, доставка квітів, оформлення весіль.",
+      "description": "Дізнайтеся більше про квітковий магазин «Квіти від Тамари» у Кельменцях.",
       "inLanguage": "uk-UA",
       "isPartOf": {"@id": "https://kvityvid-tamary.ua/#website"},
       "about": {"@id": "https://kvityvid-tamary.ua/#florist"},
@@ -109,10 +111,9 @@
   "mainEntity": [
     {"@type":"Question","name":"Де купити свіжі квіти у Кельменцях?","acceptedAnswer":{"@type":"Answer","text":"Купити свіжі квіти у Кельменцях можна у квітковому магазині «Квіти від Тамари» за адресою: вулиця Довженка, 27. Ми працюємо щодня з 08:00 до 20:00 та пропонуємо широкий асортимент букетів для будь-якого приводу."}},
     {"@type":"Question","name":"Чи є доставка квітів у Кельменцях та районі?","acceptedAnswer":{"@type":"Answer","text":"Так, магазин «Квіти від Тамари» пропонує швидку доставку квітів по Кельменцях та Кельменецькому районі. Можлива термінова доставка протягом 2 годин. Замовлення за тел: +38 (097) 698 21 54."}},
-    {"@type":"Question","name":"Скільки коштують квіти у Кельменцях?","acceptedAnswer":{"@type":"Answer","text":"Ціни на букети в магазині «Квіти від Тамари» починаються від 850 грн. У нас є варіанти на будь-який бюджет — від невеликих композицій до розкішних преміум-букетів."}},
-    {"@type":"Question","name":"Чи можна замовити весільні квіти у Кельменцях?","acceptedAnswer":{"@type":"Answer","text":"Так, «Квіти від Тамари» пропонують повне флористичне оформлення весіль у Кельменцях — букет нареченої, бутоньєрки, арки, декор залу та фотозони."}},
+    {"@type":"Question","name":"Скільки коштують квіти у Кельменцях?","acceptedAnswer":{"@type":"Answer","text":"Ціни на букети в магазині «Квіти від Тамари» починаються від 850 грн."}},
+    {"@type":"Question","name":"Чи можна замовити весільні квіти у Кельменцях?","acceptedAnswer":{"@type":"Answer","text":"Так, «Квіти від Тамари» пропонують повне флористичне оформлення весіль у Кельменцях."}},
     {"@type":"Question","name":"Як замовити квіти онлайн у Кельменцях?","acceptedAnswer":{"@type":"Answer","text":"Замовити квіти у Кельменцях можна онлайн через сайт або зателефонувавши за номером +38 (097) 698 21 54 чи +38 (098) 658 50 50. Також пишіть у Telegram або Instagram."}},
-    {"@type":"Question","name":"Чи є знижки при замовленні букетів?","acceptedAnswer":{"@type":"Answer","text":"Так, постійні клієнти магазину «Квіти від Тамари» у Кельменцях отримують знижки та бонуси. Запитуйте про умови при замовленні."}},
     {"@type":"Question","name":"О котрій годині працює квітковий магазин у Кельменцях?","acceptedAnswer":{"@type":"Answer","text":"Магазин «Квіти від Тамари» на вул. Довженка, 27 у Кельменцях працює щодня з 08:00 до 20:00."}}
   ]
 }
@@ -120,38 +121,18 @@
 
 <style>
 /* ═══════════════════════════════════
-   ABOUT PAGE — PREMIUM REDESIGN
+   ABOUT PAGE — PAGE-SCOPED STYLES
    ═══════════════════════════════════ */
 
-/* ─── BREADCRUMB ─── */
-.about-breadcrumb {
-  padding: 20px clamp(24px, 5vw, 80px);
-  background: var(--cream);
-  border-bottom: 1px solid var(--line-soft);
-}
-.about-breadcrumb nav {
-  max-width: 1340px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--gray-light);
-}
-.about-breadcrumb a { color: var(--gray-light); text-decoration: none; transition: color .25s; }
-.about-breadcrumb a:hover { color: var(--accent); }
-.about-breadcrumb span { color: var(--black); font-weight: 500; }
-.about-breadcrumb-sep { opacity: 0.4; }
-
-/* ─── CINEMATIC HERO ─── */
+/* ─── NEW MODERN HERO ─── */
 .ab-hero {
   position: relative;
-  min-height: 88vh;
+  min-height: 90vh;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   overflow: hidden;
   isolation: isolate;
-  background: var(--accent);
+  background: var(--surface-dark); /* Fallback */
 }
 
 .ab-hero__bg {
@@ -163,19 +144,23 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center;
   display: block;
-  filter: saturate(0.6);
-  transform: scale(1.06);
-  transition: transform 12s ease-out;
+  transform: scale(1.05);
+  transition: transform 14s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .ab-hero.is-loaded .ab-hero__bg img { transform: scale(1); }
 
+/* М'якший сучасний градієнт для читабельності */
 .ab-hero__overlay {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(to top, rgba(10,14,10,0.92) 0%, rgba(10,14,10,0.55) 45%, rgba(26,56,40,0.2) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 18, 0.4) 0%,
+    rgba(15, 23, 18, 0.75) 50%,
+    rgba(10, 14, 10, 0.95) 100%
+  );
   z-index: 1;
 }
 
@@ -184,138 +169,143 @@
   z-index: 2;
   max-width: 1340px;
   margin: 0 auto;
-  padding: clamp(48px,8vw,96px) clamp(24px,5vw,80px) clamp(64px,10vw,112px);
+  padding: clamp(80px, 12vw, 140px) clamp(24px, 5vw, 80px) clamp(60px, 10vw, 100px);
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: flex-end;
-  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
-
-.ab-hero__left { max-width: 780px; }
 
 .ab-hero__eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 11px;
+  gap: 12px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--gold-light);
-  margin-bottom: 28px;
-  padding: 8px 20px;
-  border: 1px solid rgba(212,170,80,0.35);
-  border-radius: var(--radius-xl);
-  background: rgba(212,170,80,0.08);
-  backdrop-filter: blur(8px);
+  color: var(--white);
+  margin-bottom: 24px;
+  padding: 10px 24px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
-
 .ab-hero__eyebrow::before {
   content: '';
-  width: 5px; height: 5px;
+  width: 6px; height: 6px;
   background: var(--gold-light);
   border-radius: 50%;
+  box-shadow: 0 0 10px var(--gold-light);
 }
 
 .ab-hero__h1 {
   font-family: var(--font-heading);
-  font-size: clamp(44px, 7vw, 92px);
+  font-size: clamp(40px, 6.5vw, 84px);
   font-weight: 300;
-  line-height: 1.0;
-  letter-spacing: -0.03em;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   color: var(--white);
-  margin-bottom: 28px;
+  margin-bottom: 24px;
+  max-width: 900px;
 }
-.ab-hero__h1 em { font-style: italic; color: var(--gold-light); }
+.ab-hero__h1 em {
+  font-style: italic;
+  background: linear-gradient(120deg, var(--gold-light), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .ab-hero__desc {
   font-size: clamp(16px, 2vw, 20px);
   font-weight: 300;
-  color: rgba(255,255,255,0.75);
-  line-height: 1.75;
-  max-width: 560px;
-  margin-bottom: 44px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+  max-width: 680px;
+  margin-bottom: 48px;
 }
 
 .ab-hero__cta {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 64px;
 }
 
 .ab-hero__btn-primary {
   padding: 18px 48px;
-  border-radius: var(--radius-xl);
-  background: linear-gradient(135deg, var(--accent-mid), var(--accent));
+  border-radius: 100px;
+  background: var(--accent);
   color: var(--white);
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
   border: none;
   cursor: pointer;
-  transition: all 0.45s var(--ease-out);
-  box-shadow: 0 8px 36px rgba(26,56,40,0.45);
-  position: relative;
-  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 12px 24px rgba(26,56,40,0.5);
 }
 .ab-hero__btn-primary:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 52px rgba(26,56,40,0.55);
-  background: linear-gradient(135deg, var(--accent-light), var(--accent-mid));
+  background: var(--accent-light);
+  box-shadow: 0 16px 32px rgba(26,56,40,0.7);
 }
 
 .ab-hero__btn-secondary {
   padding: 18px 40px;
-  border-radius: var(--radius-xl);
-  border: 1.5px solid rgba(255,255,255,0.3);
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.4);
   color: var(--white);
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: all 0.45s var(--ease-out);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background: rgba(255,255,255,0.05);
   backdrop-filter: blur(8px);
 }
 .ab-hero__btn-secondary:hover {
-  border-color: rgba(255,255,255,0.65);
-  background: rgba(255,255,255,0.08);
-  transform: translateY(-3px);
+  border-color: var(--white);
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-4px);
 }
 
-.ab-hero__right {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  text-align: right;
+/* Glassmorphism Stats Bar */
+.ab-hero__stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  width: 100%;
+  max-width: 1000px;
+  padding: 32px 48px;
+  background: rgba(20, 30, 24, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.2);
 }
 
 .ab-hero__stat {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
-  padding: 20px 28px;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: var(--radius-sm);
-  backdrop-filter: blur(12px);
-  transition: all 0.35s var(--ease-out);
-}
-.ab-hero__stat:hover {
-  background: rgba(255,255,255,0.12);
-  border-color: rgba(212,170,80,0.3);
-  transform: translateX(-4px);
+  align-items: center;
+  text-align: center;
+  gap: 8px;
 }
 
 .ab-hero__stat-num {
   font-family: var(--font-heading);
-  font-size: 40px;
+  font-size: clamp(32px, 4vw, 48px);
   font-weight: 300;
   color: var(--gold-light);
   line-height: 1;
@@ -323,147 +313,151 @@
 .ab-hero__stat-label {
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.7);
 }
 
-/* Scroll indicator */
+/* Скрол індикатор (сучасний, без тексту) */
 .ab-hero__scroll {
   position: absolute;
-  bottom: 36px;
+  bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-.ab-hero__scroll-line {
   width: 1px;
-  height: 56px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
-  animation: scrollPulse 2s ease-in-out infinite;
+  height: 60px;
+  background: rgba(255,255,255,0.2);
+  overflow: hidden;
 }
-.ab-hero__scroll-txt {
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
-  writing-mode: vertical-lr;
-  text-orientation: mixed;
+.ab-hero__scroll::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 50%;
+  background: var(--white);
+  animation: scrollModern 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
 }
-@keyframes scrollPulse {
-  0%,100% { opacity:0.5; transform: scaleY(1); }
-  50%      { opacity:1;   transform: scaleY(0.85); }
+@keyframes scrollModern {
+  0% { transform: translateY(-100%); }
+  50% { transform: translateY(100%); }
+  100% { transform: translateY(200%); }
 }
 
-/* ─── STORY SPLIT ─── */
+/* ─── NEW MODERN STORY SPLIT ─── */
 .ab-story {
+  padding: clamp(80px, 10vw, 140px) clamp(24px, 5vw, 80px);
+  max-width: 1400px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 640px;
-  isolation: isolate;
+  gap: clamp(40px, 8vw, 80px);
+  align-items: center;
 }
 
 .ab-story__img-col {
   position: relative;
+  border-radius: 24px;
   overflow: hidden;
+  box-shadow: 0 32px 64px rgba(15, 23, 18, 0.15);
+  aspect-ratio: 4/5;
 }
 .ab-story__img-col img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 1.2s var(--ease-out);
+  transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.ab-story__img-col:hover img { transform: scale(1.04); }
+.ab-story__img-col:hover img {
+  transform: scale(1.05);
+}
 
-.ab-story__img-overlay {
+/* Декоративний елемент позаду фото */
+.ab-story__img-col::before {
+  content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(26,56,40,0.15) 0%, transparent 60%);
-  pointer-events: none;
+  inset: -20px;
+  border: 1px solid var(--gold-light);
+  border-radius: 32px;
+  z-index: -1;
+  opacity: 0.3;
 }
 
 .ab-story__content-col {
-  padding: clamp(56px,8vw,96px) clamp(40px,6vw,96px);
-  background: var(--cream);
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
 }
 
-.ab-story__content-col::before {
-  content: '"';
-  position: absolute;
-  top: 40px;
-  right: 48px;
-  font-family: var(--font-heading);
-  font-size: 200px;
-  line-height: 1;
-  color: rgba(26,56,40,0.06);
-  pointer-events: none;
-}
-
 .ab-story__year-badge {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 11px;
+  gap: 12px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--accent-light);
-  margin-bottom: 20px;
+  color: var(--accent);
+  margin-bottom: 24px;
 }
 .ab-story__year-badge::before {
   content: '';
   display: block;
-  width: 28px;
-  height: 1.5px;
-  background: var(--accent-light);
+  width: 32px;
+  height: 2px;
+  background: var(--accent);
 }
 
 .ab-story__h2 {
   font-family: var(--font-heading);
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(32px, 4vw, 56px);
   font-weight: 300;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   color: var(--black);
-  margin-bottom: 28px;
-  line-height: 1.1;
+  margin-bottom: 32px;
+  line-height: 1.15;
 }
 
 .ab-story__text {
   font-size: 17px;
   color: var(--gray);
-  line-height: 1.88;
-  margin-bottom: 18px;
+  line-height: 1.8;
+  margin-bottom: 20px;
 }
-.ab-story__text:last-of-type { margin-bottom: 40px; }
+.ab-story__text:last-of-type { margin-bottom: 48px; }
 
 .ab-story__link {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 13px;
+  gap: 12px;
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent);
   text-decoration: none;
-  border-bottom: 1.5px solid rgba(26,56,40,0.22);
-  padding-bottom: 4px;
-  transition: all 0.35s var(--ease-out);
+  position: relative;
+  width: fit-content;
+  transition: all 0.3s ease;
 }
-.ab-story__link::after { content: '→'; transition: transform 0.35s var(--ease-out); }
-.ab-story__link:hover { color: var(--accent-light); border-color: var(--accent-light); }
-.ab-story__link:hover::after { transform: translateX(5px); }
+.ab-story__link::before {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 100%; height: 2px;
+  background: var(--accent);
+  transform: scaleX(0.3);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.ab-story__link::after { content: '→'; transition: transform 0.3s ease; }
+.ab-story__link:hover::before { transform: scaleX(1); }
+.ab-story__link:hover::after { transform: translateX(6px); }
 
-/* ─── NUMBERS BAND ─── */
+
+/* ─── Інші стилі (залишаємо без змін) ─── */
 .ab-numbers {
   background:
     radial-gradient(ellipse 100% 80% at 80% 20%, rgba(82,134,106,0.3) 0%, transparent 50%),
@@ -473,12 +467,10 @@
   overflow: hidden;
   border-top: 1px solid rgba(255,255,255,0.05);
 }
-
 .ab-numbers::before {
   content: '';
   position: absolute;
-  top: -40%;
-  right: -5%;
+  top: -40%; right: -5%;
   width: 560px; height: 560px;
   background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
   pointer-events: none;
@@ -531,28 +523,12 @@
   line-height: 1.4;
 }
 
-/* ─── SERVICES GRID ─── */
-.ab-services {
-  padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
-  background: var(--white);
-  position: relative;
-}
-
-.ab-services::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(30,61,47,0.035) 0%, transparent 55%);
-  pointer-events: none;
-}
-
 .ab-section-head {
   max-width: 700px;
   margin: 0 auto clamp(44px,6vw,72px);
   text-align: center;
   position: relative;
 }
-
 .ab-kicker {
   font-size: 10.5px;
   font-weight: 700;
@@ -561,7 +537,6 @@
   color: var(--accent-light);
   margin-bottom: 14px;
 }
-
 .ab-h2 {
   font-family: var(--font-heading);
   font-size: clamp(32px, 4.5vw, 56px);
@@ -571,14 +546,12 @@
   color: var(--black);
   margin-bottom: 16px;
 }
-
 .ab-subtitle {
   font-size: 16px;
   color: var(--gray);
   line-height: 1.72;
   font-weight: 300;
 }
-
 .ab-section-head::after {
   content: '';
   display: block;
@@ -586,6 +559,19 @@
   height: 1px;
   margin: 24px auto 0;
   background: linear-gradient(90deg, transparent, var(--gold-mid), transparent);
+}
+
+.ab-services {
+  padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
+  background: var(--white);
+  position: relative;
+}
+.ab-services::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(30,61,47,0.035) 0%, transparent 55%);
+  pointer-events: none;
 }
 
 .ab-services__grid {
@@ -606,7 +592,6 @@
   transition: all 0.55s var(--ease-spring);
   box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.65);
 }
-
 .ab-service-card::before {
   content: '';
   position: absolute;
@@ -630,7 +615,6 @@
 .ab-service-card:hover {
   transform: translateY(-12px) scale(1.02);
   box-shadow: 0 28px 56px rgba(13,16,12,0.14), 0 0 0 1px rgba(255,255,255,0.06);
-  border-color: rgba(30,61,47,0.04);
 }
 
 .ab-service-card .card-shine {
@@ -659,7 +643,6 @@
   transform: scale(1.12) rotate(8deg);
   background: rgba(255,255,255,0.12);
 }
-
 .ab-service-card h3 {
   font-family: var(--font-heading);
   font-size: 24px;
@@ -678,7 +661,6 @@
 .ab-service-card:hover h3,
 .ab-service-card:hover p { color: var(--white); }
 
-/* ─── WHY US CARDS ─── */
 .ab-why {
   padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
   background: var(--cream);
@@ -721,7 +703,6 @@
   transition: width 0.55s var(--ease-out);
 }
 .ab-why-card:hover::before { width: 100%; }
-
 .ab-why-card:hover {
   background: linear-gradient(135deg, var(--white), var(--cream));
   transform: translateY(-5px) scale(1.01);
@@ -743,7 +724,6 @@
   transition: opacity 0.45s;
 }
 .ab-why-card:hover .ab-why-num { opacity: 0.6; }
-
 .ab-why-card h3 {
   font-family: var(--font-heading);
   font-size: 24px;
@@ -753,7 +733,6 @@
 }
 .ab-why-card p { font-size: 15px; color: var(--gray); line-height: 1.82; }
 
-/* ─── FLORISTS ─── */
 .ab-team {
   padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
   background: var(--white);
@@ -804,7 +783,6 @@
   padding: 32px 32px 36px;
   text-align: left;
 }
-
 .ab-florist-card__name {
   font-family: var(--font-heading);
   font-size: 32px;
@@ -837,7 +815,6 @@
   max-height: 200px;
 }
 
-/* ─── PROCESS TIMELINE ─── */
 .ab-process {
   padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
   background:
@@ -878,15 +855,11 @@
   padding: 40px 28px;
   text-align: center;
 }
-
-/* Connector line */
 .ab-process__step:not(:last-child)::after {
   content: '';
   position: absolute;
-  top: 64px;
-  right: -1px;
-  width: 2px;
-  height: 40%;
+  top: 64px; right: -1px;
+  width: 2px; height: 40%;
   background: linear-gradient(to bottom, rgba(212,170,80,0.35), transparent);
 }
 
@@ -909,7 +882,6 @@
   transform: scale(1.12);
   box-shadow: 0 10px 36px rgba(26,56,40,0.55);
 }
-
 .ab-process__step h3 {
   font-family: var(--font-heading);
   font-size: 22px;
@@ -919,7 +891,6 @@
 }
 .ab-process__step p { font-size: 14.5px; color: rgba(255,255,255,0.55); line-height: 1.72; }
 
-/* ─── PHOTO GALLERY ─── */
 .ab-gallery {
   padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
   background: var(--cream);
@@ -934,9 +905,7 @@
   font-weight: 600;
   color: var(--accent);
   margin-bottom: 8px;
-  letter-spacing: 0.02em;
 }
-
 .ab-gallery__hours {
   text-align: center;
   font-size: 13px;
@@ -945,7 +914,6 @@
   margin-bottom: clamp(32px,5vw,56px);
 }
 
-/* Masonry-like 8-photo grid */
 .ab-gallery__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -961,16 +929,10 @@
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
   transition: all 0.55s var(--ease-out);
+  cursor: pointer;
 }
-
-/* Larger feature photos */
-.ab-gallery__item:nth-child(1) {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-.ab-gallery__item:nth-child(4) {
-  grid-column: span 2;
-}
+.ab-gallery__item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.ab-gallery__item:nth-child(4) { grid-column: span 2; }
 
 .ab-gallery__item img {
   width: 100%; height: 100%;
@@ -979,17 +941,14 @@
   display: block;
 }
 .ab-gallery__item:hover img { transform: scale(1.08); }
-
 .ab-gallery__item:hover {
   box-shadow: var(--shadow-hover);
   transform: scale(1.02);
   z-index: 2;
 }
-
 .ab-gallery__item::after {
   content: '';
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(26,56,40,0.45) 0%, transparent 55%);
   opacity: 0;
   transition: opacity 0.45s var(--ease-out);
@@ -1005,7 +964,6 @@
   transition: transform 0.5s var(--ease-out);
 }
 .ab-gallery__item:hover .ab-gallery__caption { transform: translateY(0); }
-
 .ab-gallery__caption-text {
   font-family: var(--font-heading);
   font-size: 18px;
@@ -1014,7 +972,6 @@
   text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-/* ─── VALUES STRIP ─── */
 .ab-values {
   padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
   background: var(--white);
@@ -1039,7 +996,6 @@
   transition: all 0.5s var(--ease-spring);
   box-shadow: var(--shadow-xs), inset 0 1px 0 rgba(255,255,255,0.9);
 }
-
 .ab-value-card::before {
   content: '';
   position: absolute;
@@ -1067,7 +1023,6 @@
   transition: transform 0.55s var(--ease-spring), border-radius 0.5s;
 }
 .ab-value-card:hover .ab-value-icon { transform: scale(1.1) rotate(-5deg); border-radius: 26px; }
-
 .ab-value-card h3 {
   font-family: var(--font-heading);
   font-size: 24px;
@@ -1077,7 +1032,6 @@
 }
 .ab-value-card p { font-size: 14.5px; color: var(--gray); line-height: 1.75; }
 
-/* ─── CONTACT BLOCK ─── */
 .ab-contact {
   padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
   background: var(--cream);
@@ -1163,14 +1117,25 @@
   transition: all 0.38s var(--ease-out);
   box-shadow: var(--shadow-xs);
 }
+.ab-social-link i {
+  font-size: 17px;
+  flex-shrink: 0;
+  transition: transform 0.38s var(--ease-spring);
+}
 .ab-social-link:hover {
   border-color: var(--accent);
   color: var(--accent);
   transform: translateY(-3px);
   box-shadow: var(--shadow-sm);
 }
+.ab-social-link:hover i { transform: scale(1.18); }
 
-/* ─── FAQ ─── */
+.ab-social-link--viber:hover  { border-color: #7360f2; color: #7360f2; }
+.ab-social-link--tg:hover     { border-color: #2aabee; color: #2aabee; }
+.ab-social-link--insta:hover  { border-color: #e1306c; color: #e1306c; }
+.ab-social-link--phone:hover  { border-color: var(--accent); color: var(--accent); }
+.ab-social-link--order:hover  { background: var(--accent); border-color: var(--accent); color: var(--white); }
+
 .ab-faq {
   padding: clamp(72px,10vw,120px) clamp(24px,5vw,80px);
   background: var(--white);
@@ -1180,9 +1145,7 @@
   max-width: 860px;
   margin: 0 auto;
 }
-
 .ab-faq__item { border-bottom: 1px solid rgba(30,61,47,0.09); }
-
 .ab-faq__btn {
   width: 100%;
   display: flex;
@@ -1196,7 +1159,6 @@
   gap: 16px;
 }
 .ab-faq__btn:hover .ab-faq__q { color: var(--accent); }
-
 .ab-faq__q {
   font-family: var(--font-heading);
   font-size: 21px;
@@ -1205,7 +1167,6 @@
   line-height: 1.4;
   transition: color 0.3s;
 }
-
 .ab-faq__icon {
   width: 36px; height: 36px;
   flex-shrink: 0;
@@ -1221,7 +1182,6 @@
   background: var(--accent);
   color: var(--white);
 }
-
 .ab-faq__body {
   max-height: 0;
   overflow: hidden;
@@ -1233,7 +1193,6 @@
 }
 .ab-faq__body p { font-size: 16px; line-height: 1.85; color: var(--gray); }
 
-/* ─── FINAL CTA ─── */
 .ab-cta {
   padding: clamp(96px,12vw,140px) clamp(24px,5vw,80px);
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-mid) 55%, var(--accent-light) 100%);
@@ -1259,7 +1218,6 @@
 }
 
 .ab-cta__inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
-
 .ab-cta__eyebrow {
   display: inline-block;
   font-size: 10.5px;
@@ -1270,7 +1228,6 @@
   margin-bottom: 20px;
   opacity: 0.95;
 }
-
 .ab-cta h2 {
   font-family: var(--font-heading);
   font-size: clamp(36px, 5vw, 64px);
@@ -1280,21 +1237,18 @@
   letter-spacing: -0.03em;
   line-height: 1.08;
 }
-
 .ab-cta p {
   font-size: 18px;
   color: rgba(255,255,255,0.72);
   margin-bottom: 52px;
   line-height: 1.75;
 }
-
 .ab-cta__btns {
   display: flex;
   gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
 }
-
 .ab-cta__btn-white {
   padding: 20px 52px;
   border-radius: var(--radius-xl);
@@ -1317,7 +1271,6 @@
   background: var(--gold-light);
   color: var(--black);
 }
-
 .ab-cta__btn-outline {
   padding: 20px 44px;
   border-radius: var(--radius-xl);
@@ -1337,7 +1290,6 @@
   transform: translateY(-3px);
 }
 
-/* SEO hidden text */
 .ab-seo-rich {
   padding: clamp(40px,6vw,72px) clamp(24px,5vw,80px);
   background: var(--cream-deep);
@@ -1350,7 +1302,6 @@
   font-weight: 400;
   color: var(--black);
   margin-bottom: 20px;
-  letter-spacing: -0.01em;
 }
 .ab-seo-rich p { font-size: 15px; color: var(--gray); line-height: 1.82; margin-bottom: 14px; }
 .ab-seo-rich strong { color: var(--accent); font-weight: 600; }
@@ -1379,16 +1330,109 @@
   opacity: 0.7;
 }
 
+.gallery-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(8,10,8,0.85);
+  backdrop-filter: blur(18px) saturate(1.8);
+  -webkit-backdrop-filter: blur(18px) saturate(1.8);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.45s var(--ease-out);
+}
+.gallery-modal-overlay.open { opacity: 1; visibility: visible; }
+
+.gallery-modal-box {
+  position: relative;
+  max-width: 960px;
+  width: 100%;
+  background: var(--surface-dark);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 60px 140px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.07), inset 0 1px 0 rgba(255,255,255,0.06);
+  transform: translateY(32px) scale(0.94);
+  transition: all 0.55s var(--ease-out);
+}
+.gallery-modal-overlay.open .gallery-modal-box { transform: translateY(0) scale(1); }
+
+.gallery-modal-box::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light), var(--gold-light)); z-index: 10;
+}
+
+.gallery-modal-img-wrap {
+  position: relative; width: 100%; aspect-ratio: 16 / 10;
+  background: var(--surface-dark-mid); overflow: hidden;
+}
+.gallery-modal-img-wrap img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.7s var(--ease-out);
+}
+.gallery-modal-overlay.open .gallery-modal-img-wrap img { transform: scale(1.02); }
+
+.gallery-modal-img-wrap::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 35%;
+  background: linear-gradient(to top, rgba(8,10,8,0.82) 0%, transparent 100%); pointer-events: none;
+}
+
+.gallery-modal-info {
+  position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 36px 32px; z-index: 2;
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 24px;
+}
+
+.gallery-modal-caption {
+  font-family: var(--font-heading); font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 300; color: var(--white); letter-spacing: -0.01em; text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+
+.gallery-modal-counter {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); flex-shrink: 0;
+}
+
+.gallery-modal-close {
+  position: absolute; top: 18px; right: 18px; z-index: 20; width: 44px; height: 44px;
+  border-radius: 50%; background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.14);
+  color: var(--white); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.38s var(--ease-out); backdrop-filter: blur(8px);
+}
+.gallery-modal-close:hover { background: var(--accent); border-color: var(--accent); transform: rotate(90deg) scale(1.1); }
+
+.gallery-modal-nav {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 15; width: 52px; height: 52px;
+  border-radius: 50%; background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.16);
+  color: var(--white); font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.38s var(--ease-out); backdrop-filter: blur(8px);
+}
+.gallery-modal-nav:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-50%) scale(1.08); }
+.gallery-modal-prev { left: 18px; }
+.gallery-modal-next { right: 18px; }
+
+.gallery-modal-thumbs {
+  display: flex; gap: 8px; padding: 14px 20px; background: rgba(0,0,0,0.5);
+  overflow-x: auto; scrollbar-width: none;
+}
+.gallery-modal-thumbs::-webkit-scrollbar { display: none; }
+
+.gallery-modal-thumb {
+  flex-shrink: 0; width: 64px; height: 64px; border-radius: var(--radius-xs); overflow: hidden;
+  cursor: pointer; border: 2px solid transparent; transition: all 0.3s var(--ease-out); opacity: 0.55;
+}
+.gallery-modal-thumb:hover { opacity: 0.85; transform: scale(1.05); }
+.gallery-modal-thumb.active { border-color: var(--gold-light); opacity: 1; transform: scale(1.06); }
+.gallery-modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
 /* ─── RESPONSIVE ─── */
 @media (max-width: 1100px) {
-  .ab-hero__content { grid-template-columns: 1fr; }
-  .ab-hero__right { flex-direction: row; flex-wrap: wrap; justify-content: flex-start; }
-  .ab-hero__stat { flex: 1; min-width: 140px; align-items: flex-start; }
   .ab-services__grid { grid-template-columns: repeat(2, 1fr); }
   .ab-why__grid { grid-template-columns: repeat(2, 1fr); }
   .ab-why-card:nth-child(3) { border-right: 1px solid var(--cream-mid); }
-  .ab-why-card:nth-child(4),
-  .ab-why-card:nth-child(5) { border-bottom: 1px solid var(--cream-mid); }
+  .ab-why-card:nth-child(4), .ab-why-card:nth-child(5) { border-bottom: 1px solid var(--cream-mid); }
   .ab-why-card:nth-child(6) { border-right: none; border-bottom: none; }
   .ab-values__grid { grid-template-columns: repeat(2, 1fr); }
   .ab-numbers__inner { grid-template-columns: repeat(2, 1fr); }
@@ -1398,7 +1442,7 @@
 
 @media (max-width: 900px) {
   .ab-story { grid-template-columns: 1fr; }
-  .ab-story__img-col { height: 400px; }
+  .ab-story__img-col { aspect-ratio: 16/9; max-height: 400px; }
   .ab-gallery__grid {
     grid-template-rows: repeat(4, 200px);
     grid-template-columns: repeat(2, 1fr);
@@ -1408,9 +1452,8 @@
 }
 
 @media (max-width: 768px) {
-  .ab-hero { min-height: 70vh; }
-  .ab-hero__h1 { font-size: clamp(36px, 8vw, 52px); }
-  .ab-hero__right { display: none; }
+  .ab-hero { min-height: 80vh; }
+  .ab-hero__stats-bar { grid-template-columns: repeat(2, 1fr); gap: 24px; padding: 24px; }
   .ab-services__grid { grid-template-columns: 1fr; }
   .ab-why__grid { grid-template-columns: 1fr; }
   .ab-why-card { border-right: none !important; border-bottom: 1px solid var(--cream-mid) !important; }
@@ -1418,7 +1461,6 @@
   .ab-team__grid { grid-template-columns: 1fr; max-width: 440px; }
   .ab-process__steps { grid-template-columns: 1fr; }
   .ab-process__step::after { display: none !important; }
-  .ab-numbers__inner { grid-template-columns: repeat(2, 1fr); }
   .ab-contact__cards { grid-template-columns: 1fr; max-width: 400px; }
   .ab-values__grid { grid-template-columns: 1fr; }
   .ab-seo-rich__cols { grid-template-columns: 1fr; }
@@ -1426,11 +1468,13 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(5, 180px);
   }
-  .ab-gallery__item:nth-child(1) { grid-column: 1 / -1; grid-row: span 1; }
-  .ab-gallery__item:nth-child(4) { grid-column: span 1; }
+  .gallery-modal-nav { display: none; }
+  .gallery-modal-info { padding: 18px 20px 22px; }
 }
 
 @media (max-width: 480px) {
+  .ab-hero__stats-bar { padding: 16px; gap: 16px; }
+  .ab-hero__stat-num { font-size: 28px; }
   .ab-numbers__inner { grid-template-columns: 1fr 1fr; gap: 14px; }
   .ab-numbers__item { padding: 24px 14px; }
   .ab-numbers__num { font-size: 38px; }
@@ -1441,26 +1485,21 @@
   .ab-gallery__item:nth-child(1),
   .ab-gallery__item:nth-child(4) { grid-column: span 1; grid-row: span 1; }
   .ab-cta__btns { flex-direction: column; align-items: center; }
-  .ab-cta__btn-white,
-  .ab-cta__btn-outline { width: 100%; max-width: 320px; text-align: center; justify-content: center; display: flex; }
+  .ab-cta__btn-white, .ab-cta__btn-outline {
+    width: 100%; max-width: 320px;
+    text-align: center;
+    display: flex; justify-content: center;
+  }
+  .ab-contact__social { flex-direction: column; align-items: center; }
+  .ab-social-link { width: 100%; max-width: 300px; justify-content: center; }
+  .gallery-modal-thumbs { display: none; }
+  .gallery-modal-caption { font-size: 18px; }
 }
 </style>
 {% endblock %}
 
 {% block content %}
 
-<!-- BREADCRUMB -->
-<div class="about-breadcrumb">
-  <nav aria-label="Навігація">
-    <a href="/">Головна</a>
-    <span class="about-breadcrumb-sep">›</span>
-    <span>Про магазин</span>
-  </nav>
-</div>
-
-<!-- ═══════════════════════════
-     CINEMATIC HERO
-     ═══════════════════════════ -->
 <section class="ab-hero" id="ab-hero" itemscope itemtype="https://schema.org/Florist">
   <div class="ab-hero__bg">
     <img src="/static/images/shop1.png"
@@ -1470,35 +1509,34 @@
   <div class="ab-hero__overlay"></div>
 
   <div class="ab-hero__content">
-    <div class="ab-hero__left">
-      <div class="ab-hero__eyebrow">Квітковий магазин у Кельменцях</div>
-      <h1 class="ab-hero__h1" itemprop="name">
-        Купити квіти<br>у Кельменцях —<br><em>«Квіти від Тамари»</em>
-      </h1>
-      <p class="ab-hero__desc">
-        Авторські букети, флористичні композиції та швидка доставка квітів по
-        Кельменцях і районі. Свіжі квіти щодня на <span itemprop="address">вул. Довженка, 27</span>.
-      </p>
-      <div class="ab-hero__cta">
-        <a href="/order" class="ab-hero__btn-primary">Замовити букет</a>
-        <a href="tel:+380976982154" class="ab-hero__btn-secondary" itemprop="telephone">
-          097 698 21 54
-        </a>
-      </div>
+    <div class="ab-hero__eyebrow">Ваш надійний флорист</div>
+    <h1 class="ab-hero__h1" itemprop="name">
+      Магія свіжих квітів у серці <em>Кельменців</em>
+    </h1>
+    <p class="ab-hero__desc">
+      Авторські букети, стильні флористичні композиції та швидка доставка по місту й району.
+      Створюємо настрій щодня на <span itemprop="address">вул. Довженка, 27</span>.
+    </p>
+
+    <div class="ab-hero__cta">
+      <a href="/order" class="ab-hero__btn-primary">Замовити букет</a>
+      <a href="tel:+380976982154" class="ab-hero__btn-secondary" itemprop="telephone">
+        097 698 21 54
+      </a>
     </div>
 
-    <div class="ab-hero__right">
+    <div class="ab-hero__stats-bar">
       <div class="ab-hero__stat">
         <span class="ab-hero__stat-num">10+</span>
-        <span class="ab-hero__stat-label">Років у Кельменцях</span>
+        <span class="ab-hero__stat-label">Років досвіду</span>
       </div>
       <div class="ab-hero__stat">
-        <span class="ab-hero__stat-num">5000+</span>
-        <span class="ab-hero__stat-label">Букетів для клієнтів</span>
+        <span class="ab-hero__stat-num">5k+</span>
+        <span class="ab-hero__stat-label">Задоволених клієнтів</span>
       </div>
       <div class="ab-hero__stat">
-        <span class="ab-hero__stat-num">щодня</span>
-        <span class="ab-hero__stat-label">08:00 – 20:00</span>
+        <span class="ab-hero__stat-num">2 год</span>
+        <span class="ab-hero__stat-label">Термінова доставка</span>
       </div>
       <div class="ab-hero__stat">
         <span class="ab-hero__stat-num">50+</span>
@@ -1507,42 +1545,32 @@
     </div>
   </div>
 
-  <div class="ab-hero__scroll" aria-hidden="true">
-    <div class="ab-hero__scroll-line"></div>
-    <span class="ab-hero__scroll-txt">Гортайте</span>
-  </div>
+  <div class="ab-hero__scroll" aria-hidden="true"></div>
 </section>
 
-<!-- ═══════════════════════════
-     STORY — SPLIT LAYOUT
-     ═══════════════════════════ -->
 <section class="ab-story">
   <div class="ab-story__img-col">
     <img src="/static/images/img_5.png"
          alt="Флорист магазину Квіти від Тамари створює авторський букет у Кельменцях"
          loading="lazy">
-    <div class="ab-story__img-overlay"></div>
   </div>
   <div class="ab-story__content-col">
     <div class="ab-story__year-badge">Засновано у 2013 році</div>
-    <h2 class="ab-story__h2">Більше 10 років краси та натхнення у Кельменцях</h2>
+    <h2 class="ab-story__h2">Більше десятиліття краси та натхнення</h2>
     <p class="ab-story__text">
-      Магазин «<strong>Квіти від Тамари</strong>» розпочав свою роботу як невелика крамничка з мрією —
-      дарувати людям радість через красу живих квітів. Сьогодні ми — провідний
-      <strong>квітковий магазин у Кельменцях</strong> з сотнями задоволених клієнтів.
+      Магазин «<strong>Квіти від Тамари</strong>» розпочав свою роботу як невелика крамничка з великою мрією —
+      дарувати людям щиру радість через красу живих квітів. Сьогодні ми — провідний
+      <strong>квітковий магазин у Кельменцях</strong>, якому довіряють найважливіші моменти свого життя.
     </p>
     <p class="ab-story__text">
-      Наша команда досвідчених флористів щодня створює унікальні букети та квіткові
-      композиції — від ніжних романтичних до розкішних весільних. Щодня ми оновлюємо
-      вітрину та отримуємо свіжі квіти від найкращих постачальників.
+      Наша команда талановитих флористів щодня працює над створенням унікальних композицій —
+      від витончених романтичних букетів до розкішного весільного декору. Ми ретельно відбираємо
+      квіти від найкращих постачальників, щоб гарантувати бездоганну свіжість.
     </p>
-    <a href="/order" class="ab-story__link">Замовити квіти онлайн</a>
+    <a href="/order" class="ab-story__link">Переглянути каталог</a>
   </div>
 </section>
 
-<!-- ═══════════════════════════
-     NUMBERS BAND
-     ═══════════════════════════ -->
 <div class="ab-numbers" aria-label="Магазин у цифрах">
   <div class="ab-numbers__inner">
     <div class="ab-numbers__item">
@@ -1564,9 +1592,6 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════
-     SERVICES
-     ═══════════════════════════ -->
 <section class="ab-services">
   <div class="ab-section-head">
     <p class="ab-kicker">Флористичні послуги</p>
@@ -1614,9 +1639,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════
-     WHY US
-     ═══════════════════════════ -->
 <section class="ab-why">
   <div class="ab-section-head">
     <p class="ab-kicker">Наші переваги</p>
@@ -1628,7 +1650,7 @@
     <div class="ab-why-card">
       <div class="ab-why-num">01</div>
       <h3>Свіжість щодня</h3>
-      <p>Квіти надходять щодня від найкращих постачальників. Гарантуємо свіжість та довговічність кожного букету — жодних «учорашніх» залишків.</p>
+      <p>Квіти надходять щодня від найкращих постачальників. Гарантуємо свіжість та довговічність кожного букету.</p>
     </div>
     <div class="ab-why-card">
       <div class="ab-why-num">02</div>
@@ -1658,9 +1680,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════
-     FLORISTS
-     ═══════════════════════════ -->
 <section class="ab-team">
   <div class="ab-section-head">
     <p class="ab-kicker">Наша команда</p>
@@ -1698,9 +1717,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════
-     PROCESS
-     ═══════════════════════════ -->
 <section class="ab-process">
   <div class="ab-section-head">
     <p class="ab-kicker">Як замовити квіти</p>
@@ -1732,9 +1748,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════
-     PHOTO GALLERY — 8 ФОТО
-     ═══════════════════════════ -->
 <section class="ab-gallery">
   <div class="ab-section-head">
     <p class="ab-kicker">Наш магазин</p>
@@ -1749,77 +1762,82 @@
   </div>
   <p class="ab-gallery__hours">🕐 Працюємо щодня з 08:00 до 20:00 · Свіжі квіти щодня</p>
 
-  <div class="ab-gallery__grid">
-    <div class="ab-gallery__item">
+  <div class="ab-gallery__grid" id="galleryGrid">
+    <div class="ab-gallery__item" data-index="0">
       <img src="/static/images/shop1.png"
            alt="Квітковий магазин Квіти від Тамари — вхід, вулиця Довженка 27 Кельменці"
            loading="lazy">
-      <div class="ab-gallery__caption">
-        <span class="ab-gallery__caption-text">Наш магазин</span>
-      </div>
+      <div class="ab-gallery__caption"><span class="ab-gallery__caption-text">Наш магазин</span></div>
     </div>
-    <div class="ab-gallery__item">
+    <div class="ab-gallery__item" data-index="1">
       <img src="/static/images/shop2.png"
            alt="Вітрина квіткового магазину Кельменці — свіжі букети та композиції"
            loading="lazy">
-      <div class="ab-gallery__caption">
-        <span class="ab-gallery__caption-text">Вітрина магазину</span>
-      </div>
+      <div class="ab-gallery__caption"><span class="ab-gallery__caption-text">Вітрина магазину</span></div>
     </div>
-    <div class="ab-gallery__item">
+    <div class="ab-gallery__item" data-index="2">
       <img src="/static/images/shop3.png"
-           alt="Оформлення весілля флористами Кельменці — декор залу та арки"
+           alt="Оформлення весілля флористами Кельменці"
            loading="lazy">
-      <div class="ab-gallery__caption">
-        <span class="ab-gallery__caption-text">Весільне оформлення</span>
-      </div>
+      <div class="ab-gallery__caption"><span class="ab-gallery__caption-text">Весільне оформлення</span></div>
     </div>
-    <div class="ab-gallery__item">
+    <div class="ab-gallery__item" data-index="3">
       <img src="/static/images/shop4.jpg"
-           alt="Доставка свіжих квітів по Кельменцях — замовте букет онлайн"
+           alt="Доставка свіжих квітів по Кельменцях"
            loading="lazy">
-      <div class="ab-gallery__caption">
-        <span class="ab-gallery__caption-text">Доставка квітів</span>
-      </div>
+      <div class="ab-gallery__caption"><span class="ab-gallery__caption-text">Доставка квітів</span></div>
     </div>
-    <div class="ab-gallery__item">
+    <div class="ab-gallery__item" data-index="4">
       <img src="/static/images/img.png"
-           alt="Авторський букет від флориста Тамари — квіти Кельменці"
+           alt="Авторський букет від флориста Тамари"
            loading="lazy">
-      <div class="ab-gallery__caption">
-        <span class="ab-gallery__caption-text">Авторські букети</span>
-      </div>
+      <div class="ab-gallery__caption"><span class="ab-gallery__caption-text">Авторські букети</span></div>
     </div>
-    <div class="ab-gallery__item">
+    <div class="ab-gallery__item" data-index="5">
       <img src="/static/images/img_1.png"
-           alt="Букет троянд у Кельменцях — купити троянди з доставкою"
+           alt="Букет троянд у Кельменцях"
            loading="lazy">
-      <div class="ab-gallery__caption">
-        <span class="ab-gallery__caption-text">Букети троянд</span>
-      </div>
+      <div class="ab-gallery__caption"><span class="ab-gallery__caption-text">Букети троянд</span></div>
     </div>
-    <div class="ab-gallery__item">
+    <div class="ab-gallery__item" data-index="6">
       <img src="/static/images/img_11.png"
-           alt="Флористична композиція у коробці — купити у Кельменцях"
+           alt="Флористична композиція у коробці"
            loading="lazy">
-      <div class="ab-gallery__caption">
-        <span class="ab-gallery__caption-text">Композиції у коробках</span>
-      </div>
+      <div class="ab-gallery__caption"><span class="ab-gallery__caption-text">Композиції у коробках</span></div>
     </div>
-    <div class="ab-gallery__item">
+    <div class="ab-gallery__item" data-index="7">
       <img src="/static/images/img_8.png"
-           alt="Святкова квіткова композиція — квіти для свята у Кельменцях"
+           alt="Святкова квіткова композиція"
            loading="lazy">
-      <div class="ab-gallery__caption">
-        <span class="ab-gallery__caption-text">Святкові композиції</span>
-      </div>
+      <div class="ab-gallery__caption"><span class="ab-gallery__caption-text">Святкові композиції</span></div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════
-     VALUES
-     ═══════════════════════════ -->
+<div class="gallery-modal-overlay" id="galleryModal" role="dialog" aria-modal="true" aria-label="Перегляд фото">
+  <div class="gallery-modal-box">
+    <button class="gallery-modal-close" id="galleryModalClose" aria-label="Закрити">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <button class="gallery-modal-nav gallery-modal-prev" id="galleryModalPrev" aria-label="Попереднє фото">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button class="gallery-modal-nav gallery-modal-next" id="galleryModalNext" aria-label="Наступне фото">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <div class="gallery-modal-img-wrap">
+      <img id="galleryModalImg" src="" alt="">
+      <div class="gallery-modal-info">
+        <span class="gallery-modal-caption" id="galleryModalCaption"></span>
+        <span class="gallery-modal-counter" id="galleryModalCounter"></span>
+      </div>
+    </div>
+
+    <div class="gallery-modal-thumbs" id="galleryModalThumbs"></div>
+  </div>
+</div>
+
 <section class="ab-values">
   <div class="ab-section-head">
     <p class="ab-kicker">Наші цінності</p>
@@ -1851,9 +1869,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════
-     CONTACTS
-     ═══════════════════════════ -->
 <section class="ab-contact">
   <div class="ab-section-head">
     <p class="ab-kicker">Зв'яжіться з нами</p>
@@ -1885,24 +1900,24 @@
   </div>
 
   <div class="ab-contact__social">
-    <a href="https://t.me/0976982154" target="_blank" rel="noopener" class="ab-social-link">
-      ✈️ Telegram
+    <a href="viber://chat?number=%2B380976982154" class="ab-social-link ab-social-link--viber">
+      <i class="fab fa-viber"></i> Viber
     </a>
-    <a href="https://www.instagram.com/kvitu_kelmentsi_fotozona/" target="_blank" rel="noopener" class="ab-social-link">
-      📷 Instagram
+    <a href="https://t.me/0976982154" target="_blank" rel="noopener" class="ab-social-link ab-social-link--tg">
+      <i class="fab fa-telegram"></i> Telegram
     </a>
-    <a href="tel:+380976982154" class="ab-social-link">
-      📞 Зателефонувати
+    <a href="https://www.instagram.com/kvitu_kelmentsi_fotozona/" target="_blank" rel="noopener" class="ab-social-link ab-social-link--insta">
+      <i class="fab fa-instagram"></i> Instagram
     </a>
-    <a href="/order" class="ab-social-link">
-      💐 Замовити онлайн
+    <a href="tel:+380976982154" class="ab-social-link ab-social-link--phone">
+      <i class="fas fa-phone"></i> Зателефонувати
+    </a>
+    <a href="/order" class="ab-social-link ab-social-link--order">
+      <i class="fas fa-seedling"></i> Замовити онлайн
     </a>
   </div>
 </section>
 
-<!-- ═══════════════════════════
-     FAQ
-     ═══════════════════════════ -->
 <section class="ab-faq">
   <div class="ab-section-head">
     <p class="ab-kicker">Питання та відповіді</p>
@@ -1938,7 +1953,7 @@
         <div class="ab-faq__icon">+</div>
       </button>
       <div class="ab-faq__body">
-        <p>Ціни на букети в нашому магазині починаються від <strong>850 грн</strong>. У нас є варіанти на будь-який бюджет — від невеликих композицій до розкішних преміум-букетів. Точна вартість залежить від складу, сезону та побажань. Зателефонуйте для уточнення.</p>
+        <p>Ціни на букети в нашому магазині починаються від <strong>850 грн</strong>. У нас є варіанти на будь-який бюджет — від невеликих композицій до розкішних преміум-букетів. Зателефонуйте для уточнення.</p>
       </div>
     </div>
 
@@ -1948,7 +1963,7 @@
         <div class="ab-faq__icon">+</div>
       </button>
       <div class="ab-faq__body">
-        <p>Так! «Квіти від Тамари» пропонують <strong>повне флористичне оформлення весіль у Кельменцях</strong> — букет нареченої, бутоньєрки, арки, декор залу та фотозони. Радимо зв'язатися заздалегідь для бронювання дати та обговорення деталей.</p>
+        <p>Так! «Квіти від Тамари» пропонують <strong>повне флористичне оформлення весіль у Кельменцях</strong> — букет нареченої, бутоньєрки, арки, декор залу та фотозони. Радимо зв'язатися заздалегідь для бронювання дати.</p>
       </div>
     </div>
 
@@ -1985,9 +2000,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════
-     SEO RICH TEXT
-     ═══════════════════════════ -->
 <div class="ab-seo-rich">
   <div class="ab-seo-rich__inner">
     <h2>Квітковий магазин «Квіти від Тамари» у Кельменцях — ваш надійний флорист</h2>
@@ -1999,8 +2011,6 @@
     <p>
       <strong>Доставка квітів у Кельменцях</strong> доступна щодня. Замовте букет онлайн або зателефонуйте —
       і ми доставимо свіжі квіти за вказаною адресою. Термінова доставка можлива протягом 2 годин.
-      Наші флористи створюють авторські букети на замовлення для будь-якого приводу:
-      день народження, весілля, випускний, романтичне побачення, корпоратив.
     </p>
     <div class="ab-seo-rich__cols">
       <div class="ab-seo-rich__col">
@@ -2025,9 +2035,6 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════
-     FINAL CTA
-     ═══════════════════════════ -->
 <section class="ab-cta">
   <div class="ab-cta__inner">
     <span class="ab-cta__eyebrow">Замовте квіти сьогодні</span>
@@ -2041,18 +2048,16 @@
 </section>
 
 <script>
-/* FAQ accordion */
+/* ═══ FAQ Accordion ═══ */
 document.querySelectorAll('.ab-faq__btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.parentElement;
     const body = item.querySelector('.ab-faq__body');
     const isOpen = item.classList.contains('open');
-
     document.querySelectorAll('.ab-faq__item').forEach(i => {
       i.classList.remove('open');
       i.querySelector('.ab-faq__body').style.maxHeight = '0';
     });
-
     if (!isOpen) {
       item.classList.add('open');
       body.style.maxHeight = body.scrollHeight + 'px';
@@ -2060,32 +2065,113 @@ document.querySelectorAll('.ab-faq__btn').forEach(btn => {
   });
 });
 
-/* Hero image parallax + load animation */
+/* ═══ Hero parallax ═══ */
 const hero = document.getElementById('ab-hero');
 if (hero) {
   setTimeout(() => hero.classList.add('is-loaded'), 100);
-
   window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
     const bg = hero.querySelector('.ab-hero__bg img');
-    if (bg && scrolled < window.innerHeight) {
-      bg.style.transform = `translateY(${scrolled * 0.25}px)`;
+    if (bg && window.scrollY < window.innerHeight) {
+      bg.style.transform = `translateY(${window.scrollY * 0.25}px)`;
     }
   }, { passive: true });
 }
 
-/* Section scroll reveal */
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
+/* ═══ Scroll reveal ═══ */
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
 }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.ab-story,.ab-numbers,.ab-services,.ab-why,.ab-team,.ab-process,.ab-gallery,.ab-values,.ab-contact,.ab-faq,.ab-seo-rich,.ab-cta').forEach(el => revealObs.observe(el));
 
-document.querySelectorAll('.ab-story, .ab-numbers, .ab-services, .ab-why, .ab-team, .ab-process, .ab-gallery, .ab-values, .ab-contact, .ab-faq, .ab-seo-rich, .ab-cta').forEach(el => {
-  revealObserver.observe(el);
-});
+/* ═══ Gallery Lightbox ═══ */
+(function() {
+  const items = Array.from(document.querySelectorAll('#galleryGrid .ab-gallery__item'));
+  const modal = document.getElementById('galleryModal');
+  const modalImg = document.getElementById('galleryModalImg');
+  const modalCaption = document.getElementById('galleryModalCaption');
+  const modalCounter = document.getElementById('galleryModalCounter');
+  const thumbsWrap = document.getElementById('galleryModalThumbs');
+  const btnClose = document.getElementById('galleryModalClose');
+  const btnPrev = document.getElementById('galleryModalPrev');
+  const btnNext = document.getElementById('galleryModalNext');
+
+  let current = 0;
+
+  /* Зібрати дані з фото */
+  const photos = items.map(item => ({
+    src: item.querySelector('img').src,
+    alt: item.querySelector('img').alt,
+    caption: item.querySelector('.ab-gallery__caption-text')
+              ? item.querySelector('.ab-gallery__caption-text').textContent.trim()
+              : ''
+  }));
+
+  /* Побудувати мініатюри один раз */
+  photos.forEach((p, i) => {
+    const thumb = document.createElement('div');
+    thumb.className = 'gallery-modal-thumb';
+    thumb.innerHTML = `<img src="${p.src}" alt="${p.alt}" loading="lazy">`;
+    thumb.addEventListener('click', () => goTo(i));
+    thumbsWrap.appendChild(thumb);
+  });
+
+  function goTo(idx) {
+    current = (idx + photos.length) % photos.length;
+    const p = photos[current];
+    modalImg.src = p.src;
+    modalImg.alt = p.alt;
+    modalCaption.textContent = p.caption;
+    modalCounter.textContent = `${current + 1} / ${photos.length}`;
+
+    /* Активна мініатюра */
+    thumbsWrap.querySelectorAll('.gallery-modal-thumb').forEach((t, i) => {
+      t.classList.toggle('active', i === current);
+    });
+
+    /* Прокрутити мініатюри до активної */
+    const activeThumb = thumbsWrap.children[current];
+    if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+
+  function openModal(idx) {
+    goTo(idx);
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* Клік по фото */
+  items.forEach((item, i) => {
+    item.addEventListener('click', () => openModal(i));
+    item.style.cursor = 'zoom-in';
+  });
+
+  btnClose.addEventListener('click', closeModal);
+  btnPrev.addEventListener('click', () => goTo(current - 1));
+  btnNext.addEventListener('click', () => goTo(current + 1));
+
+  /* Клік поза боксом */
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+  /* Клавіатура */
+  document.addEventListener('keydown', e => {
+    if (!modal.classList.contains('open')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowLeft') goTo(current - 1);
+    if (e.key === 'ArrowRight') goTo(current + 1);
+  });
+
+  /* Touch swipe */
+  let touchStartX = 0;
+  modal.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+  modal.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) { dx < 0 ? goTo(current + 1) : goTo(current - 1); }
+  }, { passive: true });
+})();
 </script>
 {% endblock %}

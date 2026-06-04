@@ -1,9 +1,55 @@
 {% extends "base.html" %}
 
-{% block title %}{{ rose.name }} — Квіти від Тамари | Кельменці{% endblock %}
+{% block title %}{{ rose.name }} — троянди у Кельменцях | Квіти від Тамари{% endblock %}
+
+{% block canonical %}<link rel="canonical" href="https://tflora.com.ua/assortment/rose/{{ idx }}">{% endblock %}
 
 {% block head %}
-<meta name="description" content="{{ rose.description or rose.name }}. Троянди у квітковому магазині «Квіти від Тамари» в Кельменцях.">
+<meta name="description" content="{{ rose.description or rose.name }}. Троянди {{ rose.name }} у квітковому магазині «Квіти від Тамари» у Кельменцях. Ціна {{ rose.price }} грн/шт. Тел: +38 (097) 698 21 54.">
+<meta name="keywords" content="{{ rose.name }}, троянди Кельменці, купити троянди Кельменці, сорт троянд, квіти від Тамари">
+<meta property="og:title" content="{{ rose.name }} — троянди у Кельменцях | Квіти від Тамари">
+<meta property="og:description" content="{{ rose.description or rose.name }}. Ціна {{ rose.price }} грн/шт у магазині «Квіти від Тамари», Кельменці.">
+<meta property="og:type" content="product">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:url" content="https://tflora.com.ua/assortment/rose/{{ idx }}">
+{% if rose.image %}<meta property="og:image" content="{{ rose.image }}">{% endif %}
+<meta property="og:site_name" content="Квіти від Тамари — Кельменці">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ rose.name }}",
+  "description": "{{ rose.description | replace('"', '\\"') if rose.description else rose.name }}",
+  {% if rose.image %}"image": "{{ rose.image }}",{% endif %}
+  "brand": {
+    "@type": "Brand",
+    "name": "Квіти від Тамари"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://tflora.com.ua/assortment/rose/{{ idx }}",
+    "priceCurrency": "UAH",
+    "price": "{{ rose.price }}",
+    "priceValidUntil": "2026-12-31",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Florist",
+      "@id": "https://tflora.com.ua/#florist",
+      "name": "Квіти від Тамари"
+    }
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Головна", "item": "https://tflora.com.ua/"},
+      {"@type": "ListItem", "position": 2, "name": "Асортимент", "item": "https://tflora.com.ua/assortment"},
+      {"@type": "ListItem", "position": 3, "name": "Троянди", "item": "https://tflora.com.ua/assortment#roses"},
+      {"@type": "ListItem", "position": 4, "name": "{{ rose.name }}", "item": "https://tflora.com.ua/assortment/rose/{{ idx }}"}
+    ]
+  }
+}
+</script>
 {% endblock %}
 
 {% block content %}
@@ -84,9 +130,9 @@
 
   <div class="related-examples-grid">
     {% for real_idx, item in rose_examples %}
-    <div class="rel-example-card rel-example-card-rose">
+    <a href="/examples/{{ real_idx }}" class="rel-example-card rel-example-card-rose">
       <div class="rel-example-card-img">
-        <img src="{{ item.image }}" alt="{{ item.name }}">
+        <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy">
         <span class="rel-card-badge rel-card-badge-rose">🌹 З троянд</span>
         {% if item.price %}
         <span class="rel-card-price-overlay">від {{ item.price }} грн</span>
@@ -97,11 +143,11 @@
         {% if item.price %}
         <p class="rel-example-card-price">від {{ item.price }} грн</p>
         {% endif %}
-        <a href="/examples/{{ real_idx }}" class="rel-example-view-btn rel-example-view-btn-rose">
+        <span class="rel-example-view-btn rel-example-view-btn-rose">
           <span>Подивитися</span>
-        </a>
+        </span>
       </div>
-    </div>
+    </a>
     {% endfor %}
   </div>
 </section>

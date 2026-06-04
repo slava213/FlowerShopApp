@@ -1,10 +1,38 @@
 {% extends "base.html" %}
 
-{% block title %}Доставка квітів — Квіти від Тамари | Кельменці{% endblock %}
+{% block title %}Доставка квітів по Кельменцях та районі — Квіти від Тамари{% endblock %}
+
+{% block canonical %}<link rel="canonical" href="https://tflora.com.ua/delivery">{% endblock %}
 
 {% block head %}
-<meta name="description" content="Доставка квітів по Кельменцях та районі. Замовте букет з доставкою для близьких — здивуйте їх приємним сюрпризом!">
-<meta name="keywords" content="доставка квітів Кельменці, доставка букетів, квіти з доставкою">
+<meta name="description" content="Доставка квітів по Кельменцях та Кельменецькому районі від магазину «Квіти від Тамари». Термінова доставка за 2 години. Відеозйомка вручення, листівка, музика. Тел: +38 (097) 698 21 54.">
+<meta name="keywords" content="доставка квітів Кельменці, доставка букетів Кельменці, квіти з доставкою Кельменці, термінова доставка квітів">
+<meta property="og:title" content="Доставка квітів по Кельменцях — Квіти від Тамари">
+<meta property="og:description" content="Швидка доставка квітів по Кельменцях та районі. Термінова доставка за 2 години. Здивуйте близьких!">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tflora.com.ua/delivery">
+<meta property="og:image" content="https://tflora.com.ua/static/images/img.png">
+<meta property="og:site_name" content="Квіти від Тамари — Кельменці">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://tflora.com.ua/delivery#webpage",
+  "url": "https://tflora.com.ua/delivery",
+  "name": "Доставка квітів по Кельменцях — Квіти від Тамари",
+  "description": "Швидка доставка квітів по Кельменцях та Кельменецькому районі. Термінова доставка за 2 години.",
+  "inLanguage": "uk-UA",
+  "isPartOf": {"@id": "https://tflora.com.ua/#website"},
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Головна", "item": "https://tflora.com.ua/"},
+      {"@type": "ListItem", "position": 2, "name": "Доставка", "item": "https://tflora.com.ua/delivery"}
+    ]
+  }
+}
+</script>
 {% endblock %}
 
 {% block content %}
@@ -56,8 +84,8 @@
       <!-- Форма "Собі" -->
       <div id="formSelf">
         <p class="form-group-label">Контактна інформація</p>
-        <input type="text" name="self_name" placeholder="Ваше ім'я *">
-        <input type="tel" name="self_phone" placeholder="Ваш телефон *">
+        <input type="text" name="self_name" placeholder="Ваше ім'я *" autocomplete="name">
+        <input type="tel" name="self_phone" placeholder="Ваш телефон *" autocomplete="tel">
 
         <div class="form-divider"><span>Адреса доставки</span></div>
         <input type="text" name="self_city" placeholder="Населений пункт *" value="Кельменці">
@@ -65,14 +93,14 @@
       </div>
 
       <!-- Форма "Іншій людині" -->
-      <div id="formOther" class="form-other-block">
+      <div id="formOther" class="form-other-block" style="display:none">
         <p class="form-group-label">Ваші дані (відправник)</p>
-        <input type="text" name="sender_name" placeholder="Ваше ім'я *">
-        <input type="tel" name="sender_phone" placeholder="Ваш телефон *">
+        <input type="text" name="sender_name" placeholder="Ваше ім'я *" autocomplete="name">
+        <input type="tel" name="sender_phone" placeholder="Ваш телефон *" autocomplete="tel">
 
         <div class="form-divider"><span>Отримувач</span></div>
-        <input type="text" name="recipient_name" placeholder="Ім'я отримувача *">
-        <input type="tel" name="recipient_phone" placeholder="Телефон отримувача *">
+        <input type="text" name="recipient_name" placeholder="Ім'я отримувача *" autocomplete="off">
+        <input type="tel" name="recipient_phone" placeholder="Телефон отримувача *" autocomplete="off">
 
         <div class="form-divider"><span>Адреса доставки</span></div>
         <input type="text" name="city" placeholder="Населений пункт *" value="Кельменці">
@@ -176,8 +204,11 @@ const formOther  = document.getElementById('formOther');
 function switchDelivery() {
   const toOther = delivOther.checked;
   formSelf.style.display  = toOther ? 'none'  : 'flex';
-  formOther.style.display = toOther ? 'flex' : 'none';
+  formOther.style.display = toOther ? 'flex'  : 'none';
 }
+
+// Ініціалізація: показати правильну форму відразу
+switchDelivery();
 
 delivSelf.addEventListener('change', switchDelivery);
 delivOther.addEventListener('change', switchDelivery);

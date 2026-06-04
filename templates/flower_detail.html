@@ -1,15 +1,71 @@
 {% extends "base.html" %}
 
-{% block title %}{{ flower.name }} — Квіти від Тамари | Кельменці{% endblock %}
+{% block title %}{{ flower.name }} — купити квіти у Кельменцях | Квіти від Тамари{% endblock %}
+
+{% block canonical %}
+  {% if flower_id %}
+  <link rel="canonical" href="https://tflora.com.ua/flowers/{{ flower_id }}">
+  {% elif example_idx is not none %}
+  <link rel="canonical" href="https://tflora.com.ua/examples/{{ example_idx }}">
+  {% endif %}
+{% endblock %}
 
 {% block head %}
-<meta name="description" content="{{ flower.description[:150] if flower.description else flower.name }}... Замовляйте онлайн або телефоном у квітковому магазині «Квіти від Тамари».">
-<meta name="keywords" content="{{ flower.name }}, квіти Кельменці, букети Кельменці, купити квіти">
-<meta property="og:title" content="{{ flower.name }} — Квіти від Тамари">
+<meta name="description" content="{{ flower.description[:150] if flower.description else flower.name }}... Замовляйте онлайн або телефоном у квітковому магазині «Квіти від Тамари» у Кельменцях.">
+<meta name="keywords" content="{{ flower.name }}, квіти Кельменці, букети Кельменці, купити квіти, квіти від Тамари">
+<meta property="og:title" content="{{ flower.name }} — Квіти від Тамари | Кельменці">
 <meta property="og:description" content="{{ flower.description[:150] if flower.description else flower.name }}...">
 <meta property="og:type" content="product">
+<meta property="og:locale" content="uk_UA">
+{% if flower_id %}
+<meta property="og:url" content="https://tflora.com.ua/flowers/{{ flower_id }}">
+{% elif example_idx is not none %}
+<meta property="og:url" content="https://tflora.com.ua/examples/{{ example_idx }}">
+{% endif %}
 <meta property="og:image" content="{{ flower.image }}">
-
+<meta property="og:site_name" content="Квіти від Тамари — Кельменці">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ flower.name }} — Квіти від Тамари">
+<meta name="twitter:description" content="{{ flower.description[:100] if flower.description else flower.name }}">
+<meta name="twitter:image" content="{{ flower.image }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ flower.name }}",
+  "description": "{{ flower.description | replace('"', '\\"') if flower.description else flower.name }}",
+  "image": "{{ flower.image }}",
+  "brand": {
+    "@type": "Brand",
+    "name": "Квіти від Тамари"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "{% if flower_id %}https://tflora.com.ua/flowers/{{ flower_id }}{% elif example_idx is not none %}https://tflora.com.ua/examples/{{ example_idx }}{% endif %}",
+    "priceCurrency": "UAH",
+    "price": "{{ flower.price }}",
+    "priceValidUntil": "2026-12-31",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Florist",
+      "@id": "https://tflora.com.ua/#florist",
+      "name": "Квіти від Тамари"
+    }
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Головна", "item": "https://tflora.com.ua/"},
+      {% if back_url %}
+      {"@type": "ListItem", "position": 2, "name": "Приклади", "item": "https://tflora.com.ua/examples"},
+      {"@type": "ListItem", "position": 3, "name": "{{ flower.name }}", "item": "https://tflora.com.ua/examples/{{ example_idx }}"}
+      {% else %}
+      {"@type": "ListItem", "position": 2, "name": "{{ flower.name }}", "item": "https://tflora.com.ua/flowers/{{ flower_id }}"}
+      {% endif %}
+    ]
+  }
+}
+</script>
 {% endblock %}
 
 {% block content %}
@@ -30,7 +86,7 @@
       <div class="flower-thumbnails">
         {% for thumb in flower.gallery %}
         <div class="flower-thumb" onclick="changeMainImage('{{ thumb }}')">
-          <img src="{{ thumb }}" alt="{{ flower.name }} фото {{ loop.index }}">
+          <img src="{{ thumb }}" alt="{{ flower.name }} фото {{ loop.index }}" loading="lazy">
         </div>
         {% endfor %}
       </div>
@@ -59,6 +115,11 @@
         {% if flower.old_price %}
         <span class="flower-old-price">{{ flower.old_price }} грн</span>
         {% endif %}
+      </div>
+
+      <div class="flower-price-disclaimer">
+        <span class="flower-price-disclaimer-icon">⚠️</span>
+        <p><strong>Увага!</strong> Ціни є орієнтовними та можуть змінюватися залежно від сезону, наявності квітів і складності композиції. Для уточнення актуальної вартості звертайтесь до нас.</p>
       </div>
 
       {% if flower.description %}
@@ -125,7 +186,7 @@
           <span class="flower-btn-icon"></span>
           <span>Доставка</span>
         </a>
-        <a href="{{ back_url if back_url else 'javascript:history.back()' }}" class="flower-btn flower-btn-back">
+        <a href="{{ back_url if back_url else '/' }}" class="flower-btn flower-btn-back">
           <span>←</span>
           <span>Назад</span>
         </a>
@@ -161,10 +222,10 @@
   {% if back_url %}
   <!-- Перегляд з прикладів — картки example-card стилю -->
   <div class="related-examples-grid">
-    {% for related in related_flowers %}
-    <div class="rel-example-card" onclick="window.location.href='/examples/{{ loop.index0 }}'">
+    {% for real_idx, related in related_flowers %}
+    <a href="/examples/{{ real_idx }}" class="rel-example-card">
       <div class="rel-example-card-img">
-        <img src="{{ related.image }}" alt="{{ related.name }}">
+        <img src="{{ related.image }}" alt="{{ related.name }}" loading="lazy">
         <span class="rel-card-badge">🌸 Букет</span>
         {% if related.price %}
         <span class="rel-card-price-overlay">{{ related.price }} грн</span>
@@ -172,21 +233,24 @@
       </div>
       <div class="rel-example-card-body">
         <h3 class="rel-example-card-title">{{ related.name }}</h3>
-        <a href="/examples/{{ loop.index0 }}" class="rel-example-view-btn">
-          <span>Переглянути</span>
-        </a>
+        {% if related.price %}
+        <p class="rel-example-card-price">від {{ related.price }} грн</p>
+        {% endif %}
+        <span class="rel-example-view-btn">
+          <span>Подивитися</span>
+        </span>
       </div>
-    </div>
+    </a>
     {% endfor %}
   </div>
 
   {% else %}
-  <!-- Перегляд з /flowers/ — модальне підтвердження -->
+  <!-- Перегляд з /flowers/ — прямі посилання -->
   <div class="related-examples-grid">
     {% for related in related_flowers %}
-    <div class="rel-example-card" onclick="showModal('{{ related.name }}', '/flowers/{{ related.id }}')">
+    <a href="/flowers/{{ related.id }}" class="rel-example-card">
       <div class="rel-example-card-img">
-        <img src="{{ related.image }}" alt="{{ related.name }}">
+        <img src="{{ related.image }}" alt="{{ related.name }}" loading="lazy">
         <span class="rel-card-badge">🌸 Букет</span>
         {% if related.price %}
         <span class="rel-card-price-overlay">від {{ related.price }} грн</span>
@@ -194,11 +258,12 @@
       </div>
       <div class="rel-example-card-body">
         <h3 class="rel-example-card-title">{{ related.name }}</h3>
-        <button class="rel-example-view-btn" onclick="event.stopPropagation(); showModal('{{ related.name }}', '/flowers/{{ related.id }}')">
-          <span>Переглянути</span>
-        </button>
+        {% if related.price %}
+        <p class="rel-example-card-price">від {{ related.price }} грн</p>
+        {% endif %}
+        <span class="rel-example-view-btn"><span>Подивитися</span></span>
       </div>
-    </div>
+    </a>
     {% endfor %}
   </div>
   {% endif %}
@@ -217,9 +282,9 @@
 
   <div class="related-examples-grid">
     {% for real_idx, item in random_examples %}
-    <div class="rel-example-card">
+    <a href="/examples/{{ real_idx }}" class="rel-example-card">
       <div class="rel-example-card-img">
-        <img src="{{ item.image }}" alt="{{ item.name }}">
+        <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy">
         {% if item.category == 'rose_bouquet' %}
         <span class="rel-card-badge">🌹 З троянд</span>
         {% elif item.category == 'composition' %}
@@ -236,78 +301,27 @@
         {% if item.price %}
         <p class="rel-example-card-price">від {{ item.price }} грн</p>
         {% endif %}
-        <a href="/examples/{{ real_idx }}" class="rel-example-view-btn">
+        <span class="rel-example-view-btn">
           <span>Подивитися</span>
-        </a>
+        </span>
       </div>
-    </div>
+    </a>
     {% endfor %}
   </div>
 </section>
 {% endif %}
 
-{% if not back_url %}
-<!-- Модальне вікно (тільки для /flowers/) -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal-container">
-    <div class="modal-content">
-      <div class="modal-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          <path d="M12 8v4"></path>
-          <circle cx="12" cy="16" r="1"></circle>
-        </svg>
-      </div>
-      <h3 class="modal-title">Перейти на сторінку</h3>
-      <p class="modal-text" id="modalText">Перейти на сторінку букета?</p>
-      <div class="modal-actions">
-        <button class="modal-btn modal-btn-cancel" onclick="closeModal()">
-          <span>Скасувати</span>
-        </button>
-        <button class="modal-btn modal-btn-confirm" id="modalConfirmBtn">
-          <span>Перейти →</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-{% endif %}
 
 <script>
 function changeMainImage(src) {
   const img = document.querySelector('.flower-main-image');
   img.style.opacity = '0';
-  img.style.transform = 'scale(1.03)';
   setTimeout(() => {
     img.src = src;
-    img.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+    img.style.transition = 'opacity 0.4s ease';
     img.style.opacity = '1';
-    img.style.transform = 'scale(1)';
   }, 200);
 }
-
-{% if not back_url %}
-let modalRedirectUrl = '';
-function showModal(productName, url) {
-  modalRedirectUrl = url;
-  document.getElementById('modalText').textContent = `Перейти на сторінку «${productName}»?`;
-  document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  document.getElementById('modalConfirmBtn').onclick = function() {
-    window.location.href = modalRedirectUrl;
-  };
-}
-function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.getElementById('modalOverlay').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
-});
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeModal();
-});
-{% endif %}
 </script>
 
 {% endblock %}

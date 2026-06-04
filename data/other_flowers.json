@@ -1,8 +1,92 @@
 [
   {
-    "name": "jj",
-    "price": "125",
-    "description": "",
-    "image": null
+    "name": "Еустома Лізіантус",
+    "price": "140 - 170",
+    "description": "Еустома Лізіантус має висоту 60 см.",
+    "image": "/static/uploads/catalog_20260413221420.jpg"
+  },
+  {
+    "name": "Кущова Гвоздика - Діантус",
+    "price": "40 - 50",
+    "description": "Кущова Гвоздика Діантус має висоту 50 - 60 см.",
+    "image": "/static/uploads/catalog_20260413221556.jpg"
+  },
+  {
+    "name": "Гвоздика Діантус",
+    "price": "35",
+    "description": "Гвоздика Діантус має висоту 50 см.",
+    "image": "/static/uploads/catalog_20260413221659.jpg"
+  },
+  {
+    "name": "Гвоздика Діантус",
+    "price": "35",
+    "description": "Гвоздика Діантус  має висоту 50 см.",
+    "image": "/static/uploads/catalog_20260413221738.jpg"
+  },
+  {
+    "name": "Гвоздика Діантус",
+    "price": "35",
+    "description": "Гвоздика Діантус  має висоту 50 см.",
+    "image": "/static/uploads/catalog_20260413221851.jpg"
+  },
+  {
+    "name": "Гвоздика Діантус",
+    "price": "35",
+    "description": "Гвоздика Діантус  має висоту 50 см.",
+    "image": "/static/uploads/catalog_20260413221930.jpg"
+  },
+  {
+    "name": "Гвоздика Діантус",
+    "price": "35",
+    "description": "Гвоздика Діантус має висоту 50 см.",
+    "image": "/static/uploads/catalog_20260413222029.jpg"
+  },
+  {
+    "name": "Гвоздика Діантус",
+    "price": "35",
+    "description": "Гвоздика Діантус має висоту 50 см.",
+    "image": "/static/uploads/catalog_20260413222050.jpg"
+  },
+  {
+    "name": "Гіпсофіла Кольорова",
+    "price": "85",
+    "description": "Гіпсофіла Кольорова має висоту 60 см.",
+    "image": "/static/uploads/catalog_20260413222133.jpg"
+  },
+  {
+    "name": "Гіпсофіла Біла",
+    "price": "75",
+    "description": "Гіпсофіла Біла має висоту 60 см.",
+    "image": "/static/uploads/catalog_20260413222216.jpg"
+  },
+  {
+    "name": "Одноголова хризантема Магнум",
+    "price": "130 - 150",
+    "description": "Одноголова хризантема Магнум має висоту 60 см.",
+    "image": "/static/uploads/catalog_20260413222326.jpg"
+  },
+  {
+    "name": "Хризантема Балтика",
+    "price": "80 - 110",
+    "description": "Хризантема Балтика має висоту 60 см.",
+    "image": "/static/uploads/catalog_20260413222426.jpg"
+  },
+  {
+    "name": "Хризантема Балтика",
+    "price": "80 - 110",
+    "description": "Хризантема Балтика має висоту 60 см.",
+    "image": "/static/uploads/catalog_20260413222510.jpg"
+  },
+  {
+    "name": "Хризантема Бейбі",
+    "price": "90 - 130",
+    "description": "Хризантема Бейбі має висоту 60 см.",
+    "image": "/static/uploads/catalog_20260413222545.jpg"
+  },
+  {
+    "name": "Ромашка",
+    "price": "80 - 110",
+    "description": "Ромашка має висоту 60 см.",
+    "image": "/static/uploads/catalog_20260413222628.jpg"
   }
 ]

@@ -1,10 +1,44 @@
 {% extends "base.html" %}
 
-{% block title %}Приклади робіт — Квіти від Тамари | Кельменці{% endblock %}
+{% block title %}Приклади авторських букетів у Кельменцях — галерея | Квіти від Тамари{% endblock %}
+
+{% block canonical %}<link rel="canonical" href="https://tflora.com.ua/examples">{% endblock %}
 
 {% block head %}
-<meta name="description" content="Приклади букетів та флористичних композицій від Тамари у Кельменцях. Авторські роботи з натуральних квітів.">
-<meta name="keywords" content="приклади букетів Кельменці, флористика, авторські букети, композиції">
+<meta name="description" content="Приклади авторських букетів та флористичних композицій від «Квіти від Тамари» у Кельменцях. Реальні роботи флориста — букети з троянд, хризантем, лілій для будь-якого приводу.">
+<meta name="keywords" content="приклади букетів Кельменці, флористика Кельменці, авторські букети фото, купити букет Кельменці, квіткові композиції">
+<meta property="og:title" content="Приклади авторських букетів — Квіти від Тамари | Кельменці">
+<meta property="og:description" content="Галерея реальних робіт флориста Тамари у Кельменцях — авторські букети та квіткові композиції для будь-якого приводу.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tflora.com.ua/examples">
+<meta property="og:image" content="https://tflora.com.ua/static/images/img.png">
+<meta property="og:site_name" content="Квіти від Тамари — Кельменці">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  .example-badge-bouquet {
+    background: rgba(139, 90, 43, 0.82);
+    color: #fff;
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://tflora.com.ua/examples#webpage",
+  "url": "https://tflora.com.ua/examples",
+  "name": "Приклади авторських букетів — Квіти від Тамари | Кельменці",
+  "description": "Галерея реальних робіт флориста — авторські букети та квіткові композиції у Кельменцях.",
+  "inLanguage": "uk-UA",
+  "isPartOf": {"@id": "https://tflora.com.ua/#website"},
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Головна", "item": "https://tflora.com.ua/"},
+      {"@type": "ListItem", "position": 2, "name": "Приклади", "item": "https://tflora.com.ua/examples"}
+    ]
+  }
+}
+</script>
 {% endblock %}
 
 {% block content %}
@@ -17,10 +51,10 @@
     </div>
 
     <div class="examples-filter">
-      <button class="filter-btn active" data-filter="all">Всі</button>
-      <button class="filter-btn" data-filter="bouquet">Букети</button>
-      <button class="filter-btn filter-btn-rose" data-filter="rose_bouquet">🌹 З троянд</button>
-      <button class="filter-btn" data-filter="composition">Композиції</button>
+      <button type="button" class="filter-btn active" data-filter="all">Всі</button>
+      <button type="button" class="filter-btn" data-filter="bouquet">Букети</button>
+      <button type="button" class="filter-btn filter-btn-rose" data-filter="rose_bouquet">🌹 З троянд</button>
+      <button type="button" class="filter-btn" data-filter="composition">Композиції</button>
     </div>
 
     {% if not examples %}
@@ -37,9 +71,9 @@
       {% for item in examples %}
       <div class="example-card" data-category="{{ item.category }}">
         <div class="example-card-img">
-          <img src="{{ item.image }}" alt="{{ item.name }}">
+          <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy">
           {% if item.category == 'bouquet' %}
-          <span class="example-badge">Букет</span>
+          <span class="example-badge example-badge-bouquet">💐 Букет</span>
           {% elif item.category == 'rose_bouquet' %}
           <span class="example-badge example-badge-rose">🌹 З троянд</span>
           {% else %}

@@ -6,20 +6,76 @@
     <title>{% block title %}Квіти від Тамари — квітковий магазин у Кельменцях{% endblock %}</title>
     <meta name="theme-color" content="#1a3828">
 
+    <!-- Geo / Local SEO -->
+    <meta name="geo.region" content="UA-26">
+    <meta name="geo.placename" content="Кельменці, Чернівецька область">
+    <meta name="geo.position" content="48.4730;26.8370">
+    <meta name="ICBM" content="48.4730, 26.8370">
+    <meta name="language" content="uk">
+    <meta name="robots" content="{% block robots %}index, follow, max-image-preview:large{% endblock %}">
+
+    {% block canonical %}<link rel="canonical" href="https://tflora.com.ua{{ request.path }}">{% endblock %}
+
     {% block head %}{% endblock %}
 
+    <!-- Sitewide LocalBusiness schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Florist",
+      "@id": "https://tflora.com.ua/#florist",
+      "name": "Квіти від Тамари",
+      "alternateName": ["Квіти Кельменці", "tflora"],
+      "url": "https://tflora.com.ua/",
+      "telephone": ["+380976982154", "+380986585050"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "вулиця Довженка, 27",
+        "addressLocality": "Кельменці",
+        "addressRegion": "Чернівецька область",
+        "postalCode": "60100",
+        "addressCountry": "UA"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 48.4730,
+        "longitude": 26.8370
+      },
+      "hasMap": "https://maps.app.goo.gl/dWTGqCRkapmPnB1E8",
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "08:00",
+        "closes": "20:00"
+      }],
+      "priceRange": "₴₴",
+      "image": "https://tflora.com.ua/static/images/img.png",
+      "sameAs": [
+        "https://www.instagram.com/kvitu_kelmentsi_fotozona/",
+        "https://maps.app.goo.gl/dWTGqCRkapmPnB1E8"
+      ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
+
+  <a href="#main-content" class="skip-to-content">Перейти до змісту</a>
+
+  <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
 
   <header class="header">
     <a href="{{ url_for('main') }}" class="logo-link" aria-label="Квіти від Тамари — на головну">
       <img src="{{ url_for('static', filename='images/logo-removebg-preview.png') }}"
            class="logo"
            width="118"
+           height="56"
            alt="Квіти від Тамари — квітковий магазин у Кельменцях">
     </a>
 
@@ -29,7 +85,7 @@
         <a href="/order">Замовити</a>
         <a href="/delivery">Доставка</a>
         <a href="/examples">Приклади</a>
-        <a href="/assortment">Ассортимент</a>
+        <a href="/assortment">Асортимент</a>
         <a href="tel:+380976982154" class="nav-phone">+38 (097) 698 21 54</a>
     </nav>
 
@@ -42,7 +98,7 @@
     </button>
   </header>
 
-  <main>
+  <main id="main-content">
       {% block content %}{% endblock %}
   </main>
 
@@ -67,7 +123,7 @@
           <a href="/order" class="footer-link">Замовити</a>
           <a href="/delivery" class="footer-link">Доставка</a>
           <a href="/examples" class="footer-link">Приклади</a>
-          <a href="/assortment" class="footer-link">Ассортимент</a>
+          <a href="/assortment" class="footer-link">Асортимент</a>
       </div>
 
       <div class="footer-block">
@@ -78,7 +134,7 @@
             <p>60100</p>
           </address>
           <h4 style="margin-top:20px;">🌍 Геолокація</h4>
-          <a class="footer-link" target="_blank" rel="noopener"
+          <a class="footer-link" target="_blank" rel="noopener noreferrer"
              href="https://maps.app.goo.gl/dWTGqCRkapmPnB1E8">
               📍 Відкрити на Google Maps
           </a>
@@ -88,11 +144,11 @@
           <h4>Соцмережі</h4>
           <a class="social-link"
              href="https://www.instagram.com/kvitu_kelmentsi_fotozona/"
-             target="_blank" rel="noopener" aria-label="Instagram Квіти від Тамари">
+             target="_blank" rel="noopener noreferrer" aria-label="Instagram Квіти від Тамари">
               <i class="fab fa-instagram"></i> Instagram
           </a>
           <a class="social-link" href="https://t.me/0976982154"
-             rel="noopener" aria-label="Telegram Квіти від Тамари">
+             target="_blank" rel="noopener noreferrer" aria-label="Telegram Квіти від Тамари">
               <i class="fab fa-telegram"></i> Telegram
           </a>
           <a class="social-link" href="viber://chat?number=+380976982154"
@@ -107,36 +163,44 @@
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 
   <script>
-    const burger = document.getElementById('burgerBtn');
-    const nav    = document.getElementById('navMenu');
-
-    let scrollY = 0;
+    const burger  = document.getElementById('burgerBtn');
+    const nav     = document.getElementById('navMenu');
+    const backdrop = document.getElementById('navBackdrop');
 
     function toggleMenu(open) {
       burger.classList.toggle('open', open);
       nav.classList.toggle('open', open);
+      backdrop.classList.toggle('open', open);
+      backdrop.setAttribute('aria-hidden', !open);
       burger.setAttribute('aria-label', open ? 'Закрити меню' : 'Відкрити меню');
-
-      if (open) {
-        scrollY = window.scrollY;
-        document.body.style.overflow = 'hidden'; document.body.style.overflowX = 'hidden'; document.documentElement.style.overflowX = 'hidden';
-        document.body.style.position = 'fixed';
-        document.body.style.top = `-${scrollY}px`;
-        document.body.style.width = '100%';
-      } else {
-        document.body.style.overflow = ''; document.body.style.overflowX = ''; document.documentElement.style.overflowX = '';
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        window.scrollTo(0, scrollY);
-      }
+      document.body.classList.toggle('nav-open', open);
     }
 
     burger.addEventListener('click', () => toggleMenu(!nav.classList.contains('open')));
+    backdrop.addEventListener('click', () => toggleMenu(false));
 
     nav.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => toggleMenu(false));
     });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && nav.classList.contains('open')) toggleMenu(false);
+    });
+  </script>
+  <script>
+    /* Активна сторінка в навігації */
+    (function() {
+      const path = window.location.pathname.replace(/\/$/, '') || '/';
+      document.querySelectorAll('.nav a, .footer-link').forEach(link => {
+        try {
+          const linkPath = new URL(link.href).pathname.replace(/\/$/, '') || '/';
+          if (linkPath === path) {
+            link.classList.add('nav-active');
+            link.setAttribute('aria-current', 'page');
+          }
+        } catch(e) {}
+      });
+    })();
   </script>
 
 </body>

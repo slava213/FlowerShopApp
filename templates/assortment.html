@@ -1,9 +1,39 @@
 {% extends "base.html" %}
 
-{% block title %}Асортимент — Квіти від Тамари | Кельменці{% endblock %}
+{% block title %}Асортимент квітів у Кельменцях — троянди, вазони, аксесуари | Квіти від Тамари{% endblock %}
+
+{% block canonical %}<link rel="canonical" href="https://tflora.com.ua/assortment">{% endblock %}
 
 {% block head %}
-<meta name="description" content="Асортимент квіткового магазину «Квіти від Тамари» — троянди, квіти, вазони та аксесуари у Кельменцях.">
+<meta name="description" content="Асортимент квіткового магазину «Квіти від Тамари» у Кельменцях: троянди преміум, хризантеми, лілії, вазони та аксесуари. Широкий вибір свіжих квітів — купити онлайн або в магазині на вул. Довженка, 27.">
+<meta name="keywords" content="асортимент квітів Кельменці, троянди Кельменці, купити квіти Кельменці, вазони Кельменці, квітковий магазин асортимент">
+<meta property="og:title" content="Асортимент квітів — Квіти від Тамари | Кельменці">
+<meta property="og:description" content="Троянди, квіти, вазони та аксесуари у квітковому магазині «Квіти від Тамари» у Кельменцях. Вул. Довженка, 27.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:url" content="https://tflora.com.ua/assortment">
+<meta property="og:image" content="https://tflora.com.ua/static/images/img_1.png">
+<meta property="og:site_name" content="Квіти від Тамари — Кельменці">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://tflora.com.ua/assortment#webpage",
+  "url": "https://tflora.com.ua/assortment",
+  "name": "Асортимент — Квіти від Тамари | Кельменці",
+  "description": "Асортимент квіткового магазину «Квіти від Тамари» у Кельменцях: троянди, інші квіти, вазони та аксесуари.",
+  "inLanguage": "uk-UA",
+  "isPartOf": {"@id": "https://tflora.com.ua/#website"},
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Головна", "item": "https://tflora.com.ua/"},
+      {"@type": "ListItem", "position": 2, "name": "Асортимент", "item": "https://tflora.com.ua/assortment"}
+    ]
+  }
+}
+</script>
 {% endblock %}
 
 {% block content %}
@@ -21,6 +51,13 @@
     </nav>
   </div>
 </section>
+
+<div class="assortment-disclaimer">
+  <div class="assortment-disclaimer-inner">
+    <span class="assortment-disclaimer-icon">️️⚠️</span>
+    <p>Асортимент — це перелік товарів, які ми пропонуємо. Не всі позиції можуть бути в наявності: деякі доступні під замовлення або тимчасово відсутні. Для уточнення звертайтесь до нас.</p>
+  </div>
+</div>
 
 <section class="assortment-section" id="roses">
   <div class="assortment-container">
@@ -48,7 +85,12 @@
         <div class="rose-card-body">
           <p class="rose-card-tag">Троянда · сорт</p>
           <h3>{{ rose.name }}</h3>
-          <p class="rose-card-price"><strong>{{ rose.price }}</strong> грн/шт</p>
+
+          <div class="premium-price-badge">
+            <span class="amount">{{ rose.price }}</span>
+            <span class="currency">грн/шт</span>
+          </div>
+
           {% if rose.description %}
           <p class="rose-card-desc">{{ rose.description[:120] }}{% if rose.description|length > 120 %}…{% endif %}</p>
           {% endif %}
@@ -95,7 +137,12 @@
         {% endif %}
         <div class="catalog-card-body">
           <h3>{{ item.name }}</h3>
-          <p class="catalog-card-price">{{ item.price }} грн/шт</p>
+
+          <div class="premium-price-badge">
+            <span class="amount">{{ item.price }}</span>
+            <span class="currency">грн/шт</span>
+          </div>
+
           <p class="catalog-card-tap">Деталі →</p>
         </div>
       </div>
@@ -140,7 +187,12 @@
         {% endif %}
         <div class="vase-card-body">
           <h3>{{ item.name }}</h3>
-          <p class="vase-card-price">{{ item.price }} грн/шт</p>
+
+          <div class="premium-price-badge gold">
+            <span class="amount">{{ item.price }}</span>
+            <span class="currency">грн/шт</span>
+          </div>
+
           <p class="vase-card-tap">Деталі →</p>
         </div>
       </div>
@@ -160,8 +212,8 @@
   <div class="assortment-container">
     <div class="assortment-section-header">
       <div class="assortment-section-heading">
-        <p class="assortment-section-eyebrow">Для оформлення</p>
-        <div class="assortment-divider"></div>
+        <p class="assortment-section-eyebrow" style="color:var(--gold)">Для оформлення</p>
+        <div class="assortment-divider" style="background:linear-gradient(90deg,var(--gold),var(--gold-light),transparent)"></div>
         <h2>Аксесуари</h2>
         <p>Стрічки, пакування, листівки та декор</p>
       </div>
@@ -185,7 +237,12 @@
         {% endif %}
         <div class="acc-card-body">
           <h3>{{ item.name }}</h3>
-          <p class="acc-card-price">{{ item.price }} грн/шт</p>
+
+          <div class="premium-price-badge gold">
+            <span class="amount">{{ item.price }}</span>
+            <span class="currency">грн/шт</span>
+          </div>
+
           <p class="catalog-card-tap">Деталі →</p>
         </div>
       </div>
@@ -203,10 +260,10 @@
 
 <div class="prem-modal-overlay" id="premModal" role="dialog" aria-modal="true" aria-labelledby="premModalName">
   <div class="prem-modal-box">
-    <button class="prem-modal-x" onclick="closePremModal()" aria-label="Закрити">✕</button>
+    <button class="prem-modal-x" type="button" onclick="closePremModal()" aria-label="Закрити">✕</button>
     <div class="prem-modal-body" id="premModalBody">
       <div class="prem-modal-img-col" id="premModalImgCol">
-        <img id="premModalImg" src="" alt="">
+        <img id="premModalImg" src="" alt="" loading="lazy">
       </div>
       <div class="prem-modal-info-col">
         <p class="prem-modal-eyebrow" id="premModalEyebrow">Квіти від Тамари</p>
@@ -216,7 +273,7 @@
           <span class="prem-modal-price-unit">грн / шт</span>
         </div>
         <p class="prem-modal-desc" id="premModalDesc"></p>
-        <button class="prem-modal-close-btn" onclick="closePremModal()">Закрити</button>
+        <button class="prem-modal-close-btn" type="button" onclick="closePremModal()">Закрити</button>
       </div>
     </div>
   </div>
@@ -240,7 +297,7 @@ function openPremModal(name, price, desc, img, type) {
   document.getElementById('premModalPrice').textContent   = price;
   document.getElementById('premModalDesc').textContent    = desc || '';
 
-  overlay.classList.toggle('vase-modal', type === 'vase');
+  overlay.classList.toggle('vase-modal', type === 'vase' || type === 'acc');
 
   if (img) {
     imgEl.src = img;
@@ -261,7 +318,7 @@ function closePremModal() {
   document.body.style.overflow = '';
 }
 
-// Слухачі подій для відкриття карток (через data-атрибути)
+// Слухачі подій для відкриття карток
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.js-modal-trigger').forEach(card => {
     card.addEventListener('click', function() {

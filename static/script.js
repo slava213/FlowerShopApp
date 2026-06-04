@@ -122,6 +122,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
   images.forEach(img => imageObserver.observe(img));
 
+  // ===== HERO MODAL NAVIGATION =====
+  const heroNavModal = document.getElementById("heroNavModal");
+  const heroNavConfirm = document.getElementById("heroNavConfirm");
+  const heroNavCancel = document.getElementById("heroNavCancel");
+  const heroNavText = document.getElementById("heroNavModalText");
+  let heroNextUrl = "";
+
+  const closeHeroNavModal = () => {
+    if (!heroNavModal) return;
+    heroNavModal.classList.remove("open");
+    document.body.classList.remove("nav-open");
+  };
+
+  if (heroNavModal && heroNavConfirm && heroNavCancel && heroNavText) {
+    document.querySelectorAll(".hero-nav-trigger").forEach((card) => {
+      card.addEventListener("click", () => {
+        heroNextUrl = card.dataset.targetUrl || "";
+        const targetName = card.dataset.targetName || "розділ";
+        heroNavText.textContent = `Ви дійсно хочете перейти на сторінку з категорією "${targetName}"?`;
+        heroNavModal.classList.add("open");
+        document.body.classList.add("nav-open");
+      });
+    });
+
+    heroNavCancel.addEventListener("click", closeHeroNavModal);
+    heroNavModal.addEventListener("click", (e) => {
+      if (e.target === heroNavModal) closeHeroNavModal();
+    });
+
+    heroNavConfirm.addEventListener("click", () => {
+      if (heroNextUrl) window.location.href = heroNextUrl;
+      closeHeroNavModal();
+    });
+  }
+
   // ===== ФОТО ПРЕВ'Ю У ФОРМІ =====
   const photoInput = document.getElementById("photoInput");
   const preview = document.getElementById("photoPreview");

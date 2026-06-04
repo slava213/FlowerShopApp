@@ -1,10 +1,38 @@
 {% extends "base.html" %}
 
-{% block title %}Замовити букет — Квіти від Тамари | Кельменці{% endblock %}
+{% block title %}Замовити букет у Кельменцях онлайн — Квіти від Тамари{% endblock %}
+
+{% block canonical %}<link rel="canonical" href="https://tflora.com.ua/order">{% endblock %}
 
 {% block head %}
-<meta name="description" content="Замовте авторський букет квітів онлайн у квітковому магазині «Квіти від Тамари» у Кельменцях. Швидка доставка по місту та району.">
-<meta name="keywords" content="замовити квіти Кельменці, замовити букет Кельменці, доставка квітів">
+<meta name="description" content="Замовити авторський букет онлайн у квітковому магазині «Квіти від Тамари» у Кельменцях. Швидка доставка по місту та Кельменецькому району. Тел: +38 (097) 698 21 54.">
+<meta name="keywords" content="замовити квіти Кельменці, замовити букет Кельменці, купити букет онлайн Кельменці, доставка квітів">
+<meta property="og:title" content="Замовити букет — Квіти від Тамари | Кельменці">
+<meta property="og:description" content="Замовте авторський букет онлайн. Доставка по Кельменцях та районі. Тел: +38 (097) 698 21 54.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tflora.com.ua/order">
+<meta property="og:image" content="https://tflora.com.ua/static/images/img.png">
+<meta property="og:site_name" content="Квіти від Тамари — Кельменці">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://tflora.com.ua/order#webpage",
+  "url": "https://tflora.com.ua/order",
+  "name": "Замовити букет — Квіти від Тамари | Кельменці",
+  "description": "Замовте авторський букет квітів онлайн у Кельменцях. Доставка по місту та районі.",
+  "inLanguage": "uk-UA",
+  "isPartOf": {"@id": "https://tflora.com.ua/#website"},
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Головна", "item": "https://tflora.com.ua/"},
+      {"@type": "ListItem", "position": 2, "name": "Замовити", "item": "https://tflora.com.ua/order"}
+    ]
+  }
+}
+</script>
 {% endblock %}
 
 {% block content %}
@@ -40,8 +68,8 @@
     <form class="order-form" method="POST" enctype="multipart/form-data">
       <p class="form-group-label">Контактна інформація</p>
       
-      <input type="text" name="name" placeholder="Ваше ім'я *" required="">
-      <input type="tel" name="phone" placeholder="Номер телефону *" required="" pattern="\+?[0-9\s\-\(\)]{10,}" title="Введіть коректний номер телефону">
+      <input type="text" name="name" placeholder="Ваше ім'я *" autocomplete="name" required>
+      <input type="tel" name="phone" placeholder="Номер телефону *" autocomplete="tel" required pattern="\+?[0-9\s\-\(\)]{10,}" title="Введіть коректний номер телефону">
 
       <div class="form-divider">
         <span>Деталі замовлення</span>

@@ -1,8 +1,62 @@
 [
   {
-    "name": "Фрідом",
-    "price": "65",
-    "description": "Довжина 65 см червона",
-    "image": "/static/uploads/catalog_20260322225023.jpg"
+    "name": "Троянда Фрідом",
+    "price": "65 - 85",
+    "description": "Троянда \"Фрідом\" (Freedom) має висоту 50 - 70 см.",
+    "image": "/static/uploads/catalog_20260409212627.jpg"
+  },
+  {
+    "name": "Троянда Експловер",
+    "price": "95 - 150",
+    "description": "Троянда \"Експловер\" (Explorer) має висоту 70 - 100 см.",
+    "image": "/static/uploads/catalog_20260413213104.jpg"
+  },
+  {
+    "name": "Троянда Гоча",
+    "price": "75 - 95",
+    "description": "Троянда \"Гоча\" (Gotcha) має висоту 60 - 70 см.",
+    "image": "/static/uploads/catalog_20260413213306.jpg"
+  },
+  {
+    "name": "Троянда Фруттето",
+    "price": "75 - 85",
+    "description": "Троянда \"Фруттето\" (Frutteto) має висоту 60 см.",
+    "image": "/static/uploads/catalog_20260413213544.jpg"
+  },
+  {
+    "name": "Троянда Пінкатена",
+    "price": "50 - 60",
+    "description": "Троянда \"Пінкатена\" (Pink Athena) має висоту 40 - 50 см.",
+    "image": "/static/uploads/catalog_20260413213744.jpg"
+  },
+  {
+    "name": "Троянда Атена",
+    "price": "50 - 60",
+    "description": "Троянда \"Атена\" (Athena) має висоту 40  - 50  см.",
+    "image": "/static/uploads/catalog_20260413214012.jpg"
+  },
+  {
+    "name": "Троянда Кущова",
+    "price": "110 - 160",
+    "description": "Троянда Кущова має висоту 40 - 70 см.",
+    "image": "/static/uploads/catalog_20260413214535.jpg"
+  },
+  {
+    "name": "Троянда Кущова",
+    "price": "110 - 160",
+    "description": "Троянда Кущова має висоту 40 - 70 см.",
+    "image": "/static/uploads/catalog_20260413214618.jpg"
+  },
+  {
+    "name": "Троянда Кущова",
+    "price": "110 - 160",
+    "description": "Троянда Кущова має висоту 40 - 70 см.",
+    "image": "/static/uploads/catalog_20260413214646.jpg"
+  },
+  {
+    "name": "Троянда Кущова",
+    "price": "110 - 160",
+    "description": "Троянда Кущова має висоту 40 - 70 см.",
+    "image": "/static/uploads/catalog_20260413214833.jpg"
   }
 ]

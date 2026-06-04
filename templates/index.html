@@ -3,46 +3,56 @@
 {% block title %}Квіти Кельменці — авторські букети та доставка | Квіти від Тамари{% endblock %}
 {% block body_class %}page-home{% endblock %}
 
+{% block canonical %}<link rel="canonical" href="https://tflora.com.ua/">{% endblock %}
+
 {% block head %}
 <meta name="description" content="Квітковий магазин «Квіти від Тамари» у Кельменцях. Авторські букети, квіткові композиції, троянди преміум та доставка квітів по Кельменцях і районі. Замовлення онлайн і за телефоном +38 (097) 698 21 54.">
-<meta name="robots" content="index, follow, max-image-preview:large">
-<link rel="canonical" href="https://kvityvid-tamary.ua/">
+<meta name="keywords" content="квіти Кельменці, купити квіти Кельменці, букети Кельменці, доставка квітів Кельменці, квітковий магазин Кельменці, квіти від Тамари, tflora">
 <meta property="og:title" content="Квіти Кельменці — авторські букети та доставка | Квіти від Тамари">
-<meta property="og:description" content="Авторські букети, квіткові композиції та доставка квітів по Кельменцях. Вул. Довженка, 27.">
+<meta property="og:description" content="Авторські букети, квіткові композиції та доставка квітів по Кельменцях. Вул. Довженка, 27. Щодня 08:00–20:00.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="uk_UA">
-<meta property="og:url" content="https://kvityvid-tamary.ua/">
-<meta property="og:image" content="https://kvityvid-tamary.ua/static/images/img.png">
+<meta property="og:url" content="https://tflora.com.ua/">
+<meta property="og:image" content="https://tflora.com.ua/static/images/img.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Квіти від Тамари — Кельменці">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Квіти Кельменці — Квіти від Тамари">
+<meta name="twitter:description" content="Авторські букети та доставка квітів по Кельменцях. Вул. Довженка, 27.">
+<meta name="twitter:image" content="https://tflora.com.ua/static/images/img.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebSite",
-      "@id": "https://kvityvid-tamary.ua/#website",
-      "url": "https://kvityvid-tamary.ua/",
+      "@id": "https://tflora.com.ua/#website",
+      "url": "https://tflora.com.ua/",
       "name": "Квіти від Тамари",
       "inLanguage": "uk-UA",
-      "publisher": { "@id": "https://kvityvid-tamary.ua/#florist" }
+      "description": "Квітковий магазин у Кельменцях — авторські букети, квіткові композиції та доставка квітів",
+      "publisher": { "@id": "https://tflora.com.ua/#florist" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://tflora.com.ua/assortment",
+        "query-input": "required name=search_term_string"
+      }
     },
     {
-      "@type": "Florist",
-      "@id": "https://kvityvid-tamary.ua/#florist",
-      "name": "Квіти від Тамари",
-      "image": "https://kvityvid-tamary.ua/static/images/img.png",
-      "url": "https://kvityvid-tamary.ua/",
-      "telephone": "+380976982154",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "вулиця Довженка, 27",
-        "addressLocality": "Кельменці",
-        "addressRegion": "Чернівецька область",
-        "postalCode": "60100",
-        "addressCountry": "UA"
-      },
-      "priceRange": "₴₴",
-      "sameAs": ["https://www.instagram.com/kvitu_kelmentsi_fotozona/"]
+      "@type": "WebPage",
+      "@id": "https://tflora.com.ua/#webpage",
+      "url": "https://tflora.com.ua/",
+      "name": "Квіти Кельменці — авторські букети та доставка | Квіти від Тамари",
+      "isPartOf": {"@id": "https://tflora.com.ua/#website"},
+      "about": {"@id": "https://tflora.com.ua/#florist"},
+      "inLanguage": "uk-UA",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Головна", "item": "https://tflora.com.ua/"}
+        ]
+      }
     }
   ]
 }
@@ -51,29 +61,6 @@
 
 {% block content %}
 
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal-container">
-    <div class="modal-content">
-      <div class="modal-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          <path d="M12 8v4"></path>
-          <circle cx="12" cy="16" r="1"></circle>
-        </svg>
-      </div>
-      <h3 class="modal-title">Перейти на сторінку</h3>
-      <p class="modal-text" id="modalText">Перейти на сторінку букета?</p>
-      <div class="modal-actions">
-        <button class="modal-btn modal-btn-cancel" onclick="closeModal()">
-          <span>Скасувати</span>
-        </button>
-        <button class="modal-btn modal-btn-confirm" id="modalConfirmBtn">
-          <span>Перейти</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <section class="hero">
   <div class="hero-text">
@@ -88,9 +75,9 @@
       композиції з найсвіжіших квітів —<br>
       для кожного приводу і найщиріших емоцій.
     </p>
-    <button class="order-btn" onclick="window.location.href='/order'">
+    <a href="/order" class="order-btn">
       <span>Замовити букет</span>
-    </button>
+    </a>
     <p class="hero-caption">Свіжі квіти щодня · Доставка по Кельменцях</p>
     <ul class="hero-chips" aria-label="Швидкі факти">
       <li>вул. Довженка, 27 · Кельменці</li>
@@ -116,22 +103,22 @@
   </div>
 
   <div class="hero-images">
-    <div class="hero-img-wrap" onclick="scrollToSection('products')">
-      <img src="/static/images/img.png" alt="авторський букет — квіти Кельменці">
+    <button type="button" class="hero-img-wrap hero-nav-trigger" data-target-url="/examples" data-target-name="букети">
+      <img src="/static/images/img.png" alt="авторський букет — квіти Кельменці" fetchpriority="high">
       <div class="hero-img-label"><span>Авторський букет</span></div>
-    </div>
-    <div class="hero-img-wrap" onclick="scrollToSection('products')">
-      <img src="/static/images/img_1.png" alt="букет троянд Кельменці">
+    </button>
+    <button type="button" class="hero-img-wrap hero-nav-trigger" data-target-url="/examples" data-target-name="букети">
+      <img src="/static/images/img_1.png" alt="букет троянд Кельменці" loading="lazy">
       <div class="hero-img-label"><span>Букет троянд</span></div>
-    </div>
-    <div class="hero-img-wrap" onclick="scrollToSection('products')">
-      <img src="/static/images/img_2.png" alt="флористична композиція Кельменці">
+    </button>
+    <button type="button" class="hero-img-wrap hero-nav-trigger" data-target-url="/assortment" data-target-name="композиції">
+      <img src="/static/images/img_2.png" alt="флористична композиція Кельменці" loading="lazy">
       <div class="hero-img-label"><span>Композиція</span></div>
-    </div>
-    <div class="hero-img-wrap" onclick="scrollToSection('products')">
-      <img src="/static/images/img_3.png" alt="букет на подарунок Кельменці">
+    </button>
+    <button type="button" class="hero-img-wrap hero-nav-trigger" data-target-url="/examples" data-target-name="букети">
+      <img src="/static/images/img_3.png" alt="букет на подарунок Кельменці" loading="lazy">
       <div class="hero-img-label"><span>Букет на подарунок</span></div>
-    </div>
+    </button>
   </div>
 </section>
 
@@ -173,59 +160,56 @@
   </header>
   <div class="product-grid">
 
-    <div class="product-card premium-card" onclick="showModal('Весняний букет', '/flowers/1')">
+    <a href="/flowers/1" class="product-card premium-card">
       <div class="product-card-img">
-        <img src="/static/images/img_4.png" alt="весняний букет квітів Кельменці">
+        <img src="/static/images/img_4.png" loading="lazy" alt="букет з ромашок Кельменці">
         <div class="product-card-label">
-          <p>Весняний букет</p>
+          <p>Букет з ромашок</p>
           <span class="product-price">від 850 грн</span>
         </div>
       </div>
-      <div class="product-card-caption">Весняний букет</div>
+      <div class="product-card-caption">Букет з ромашок</div>
       <div class="card-shine"></div>
-      <div class="product-badge">Хіт</div>
-    </div>
+    </a>
 
-    <div class="product-card premium-card" onclick="showModal('Романтичний букет', '/flowers/2')">
+    <a href="/flowers/2" class="product-card premium-card">
       <div class="product-card-img">
-        <img src="/static/images/img_6.png" alt="романтичний букет троянд Кельменці">
+        <img src="/static/images/img_6.png" loading="lazy" alt="букет з альстромерій Кельменці">
         <div class="product-card-label">
-          <p>Романтичний букет</p>
+          <p>Букет з альстромерій</p>
           <span class="product-price">від 1200 грн</span>
         </div>
       </div>
-      <div class="product-card-caption">Романтичний букет</div>
+      <div class="product-card-caption">Букет з альстромерій</div>
       <div class="card-shine"></div>
-      <div class="product-badge new">Новинка</div>
-    </div>
+    </a>
 
-    <div class="product-card premium-card" onclick="showModal('Авторський букет', '/flowers/3')">
+    <a href="/flowers/3" class="product-card premium-card">
       <div class="product-card-img">
-        <img src="/static/images/img_5.png" alt="авторський букет від флориста Кельменці">
+        <img src="/static/images/img_5.png" loading="lazy" alt="букет з хризантем та лілій Кельменці">
         <div class="product-card-label">
-          <p>Авторський букет</p>
+          <p>Букет з хризантем та лілій</p>
           <span class="product-price">від 950 грн</span>
         </div>
       </div>
-      <div class="product-card-caption">Авторський букет</div>
+      <div class="product-card-caption">Букет з хризантем та лілій</div>
       <div class="card-shine"></div>
-    </div>
+    </a>
 
-    <div class="product-card premium-card" onclick="showModal('Святковий букет', '/flowers/4')">
+    <a href="/flowers/4" class="product-card premium-card">
       <div class="product-card-img">
-        <img src="/static/images/img_7.png" alt="святковий букет квітів Кельменці">
+        <img src="/static/images/img_7.png" loading="lazy" alt="букет з хризантем та альстромерій Кельменці">
         <div class="product-card-label">
-          <p>Святковий букет</p>
+          <p>Букет з хризантем та альстромерій</p>
           <span class="product-price">від 1100 грн</span>
         </div>
       </div>
-      <div class="product-card-caption">Святковий букет</div>
+      <div class="product-card-caption">Букет з хризантем та альстромерій</div>
       <div class="card-shine"></div>
-      <div class="product-badge premium">Преміум</div>
-    </div>
+    </a>
 
   </div>
-  <p class="section-foot-note">Більше живих робіт — у розділі <a href="/examples">Приклади</a> та в <a href="/assortment">Ассортименті</a>.</p>
+  <p class="section-foot-note">Більше живих робіт — у розділі <a href="/examples">Приклади</a> та в <a href="/assortment">Асортименті</a>.</p>
 </section>
 
 <section class="products products--compositions" id="compositions" aria-labelledby="compositions-heading">
@@ -242,9 +226,9 @@
   </ul>
   <div class="product-grid">
 
-    <div class="product-card premium-card" onclick="showModal('Флористична композиція', '/flowers/5')">
+    <a href="/flowers/5" class="product-card premium-card">
       <div class="product-card-img">
-        <img src="/static/images/img_11.png" alt="флористична композиція у коробці Кельменці">
+        <img src="/static/images/img_11.png" loading="lazy" alt="флористична композиція у коробці Кельменці">
         <div class="product-card-label">
           <p>Флористична композиція</p>
           <span class="product-price">від 1400 грн</span>
@@ -252,10 +236,9 @@
       </div>
       <div class="product-card-caption">Флористична композиція</div>
       <div class="card-shine"></div>
-      <div class="product-badge premium">Преміум</div>
-    </div>
+    </a>
 
-    <div class="product-card premium-card" onclick="showModal('Святкова композиція', '/flowers/6')">
+    <a href="/flowers/6" class="product-card premium-card">
       <div class="product-card-img">
         <img src="/static/images/img_8.png" alt="святкова квіткова композиція Кельменці">
         <div class="product-card-label">
@@ -265,9 +248,9 @@
       </div>
       <div class="product-card-caption">Святкова композиція</div>
       <div class="card-shine"></div>
-    </div>
+    </a>
 
-    <div class="product-card premium-card" onclick="showModal('Авторська композиція', '/flowers/7')">
+    <a href="/flowers/7" class="product-card premium-card">
       <div class="product-card-img">
         <img src="/static/images/img_9.png" alt="авторська квіткова композиція Кельменці">
         <div class="product-card-label">
@@ -277,10 +260,9 @@
       </div>
       <div class="product-card-caption">Авторська композиція</div>
       <div class="card-shine"></div>
-      <div class="product-badge new">Новинка</div>
-    </div>
+    </a>
 
-    <div class="product-card premium-card" onclick="showModal('Преміум композиція', '/flowers/8')">
+    <a href="/flowers/8" class="product-card premium-card">
       <div class="product-card-img">
         <img src="/static/images/img_10.png" alt="преміум флористична композиція Кельменці">
         <div class="product-card-label">
@@ -290,8 +272,7 @@
       </div>
       <div class="product-card-caption">Преміум композиція</div>
       <div class="card-shine"></div>
-      <div class="product-badge">Хіт</div>
-    </div>
+    </a>
 
   </div>
   <p class="section-foot-note">Потрібні троянди чи аксесуари окремо? Перегляньте <a href="/assortment">каталог</a>.</p>
@@ -481,7 +462,7 @@
       <div class="stat-label">Видів квітів</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">8:00 - 21:00</div>
+      <div class="stat-num">08:00–20:00</div>
       <div class="stat-label">Приймаємо замовлення</div>
     </div>
   </div>
@@ -492,11 +473,11 @@
     <p class="cta-eyebrow">Персональний підхід</p>
     <h2 id="cta-heading">Готові замовити букет мрії?</h2>
     <p class="cta-lead">Зателефонуйте або залиште заявку онлайн — підкажемо по квітам, термінах і бюджету.</p>
-    <p class="cta-micro">Середній час відповіді в робочі години — до 15 хв. Також можна написати в <a href="https://t.me/0976982154" rel="noopener">Telegram</a> або <a href="https://www.instagram.com/kvitu_kelmentsi_fotozona/" rel="noopener">Instagram</a>.</p>
+    <p class="cta-micro">Середній час відповіді в робочі години — до 15 хв. Також можна написати в <a href="https://t.me/0976982154" target="_blank" rel="noopener noreferrer">Telegram</a> або <a href="https://www.instagram.com/kvitu_kelmentsi_fotozona/" target="_blank" rel="noopener noreferrer">Instagram</a>.</p>
     <div class="cta-buttons">
-      <button class="order-btn" onclick="window.location.href='/order'">
+      <a href="/order" class="order-btn">
         <span>Замовити букет</span>
-      </button>
+      </a>
       <a href="tel:+380976982154" class="cta-phone">
         <span>+38 (097) 698 21 54</span>
       </a>
@@ -504,36 +485,4 @@
   </div>
 </section>
 
-<script>
-// Модальне вікно
-let modalRedirectUrl = '';
-
-function showModal(productName, url) {
-  modalRedirectUrl = url;
-  document.getElementById('modalText').textContent = `Перейти на сторінку «${productName}»?`;
-  document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-
-  document.getElementById('modalConfirmBtn').onclick = function() {
-    window.location.href = modalRedirectUrl;
-  };
-}
-
-function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-document.getElementById('modalOverlay').addEventListener('click', function(e) {
-  if (e.target === this) {
-    closeModal();
-  }
-});
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    closeModal();
-  }
-});
-</script>
 {% endblock %}

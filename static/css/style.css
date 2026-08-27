@@ -2994,3 +2994,4 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-light); 
 .order-form input:valid:not(:placeholder-shown) {
   border-color: rgba(30, 61, 47, 0.35);
 }
+

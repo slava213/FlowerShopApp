@@ -226,7 +226,6 @@
     <a href="/examples/{{ real_idx }}" class="rel-example-card">
       <div class="rel-example-card-img">
         <img src="{{ related.image }}" alt="{{ related.name }}" loading="lazy">
-        <span class="rel-card-badge">🌸 Букет</span>
         {% if related.price %}
         <span class="rel-card-price-overlay">{{ related.price }} грн</span>
         {% endif %}
@@ -251,7 +250,7 @@
     <a href="/flowers/{{ related.id }}" class="rel-example-card">
       <div class="rel-example-card-img">
         <img src="{{ related.image }}" alt="{{ related.name }}" loading="lazy">
-        <span class="rel-card-badge">🌸 Букет</span>
+        <span class="rel-card-badge"></span>
         {% if related.price %}
         <span class="rel-card-price-overlay">від {{ related.price }} грн</span>
         {% endif %}
@@ -272,6 +271,8 @@
 {% endif %}
 
 <!-- Рандомні букети та композиції -->
+
+<!--
 {% if random_examples %}
 <section class="related-products" id="random-examples">
   <div class="related-products-header">
@@ -310,6 +311,7 @@
   </div>
 </section>
 {% endif %}
+-->
 
 
 <script>

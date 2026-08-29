@@ -766,6 +766,23 @@ def _is_valid_phone(phone: str) -> bool:
     return 10 <= len(digits) <= 15
 
 
+def _min_price(price) -> str:
+    """
+    Повертає мінімальну ціну як просте число (рядок) для schema.org/Offer.
+    Ціна в JSON-каталогах іноді зберігається як діапазон,
+    напр. "65 - 85" — Google Rich Results вимагає одне число,
+    тож беремо найменше значення з діапазону.
+    """
+    import re
+    if price is None:
+        return ''
+    match = re.search(r'\d+(?:[.,]\d+)?', str(price))
+    return match.group(0).replace(',', '.') if match else ''
+
+
+app.jinja_env.filters['min_price'] = _min_price
+
+
 @app.route('/')
 def main():
     examples_data = load_examples()
@@ -855,10 +872,16 @@ def order():
         phone       = request.form.get('phone', '').strip()
         description = request.form.get('description', '').strip()
         wishes      = request.form.get('wishes', '').strip()
+        consent     = request.form.get('consent')
 
         if not name or not _is_valid_phone(phone) or not description:
             return render_template('order.html',
                                    error="Заповніть всі обов'язкові поля", flower=flower)
+
+        if not consent:
+            return render_template('order.html',
+                                   error="Підтвердіть згоду з обробкою персональних даних",
+                                   flower=flower)
 
         if is_duplicate(make_order_hash(ip, name, phone, description)):
             return render_template('complete_order.html')
@@ -891,6 +914,12 @@ def delivery():
         delivery_to = request.form.get('delivery_to', 'self')
         description = request.form.get('description', '').strip()
         wishes      = request.form.get('wishes', '').strip()
+        consent     = request.form.get('consent')
+
+        if not consent:
+            return render_template('delivery.html',
+                                   error="Підтвердіть згоду з обробкою персональних даних",
+                                   flower=flower)
 
         if delivery_to == 'self':
             name     = request.form.get('self_name', '').strip()
@@ -1030,14 +1059,21 @@ def sitemap_xml():
 
 
 if __name__ == '__main__':
-    bot_thread = threading.Thread(
-        target=lambda: bot.infinity_polling(
-            allowed_updates=['message', 'callback_query'],
-            timeout=30,
-            long_polling_timeout=20,
-        ),
-        daemon=True,
-        name='telegram-bot',
-    )
-    bot_thread.start()
+    # У продакшн-режимі бот запускається окремим процесом через bot_runner.py
+    # (systemd-сервіс tflora-bot), а не тут — інакше під Gunicorn/WSGI
+    # цей блок узагалі не виконається і бот не стартоне.
+    #
+    # Для локальної розробки, якщо хочете підняти сайт і бота одночасно
+    # одним запуском, розкоментуйте нижче:
+    #
+    # bot_thread = threading.Thread(
+    #     target=lambda: bot.infinity_polling(
+    #         allowed_updates=['message', 'callback_query'],
+    #         timeout=30,
+    #         long_polling_timeout=20,
+    #     ),
+    #     daemon=True,
+    #     name='telegram-bot',
+    # )
+    # bot_thread.start()
     app.run(host='0.0.0.0', port=5000, debug=False)

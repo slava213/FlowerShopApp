@@ -90,6 +90,17 @@
         <div class="form-divider"><span>Адреса доставки</span></div>
         <input type="text" name="self_city" placeholder="Населений пункт *" value="Кельменці">
         <input type="text" name="self_address" placeholder="Адреса (вулиця, будинок, квартира) *">
+
+        <div class="map-location-block">
+          <label class="map-location-label">Точка на Google Maps (необов'язково)</label>
+          <div class="map-location-row">
+            <input type="text" name="self_map_link" id="selfMapLink" placeholder="Посилання на Google Maps або координати">
+            <button type="button" class="map-locate-btn" data-target="selfMapLink" onclick="locateForMap(this)">
+              <span>📍</span> Моє місце
+            </button>
+          </div>
+          <p class="map-location-hint">Можна вставити посилання з Google Maps або натиснути «Моє місце», щоб визначити його автоматично</p>
+        </div>
       </div>
 
       <!-- Форма "Іншій людині" -->
@@ -105,6 +116,17 @@
         <div class="form-divider"><span>Адреса доставки</span></div>
         <input type="text" name="city" placeholder="Населений пункт *" value="Кельменці">
         <input type="text" name="address" placeholder="Адреса (вулиця, будинок, квартира) *">
+
+        <div class="map-location-block">
+          <label class="map-location-label">Точка на Google Maps (необов'язково)</label>
+          <div class="map-location-row">
+            <input type="text" name="map_link" id="otherMapLink" placeholder="Посилання на Google Maps або координати">
+            <button type="button" class="map-locate-btn" data-target="otherMapLink" onclick="locateForMap(this)">
+              <span>📍</span> Моє місце
+            </button>
+          </div>
+          <p class="map-location-hint">Можна вставити посилання з Google Maps або натиснути «Моє місце», щоб визначити його автоматично</p>
+        </div>
 
         <div class="form-divider"><span>Додаткові послуги</span></div>
 
@@ -223,6 +245,34 @@ document.querySelectorAll('input[name="music"]').forEach(r => {
     document.getElementById('musicTextBlock').style.display = this.value === 'yes' ? 'block' : 'none';
   });
 });
+
+function locateForMap(btn) {
+  if (!navigator.geolocation) {
+    alert('Ваш браузер не підтримує визначення місцезнаходження. Вставте посилання на Google Maps вручну.');
+    return;
+  }
+  const targetInput = document.getElementById(btn.dataset.target);
+  const originalHTML = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<span>⏳</span> Визначаємо...';
+
+  navigator.geolocation.getCurrentPosition(
+    function(pos) {
+      const lat = pos.coords.latitude.toFixed(6);
+      const lng = pos.coords.longitude.toFixed(6);
+      targetInput.value = `https://www.google.com/maps?q=${lat},${lng}`;
+      btn.disabled = false;
+      btn.innerHTML = '<span>✅</span> Визначено';
+      setTimeout(() => { btn.innerHTML = originalHTML; }, 2000);
+    },
+    function(err) {
+      btn.disabled = false;
+      btn.innerHTML = originalHTML;
+      alert('Не вдалося визначити місцезнаходження. Вставте посилання на Google Maps вручну.');
+    },
+    { enableHighAccuracy: true, timeout: 10000 }
+  );
+}
 
 function previewImage(event) {
   const file = event.target.files[0];

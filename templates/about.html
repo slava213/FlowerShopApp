@@ -1549,7 +1549,7 @@
   <div class="ab-story__img-col">
     <img src="/static/images/shop1.png"
          alt="Флорист магазину Квіти від Тамари створює авторський букет у Кельменцях"
-         loading="lazy">
+         loading="lazy" decoding="async">
   </div>
   <div class="ab-story__content-col">
     <div class="ab-story__year-badge">Засновано у 2013 році</div>
@@ -1564,7 +1564,7 @@
       від витончених романтичних букетів до розкішного весільного декору. Ми ретельно відбираємо
       квіти від найкращих постачальників, щоб гарантувати бездоганну свіжість.
     </p>
-    <a href="/examples" class="ab-story__link">Переглянути каталог</a>
+    <a href="/examples" class="ab-story__link">Переглянути приклади</a>
   </div>
 </section>
 
@@ -1687,9 +1687,9 @@
   <div class="ab-team__grid">
     <div class="ab-florist-card">
       <div class="ab-florist-card__img-wrap">
-        <img src="/static/images/florist1.jpg"
+        <img src="/static/images/florist1.png"
              alt="Тетяна — головний флорист магазину Квіти від Тамари у Кельменцях"
-             loading="lazy">
+             loading="lazy" decoding="async">
         <div class="ab-florist-card__overlay"></div>
       </div>
       <div class="ab-florist-card__info">
@@ -1700,9 +1700,9 @@
     </div>
     <div class="ab-florist-card">
       <div class="ab-florist-card__img-wrap">
-        <img src="/static/images/florist2.jpg"
+        <img src="/static/images/florist2.png"
              alt="Іванка — флорист магазину Квіти від Тамари у Кельменцях"
-             loading="lazy">
+             loading="lazy" decoding="async">
         <div class="ab-florist-card__overlay"></div>
       </div>
       <div class="ab-florist-card__info">
@@ -1763,42 +1763,42 @@
     <div class="ab-gallery__item" data-index="0">
       <img src="/static/images/shop1.png"
            alt=""
-           loading="lazy">
+           loading="lazy" decoding="async">
     </div>
     <div class="ab-gallery__item" data-index="1">
       <img src="/static/images/shop2.png"
            alt="Вітрина квіткового магазину Кельменці — свіжі букети та композиції"
-           loading="lazy">
+           loading="lazy" decoding="async">
     </div>
     <div class="ab-gallery__item" data-index="2">
       <img src="/static/images/shop3.png"
            alt=""
-           loading="lazy">
+           loading="lazy" decoding="async">
     </div>
     <div class="ab-gallery__item" data-index="3">
       <img src="/static/images/shop4.png"
            alt=""
-           loading="lazy">
+           loading="lazy" decoding="async">
     </div>
     <div class="ab-gallery__item" data-index="4">
       <img src="/static/images/shop5.png"
            alt=""
-           loading="lazy">
+           loading="lazy" decoding="async">
     </div>
     <div class="ab-gallery__item" data-index="5">
       <img src="/static/images/shop6.png"
            alt=""
-           loading="lazy">
+           loading="lazy" decoding="async">
     </div>
     <div class="ab-gallery__item" data-index="6">
       <img src="/static/images/shop7.png"
            alt=""
-           loading="lazy">
+           loading="lazy" decoding="async">
     </div>
     <div class="ab-gallery__item" data-index="7">
       <img src="/static/images/shop8.png"
            alt=""
-           loading="lazy">
+           loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -1892,7 +1892,7 @@
     <a href="viber://chat?number=%2B380976982154" class="ab-social-link ab-social-link--viber">
       <i class="fab fa-viber"></i> Viber
     </a>
-    <a href="https://t.me/0976982154" target="_blank" rel="noopener" class="ab-social-link ab-social-link--tg">
+    <a href="https://t.me/+380976982154" target="_blank" rel="noopener" class="ab-social-link ab-social-link--tg">
       <i class="fab fa-telegram"></i> Telegram
     </a>
     <a href="https://www.instagram.com/kvitu_kelmentsi_fotozona/" target="_blank" rel="noopener" class="ab-social-link ab-social-link--insta">
@@ -2050,12 +2050,25 @@ document.querySelectorAll('.ab-faq__btn').forEach(btn => {
 const hero = document.getElementById('ab-hero');
 if (hero) {
   setTimeout(() => hero.classList.add('is-loaded'), 100);
-  window.addEventListener('scroll', () => {
-    const bg = hero.querySelector('.ab-hero__bg img');
-    if (bg && window.scrollY < window.innerHeight) {
-      bg.style.transform = `translateY(${window.scrollY * 0.25}px)`;
-    }
-  }, { passive: true });
+  // Cache the target once instead of re-querying the DOM on every
+  // single scroll event, and skip all work on mobile entirely —
+  // parallax is a decorative desktop nicety, not worth spending any
+  // main-thread time on during a touch scroll.
+  const heroBg = hero.querySelector('.ab-hero__bg img');
+  const isTouch = window.matchMedia('(pointer: coarse)').matches;
+  if (heroBg && !isTouch) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        if (window.scrollY < window.innerHeight) {
+          heroBg.style.transform = `translateY(${window.scrollY * 0.25}px)`;
+        }
+        ticking = false;
+      });
+    }, { passive: true });
+  }
 }
 
 /* ═══ Scroll reveal ═══ */
@@ -2091,7 +2104,7 @@ document.querySelectorAll('.ab-story,.ab-numbers,.ab-services,.ab-why,.ab-team,.
   photos.forEach((p, i) => {
     const thumb = document.createElement('div');
     thumb.className = 'gallery-modal-thumb';
-    thumb.innerHTML = `<img src="${p.src}" alt="${p.alt}" loading="lazy">`;
+    thumb.innerHTML = `<img src="${p.src}" alt="${p.alt}" loading="lazy" decoding="async">`;
     thumb.addEventListener('click', () => goTo(i));
     thumbsWrap.appendChild(thumb);
   });

@@ -71,7 +71,7 @@
       {% for item in examples %}
       <div class="example-card" data-category="{{ item.category }}">
         <div class="example-card-img">
-          <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy">
+          <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy" decoding="async">
           {% if item.category == 'bouquet' %}
           <span class="example-badge example-badge-bouquet">💐 Букет</span>
           {% elif item.category == 'rose_bouquet' %}

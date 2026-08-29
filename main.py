@@ -893,10 +893,11 @@ def delivery():
         wishes      = request.form.get('wishes', '').strip()
 
         if delivery_to == 'self':
-            name    = request.form.get('self_name', '').strip()
-            phone   = request.form.get('self_phone', '').strip()
-            city    = request.form.get('self_city', '').strip()
-            address = request.form.get('self_address', '').strip()
+            name     = request.form.get('self_name', '').strip()
+            phone    = request.form.get('self_phone', '').strip()
+            city     = request.form.get('self_city', '').strip()
+            address  = request.form.get('self_address', '').strip()
+            map_link = request.form.get('self_map_link', '').strip()
 
             if not name or not _is_valid_phone(phone) or not city or not address or not description:
                 return render_template('delivery.html',
@@ -904,8 +905,9 @@ def delivery():
             if is_duplicate(make_order_hash(ip, name, phone, city, address, description)):
                 return render_template('complete_order.html')
 
+            map_line = f'\n🗺 {map_link}' if map_link else ''
             text = (f'🚚 *Доставка (собі)*\n\n⏰ {datetime.now().strftime("%d.%m.%Y %H:%M")}\n\n'
-                    f'👤 {name}\n📞 {phone}\n📍 {city}, {address}\n\n'
+                    f'👤 {name}\n📞 {phone}\n📍 {city}, {address}{map_line}\n\n'
                     f'🛒 {description}\n💭 {wishes or "—"}')
         else:
             sender_name  = request.form.get('sender_name', '').strip()
@@ -914,6 +916,7 @@ def delivery():
             recip_phone  = request.form.get('recipient_phone', '').strip()
             city         = request.form.get('city', '').strip()
             address      = request.form.get('address', '').strip()
+            map_link     = request.form.get('map_link', '').strip()
             video        = request.form.get('video', 'no')
             greeting     = request.form.get('greeting', 'no')
             greeting_txt = request.form.get('greeting_text', '').strip()
@@ -938,10 +941,11 @@ def delivery():
             music_display    = (music_txt if (music == 'yes' and music_txt)
                                 else ('Так' if music == 'yes' else 'Ні'))
 
+            map_line = f'\n🗺 {map_link}' if map_link else ''
             text = (f'🚚 *Доставка (іншій людині)*\n\n⏰ {datetime.now().strftime("%d.%m.%Y %H:%M")}\n\n'
                     f'👤 Від: {sender_name}\n📞 {sender_phone}\n'
                     f'🎁 Отримувач: {recip_name}\n📞 {recip_phone}\n'
-                    f'📍 {city}, {address}\n\n'
+                    f'📍 {city}, {address}{map_line}\n\n'
                     f'🎥 Відео: {"Так (+100 грн)" if video == "yes" else "Ні"}\n'
                     f'💌 Привітання: {greeting_display}\n'
                     f'🎵 Музика: {music_display}\n\n'

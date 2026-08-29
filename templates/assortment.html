@@ -76,7 +76,7 @@
       <a href="/assortment/rose/{{ loop.index0 }}" class="rose-card">
         <div class="rose-card-img">
           {% if rose.image %}
-          <img src="{{ rose.image }}" alt="{{ rose.name }}" loading="lazy">
+          <img src="{{ rose.image }}" alt="{{ rose.name }}" loading="lazy" decoding="async">
           {% else %}
           <div class="rose-card-placeholder">🌹</div>
           {% endif %}
@@ -130,7 +130,7 @@
            data-type="other">
         {% if item.image %}
         <div class="catalog-card-img">
-          <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy">
+          <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy" decoding="async">
         </div>
         {% else %}
         <div class="catalog-card-emoji">🌸</div>
@@ -180,7 +180,7 @@
            data-type="vase">
         {% if item.image %}
         <div class="vase-card-img">
-          <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy">
+          <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy" decoding="async">
         </div>
         {% else %}
         <div class="vase-card-emoji">🪴</div>
@@ -230,7 +230,7 @@
            data-type="acc">
         {% if item.image %}
         <div class="acc-card-img">
-          <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy">
+          <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy" decoding="async">
         </div>
         {% else %}
         <div class="acc-card-emoji">🎀</div>
@@ -263,7 +263,7 @@
     <button class="prem-modal-x" type="button" onclick="closePremModal()" aria-label="Закрити">✕</button>
     <div class="prem-modal-body" id="premModalBody">
       <div class="prem-modal-img-col" id="premModalImgCol">
-        <img id="premModalImg" src="" alt="" loading="lazy">
+        <img id="premModalImg" src="" alt="" loading="lazy" decoding="async">
       </div>
       <div class="prem-modal-info-col">
         <p class="prem-modal-eyebrow" id="premModalEyebrow">Квіти від Тамари</p>
